@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Fragment } from "react";
-import { Search, Settings2, TrendingUp, Quote, UserRound, MessageCircle } from "lucide-react";
+import { Search, Settings2, TrendingUp, Quote, MessageCircle } from "lucide-react";
 import logo from "@/assets/nc-logo.png.asset.json";
 import hero from "@/assets/hero-dealership.jpg";
+import victoriaHero from "@/assets/victoria-hero.png.asset.json";
+import victoriaAbout from "@/assets/victoria-about.png.asset.json";
+import partnersImg from "@/assets/partners.png.asset.json";
 import { DiagnosticProvider, DiagnosticButton } from "@/components/landing/DiagnosticModal";
 
 export const Route = createFileRoute("/")({
@@ -31,30 +34,19 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h2 className="mx-auto max-w-3xl text-center font-display text-3xl uppercase leading-tight sm:text-4xl">{children}</h2>;
 }
 
-function PhotoPlaceholder({ className = "" }: { className?: string }) {
-  return (
-    <div className={`flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-border bg-card text-muted-foreground ${className}`}>
-      <UserRound className="h-16 w-16" />
-      <span className="text-sm">Foto da Victoria Maia</span>
-    </div>
-  );
-}
-
 const ticker = ["Aumento de Vendas", "Visibilidade", "Escala", "Crescimento", "Previsibilidade"];
 
 const steps = [
-  { icon: Search, title: "Diagnóstico Estratégico", text: "Analisamos sua loja, estoque, atendimento e anúncios para identificar onde estão as oportunidades de venda." },
-  { icon: Settings2, title: "Implementação Otimizada", text: "Aplicamos campanhas, processos comerciais e funis desenhados para o mercado automotivo." },
-  { icon: TrendingUp, title: "Resultados Comprovados", text: "Acompanhamos métricas de perto para gerar previsibilidade e escala nas suas vendas." },
+  { icon: Search, title: "1. Diagnóstico Estratégico", text: "Analisamos profundamente seu negócio, mercado e objetivos para criar um plano de ação personalizado que realmente funciona." },
+  { icon: Settings2, title: "2. Implementação Otimizada", text: "Colocamos o plano em prática com as melhores ferramentas e táticas de marketing digital, focando em performance e ROI." },
+  { icon: TrendingUp, title: "3. Resultados Comprovados", text: "Monitoramos, ajustamos e escalamos suas campanhas para garantir um fluxo constante de leads qualificados e aumento de vendas." },
 ];
 
 const testimonials = [
-  { quote: "Depoimento do cliente a ser inserido conforme os prints de referência.", name: "Nome do Cliente", company: "Loja de Veículos", result: "+40% em vendas" },
-  { quote: "Depoimento do cliente a ser inserido conforme os prints de referência.", name: "Nome do Cliente", company: "Concessionária", result: "3x mais leads" },
-  { quote: "Depoimento do cliente a ser inserido conforme os prints de referência.", name: "Nome do Cliente", company: "Multimarcas", result: "+25 carros/mês" },
+  { quote: "A NC Agência revolucionou nosso processo de vendas. Com as estratégias implementadas, conseguimos triplicar nossos leads qualificados e dobrar o faturamento em apenas 4 meses.", name: "Carlos Silva", company: "Super Fast", result: "+180% vendas" },
+  { quote: "Impressionante como a equipe da NC conseguiu otimizar nossas campanhas. Agora recebemos apenas clientes com perfil de compra real, nossa conversão aumentou drasticamente.", name: "Ana Paula Costa", company: "Bitcar", result: "+300% leads" },
+  { quote: "Trabalho excepcional! A gestão de tráfego pago e a produção de conteúdo da NC elevaram nossa marca no mercado. Resultados sólidos e crescimento sustentável mês após mês.", name: "Rafael Oliveira", company: "Luma Car", result: "ROI 420%" },
 ];
-
-const partners = ["Parceiro 1", "Parceiro 2", "Parceiro 3", "Parceiro 4", "Parceiro 5"];
 
 function Index() {
   return (
@@ -73,11 +65,11 @@ function Index() {
                 Impulsione Suas Vendas: <span className="text-primary">Diagnóstico Gratuito</span> para Lojas de Carros
               </h1>
               <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-                Estratégias de marketing digital e processos comerciais feitos sob medida para lojas de veículos e concessionárias que querem vender mais, com previsibilidade.
+                Descubra como atrair leads qualificados, com CPF limpo e aprovados para financiamento, e pare de perder tempo com quem não pode comprar. Agende sua sessão estratégica agora!
               </p>
               <DiagnosticButton className="mt-8 w-full sm:w-auto" />
             </div>
-            <PhotoPlaceholder className="hidden aspect-[3/4] w-full max-w-sm justify-self-end bg-card/60 lg:flex" />
+            <img src={victoriaHero.url} alt="Victoria Maia, fundadora da NC Agência" className="hidden w-full max-w-md justify-self-end lg:block [mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
           </Container>
         </section>
 
@@ -96,6 +88,7 @@ function Index() {
         <section className="py-24">
           <Container>
             <SectionTitle>Nossa Metodologia: Simples, Direta e Focada em Resultados</SectionTitle>
+            <p className="mt-4 text-center text-muted-foreground">Transformamos a maneira como sua concessionária atrai e converte clientes. Veja como:</p>
             <div className="mt-14 grid gap-10 md:grid-cols-3">
               {steps.map(({ icon: Icon, title, text }) => (
                 <div key={title} className="text-center">
@@ -113,11 +106,12 @@ function Index() {
         <section className="pb-24">
           <Container>
             <SectionTitle>O Que Nossos Clientes Dizem: Sucesso que Inspira</SectionTitle>
+            <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">Histórias de sucesso de concessionárias e revendas que alcançaram novos patamares com a parceria da NC Agência.</p>
             <div className="mt-14 grid gap-6 lg:grid-cols-3">
               {testimonials.map((t, i) => (
                 <figure key={i} className="flex flex-col rounded-lg border border-border bg-card p-7">
                   <Quote className="h-9 w-9 fill-primary text-primary" />
-                  <blockquote className="mt-4 flex-1 text-card-foreground/90">"{t.quote}"</blockquote>
+                  <blockquote className="mt-4 flex-1 italic text-card-foreground/90">"{t.quote}"</blockquote>
                   <figcaption className="mt-6 flex items-end justify-between gap-4 border-t border-border pt-5">
                     <div className="min-w-0">
                       <div className="font-bold">{t.name}</div>
@@ -133,15 +127,15 @@ function Index() {
 
         <section className="border-t border-border py-24">
           <Container className="grid items-center gap-12 lg:grid-cols-2">
-            <PhotoPlaceholder className="aspect-[4/5] w-full max-w-md" />
+            <img src={victoriaAbout.url} alt="Victoria Maia" loading="lazy" className="w-full max-w-md rounded-lg" />
             <div>
               <h2 className="font-display text-3xl uppercase sm:text-4xl">Quem está por trás da <span className="text-primary">NC</span>?</h2>
-              <p className="mt-6 text-muted-foreground">
-                A NC Agência foi fundada por <strong className="text-foreground">Victoria Maia</strong>, profissional com trajetória dedicada ao mercado automotivo, acompanhando de perto a rotina comercial de lojas de veículos e concessionárias.
-              </p>
-              <p className="mt-4 text-muted-foreground">
-                Dessa experiência nasceu a metodologia NC: um método que une marketing digital, atendimento e processo comercial para transformar visibilidade em vendas — com escala e previsibilidade.
-              </p>
+              <div className="mt-6 space-y-4 text-muted-foreground">
+                <p><strong className="text-foreground">Victoria Maia</strong>, há 10 anos consolidada no mercado automotivo.</p>
+                <p>O que começou no Rio de Janeiro hoje se expandiu para diversas regiões do Brasil. Como fundadora da NC, Victoria possui vasta experiência em uma metodologia validada por centenas de lojas de veículos seminovos e novos em todo o país.</p>
+                <p>Especialista em transformar agências automotivas em verdadeiras máquinas de vendas, desenvolveu um sistema completo que vai muito além do marketing digital: processos comerciais estruturados, gestão de tráfego qualificado, ferramentas estratégicas e treinamento comercial que realmente funcionam.</p>
+                <p>Com a NC, dezenas de lojas já revolucionaram seus resultados e atingiram novos patamares de faturamento através de um método testado, replicável e adaptado à realidade do mercado brasileiro.</p>
+              </div>
               <DiagnosticButton className="mt-8 w-full sm:w-auto" />
             </div>
           </Container>
@@ -150,11 +144,8 @@ function Index() {
         <section className="bg-surface py-20">
           <Container>
             <SectionTitle>Nossos Parceiros</SectionTitle>
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
-              {partners.map((p) => (
-                <div key={p} className="flex h-20 w-40 items-center justify-center rounded-lg border border-border bg-card text-sm text-muted-foreground">{p}</div>
-              ))}
-            </div>
+            <p className="mt-4 text-center text-muted-foreground">A NC conta com mais de 50 clientes parceiros satisfeitos em todo o Brasil.</p>
+            <img src={partnersImg.url} alt="LM, Alfacar, Quero Motos, Rio 2 Veículos, Luma Car, Fly Garage" loading="lazy" className="mx-auto mt-12 w-full max-w-4xl" />
           </Container>
         </section>
       </main>
@@ -170,7 +161,7 @@ function Index() {
             <MessageCircle className="h-4 w-4 text-primary" /> +55 21 97000-9239
           </a>
         </Container>
-        <p className="mt-6 text-center text-xs text-muted-foreground">© {new Date().getFullYear()} NC Agência. Todos os direitos reservados.</p>
+        <p className="mt-6 text-center text-xs text-muted-foreground">© NC - Agência Automotiva. Todos os direitos reservados.</p>
       </footer>
     </DiagnosticProvider>
   );
