@@ -287,13 +287,13 @@ function Index() {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://wa.me/5521970009239"
+              href="https://wa.me/5521971625597"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-white sm:flex"
             >
               <MessageCircle className="h-4 w-4 text-primary" />
-              <span>(21) 97000-9239</span>
+              <span>(21) 97162-5597</span>
             </a>
             <DiagnosticButton
               position="header"
@@ -1626,13 +1626,13 @@ function Index() {
           </nav>
 
           <a
-            href="https://wa.me/5521970009239"
+            href="https://wa.me/5521971625597"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-white font-semibold hover:text-primary transition-colors"
           >
             <MessageCircle className="h-5 w-5 text-primary" />
-            <span>+55 21 97000-9239</span>
+            <span>+55 21 97162-5597</span>
           </a>
         </Container>
 

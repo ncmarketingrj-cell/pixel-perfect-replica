@@ -82,7 +82,7 @@ const INITIAL_FORM_DATA: FormData = {
 };
 
 const STORAGE_KEY = "nc_diagnostic_form_v2";
-const WHATSAPP_NUMBER = "5521970009239";
+const WHATSAPP_NUMBER = "5521971625597";
 
 function formatWhatsAppMask(value: string): string {
   const digits = value.replace(/\D/g, "").slice(0, 11);

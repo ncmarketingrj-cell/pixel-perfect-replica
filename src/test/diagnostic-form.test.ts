@@ -51,12 +51,12 @@ describe("Diagnostic Form & WhatsApp Integration", () => {
     expect(message).toContain("👤 Nome: Carlos Eduardo");
   });
 
-  it("formats WhatsApp URL properly with encoded text and target number 5521970009239", () => {
+  it("formats WhatsApp URL properly with encoded text and target number 5521971625597", () => {
     const message = buildWhatsAppMessage(completeData);
     const encoded = encodeURIComponent(message);
-    const targetUrl = `https://wa.me/5521970009239?text=${encoded}`;
+    const targetUrl = `https://wa.me/5521971625597?text=${encoded}`;
 
-    expect(targetUrl).toContain("https://wa.me/5521970009239?text=");
+    expect(targetUrl).toContain("https://wa.me/5521971625597?text=");
     expect(decodeURIComponent(targetUrl)).toContain("Olá, equipe NC Agência! 🚗");
   });
 });
