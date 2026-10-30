@@ -37,6 +37,7 @@ import {
   User,
   Building2,
   Target,
+  MessageCircle,
 } from "lucide-react";
 
 interface DiagnosticContextType {
@@ -999,5 +1000,35 @@ export function DiagnosticButton({
     >
       {label}
     </Button>
+  );
+}
+
+export function PhoneDiagnosticButton({
+  className = "",
+  position = "header",
+  showCountryCode = false,
+}: {
+  className?: string;
+  position?: CtaPosition;
+  showCountryCode?: boolean;
+}) {
+  const { open } = useDiagnostic();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackEvent("cta_click", { position: `${position}_phone` });
+    open(position);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      className={`inline-flex items-center gap-2 cursor-pointer transition-colors focus:outline-none bg-transparent border-0 p-0 font-sans ${className}`}
+      aria-label="Iniciar diagnóstico comercial com a NC Agência"
+    >
+      <MessageCircle className={`${showCountryCode ? "h-5 w-5" : "h-4 w-4"} text-primary shrink-0`} />
+      <span>{showCountryCode ? "+55 21 97162-5597" : "(21) 97162-5597"}</span>
+    </button>
   );
 }

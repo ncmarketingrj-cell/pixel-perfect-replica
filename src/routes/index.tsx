@@ -41,6 +41,7 @@ import partnersImg from "@/assets/partners.png.asset.json";
 import {
   DiagnosticProvider,
   DiagnosticButton,
+  PhoneDiagnosticButton,
 } from "@/components/landing/DiagnosticModal";
 import { LegalModals, type LegalModalType } from "@/components/landing/LegalModals";
 import { useInView } from "@/hooks/use-in-view";
@@ -289,15 +290,10 @@ function Index() {
           </div>
 
           <div className="flex items-center gap-4">
-            <a
-              href="https://wa.me/5521971625597"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden items-center gap-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-white sm:flex"
-            >
-              <MessageCircle className="h-4 w-4 text-primary" />
-              <span>(21) 97162-5597</span>
-            </a>
+            <PhoneDiagnosticButton
+              position="header"
+              className="hidden text-xs font-semibold text-muted-foreground transition-colors hover:text-white sm:flex"
+            />
             <DiagnosticButton
               position="header"
               label="Quero vender mais carros"
@@ -1645,15 +1641,11 @@ function Index() {
             </button>
           </nav>
 
-          <a
-            href="https://wa.me/5521971625597"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-white font-semibold hover:text-primary transition-colors"
-          >
-            <MessageCircle className="h-5 w-5 text-primary" />
-            <span>+55 21 97162-5597</span>
-          </a>
+          <PhoneDiagnosticButton
+            position="footer"
+            showCountryCode={true}
+            className="text-white font-semibold hover:text-primary transition-colors text-sm"
+          />
         </Container>
 
         <Container className="mt-8 border-t border-white/5 pt-6 text-center text-xs text-muted-foreground/80">
