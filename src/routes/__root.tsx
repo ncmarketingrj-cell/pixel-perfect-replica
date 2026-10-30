@@ -123,6 +123,48 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const purgeWatermarks = () => {
+      const selectors = [
+        "#lovable-badge",
+        ".lovable-badge",
+        '[id*="lovable-badge"]',
+        '[class*="lovable-badge"]',
+        '[id*="lovable-tag"]',
+        '[class*="lovable-tag"]',
+        "[data-lovable-badge]",
+        "[data-lovable-tag]",
+        "#lovable-brand-tag",
+        ".lovable-brand-tag",
+        'a[href*="lovable.dev"]',
+        'a[href*="lovable.app"]',
+      ];
+
+      document.querySelectorAll(selectors.join(", ")).forEach((node) => {
+        const el = node as HTMLElement;
+        el.style.setProperty("display", "none", "important");
+        el.style.setProperty("opacity", "0", "important");
+        el.style.setProperty("visibility", "hidden", "important");
+        el.style.setProperty("pointer-events", "none", "important");
+        try {
+          el.remove();
+        } catch {}
+      });
+    };
+
+    purgeWatermarks();
+
+    const observer = new MutationObserver(() => {
+      purgeWatermarks();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}

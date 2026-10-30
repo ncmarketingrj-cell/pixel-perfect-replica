@@ -71,6 +71,33 @@
     font-family: var(--font-sans);
     overflow-x: hidden;
   }
+
+  /* Ocultação completa da marca d'água / badge do Lovable */
+  #lovable-badge,
+  .lovable-badge,
+  [id*="lovable-badge"],
+  [class*="lovable-badge"],
+  [id*="lovable-tag"],
+  [class*="lovable-tag"],
+  [data-lovable-badge],
+  [data-lovable-tag],
+  #lovable-brand-tag,
+  .lovable-brand-tag,
+  a[href*="lovable.dev"],
+  a[href*="lovable.app"],
+  div:has(> a[href*="lovable.dev"]),
+  div:has(> a[href*="lovable.app"]) {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    overflow: hidden !important;
+  }
 }
 
 @utility shadow-glow { box-shadow: var(--shadow-glow); }
