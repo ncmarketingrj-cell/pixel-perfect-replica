@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import {
   Search,
   Settings2,
@@ -24,6 +24,10 @@ import {
   ShieldCheck,
   Building2,
   Award,
+  Activity,
+  Workflow,
+  Check,
+  RotateCcw,
 } from "lucide-react";
 
 import ncLogo from "@/assets/nc-logo.png";
@@ -167,22 +171,43 @@ const gargalosComerciais = [
 
 const methodologySteps = [
   {
-    step: "ETAPA 01",
+    step: "01",
     phase: "DIAGNOSTICAR",
-    title: "Mapeamento e Gargalos",
-    text: "Análise aprofundada da operação, perfil do estoque, histórico de atendimentos e identificação precisa de onde sua loja está perdendo dinheiro.",
+    tag: "Auditoria Inicial",
+    title: "Mapeamento & Gargalos",
+    text: "Análise minuciosa da operação da sua loja: tempo de permanência de cada veículo no pátio, taxa de perdas no WhatsApp e identificação precisa de onde sua margem está sendo consumida.",
+    icon: Search,
+    deliverables: [
+      "Auditoria de tempo de pátio e estoque parado",
+      "Identificação dos canais de perda de contato",
+      "Mapeamento dos veículos com maior potencial de giro",
+    ],
   },
   {
-    step: "ETAPA 02",
+    step: "02",
     phase: "ESTRUTURAR",
-    title: "Campanhas, CRM & Processos",
-    text: "Implantação das ferramentas certas: esteira de tráfego de alta intenção, automações de triagem rápida e alinhamento do funil comercial.",
+    tag: "Implementação Integrada",
+    title: "Campanhas, CRM & Automações",
+    text: "Implantação das ferramentas do ecossistema: campanhas de alta intenção por raio de atendimento, automações com triagem em menos de 40 segundos e funil Kanban estruturado.",
+    icon: Cpu,
+    deliverables: [
+      "Campanhas Meta & Google segmentadas por perfil de crédito",
+      "Automações de pré-atendimento com triagem em < 40s",
+      "Pipeline comercial e regras de follow-up no CRM",
+    ],
   },
   {
-    step: "ETAPA 03",
+    step: "03",
     phase: "ACELERAR",
+    tag: "Escala & Giro Máximo",
     title: "Escala & Otimização Contínua",
-    text: "Monitoramento em tempo real dos indicadores de venda, refinamento diário de campanhas e acompanhamento para acelerar o giro do pátio.",
+    text: "Acompanhamento contínuo dos indicadores de venda, auditoria da postura comercial da equipe e retroalimentação de verba nos veículos que geram maior margem líquida para a revenda.",
+    icon: TrendingUp,
+    deliverables: [
+      "Acompanhamento semanal de giro e taxa de conversão",
+      "Treinamento de vendas e superação de objeções de crédito",
+      "Remanejamento de orçamento para modelos mais lucrativos",
+    ],
   },
 ];
 
@@ -212,6 +237,9 @@ const testimonials = [
 
 function Index() {
   const { ref: gargalosRef, isInView: gargalosInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: ecossistemaRef, isInView: ecossistemaInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: metodoRef, isInView: metodoInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const [activeTriad, setActiveTriad] = useState<"all" | "trafego" | "crm" | "bi">("all");
 
   return (
     <DiagnosticProvider>
@@ -488,69 +516,171 @@ function Index() {
           </Container>
         </section>
 
-        {/* 5. NOVA SEÇÃO: ECOSSISTEMA NC 3.0 (BENTO GRID COM CONEXÃO VISUAL DA TRÍADE) */}
+        {/* 5. NOVA SEÇÃO: ECOSSISTEMA NC 3.0 (CIRCUITO INTERATIVO DA TRÍADE & BENTO GRID) */}
         <section
-          className="border-t border-white/8 bg-[#0E0E0E] py-24 sm:py-32"
+          ref={ecossistemaRef}
+          className="border-t border-white/8 bg-[#0B0B0B] py-24 sm:py-32"
           id="ecossistema"
         >
           <Container>
             {/* Header da Seção */}
             <div className="mx-auto max-w-3xl text-center">
-              <SectionBadge>Engenharia de Crescimento Automotivo</SectionBadge>
-              <h2 className="mt-4 font-display text-3xl uppercase leading-tight text-white sm:text-4xl md:text-5xl">
+              <div className={`reveal-init stagger-delay-1 ${ecossistemaInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Engenharia de Crescimento Automotivo</SectionBadge>
+              </div>
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
+                  ecossistemaInView ? "reveal-visible" : ""
+                }`}
+              >
                 O Ecossistema Completo da <span className="text-primary">NC Agência</span>
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-[#A3A3A3] sm:text-base">
+              <p
+                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                  ecossistemaInView ? "reveal-visible" : ""
+                }`}
+              >
                 Muito além de uma agência tradicional de campanhas: uma operação integrada que
                 conecta atração qualificada, velocidade no atendimento e inteligência de vendas.
               </p>
             </div>
 
-            {/* Destaque da Tríade Conectada (Tráfego → CRM & Automações → Inteligência Comercial) */}
-            <div className="mt-14 mb-10 rounded-2xl border border-primary/30 bg-primary/5 p-6 backdrop-blur-sm sm:p-8">
-              <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
-                <div className="text-center lg:text-left">
-                  <span className="text-xs font-bold uppercase tracking-widest text-primary">
-                    O Circuito de Tração Automotiva NC
-                  </span>
-                  <h3 className="mt-1 font-display text-xl uppercase text-white sm:text-2xl">
+            {/* Painel Interativo: Circuito de Tração Automotiva (Tríade Conectada) */}
+            <div
+              className={`mt-14 mb-12 rounded-2xl border border-white/10 bg-[#121212]/95 p-6 sm:p-8 backdrop-blur-md relative overflow-hidden transition-all duration-300 reveal-init stagger-delay-3 ${
+                ecossistemaInView ? "reveal-visible" : ""
+              }`}
+            >
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-0.5 text-[10px] font-mono font-bold uppercase tracking-widest text-primary">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                    <span>Circuito Integrado de Tração Automotiva</span>
+                  </div>
+                  <h3 className="mt-2 font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
                     A Tríade que separa a NC de agências convencionais
                   </h3>
-                  <p className="text-xs text-muted-foreground mt-1 max-w-xl">
+                  <p className="mt-1 font-sans text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
                     Tráfego sem CRM é lead perdido. CRM sem inteligência é esforço sem lucro.
-                    Na NC, os três pilares operam em sincronia contínua.
+                    Na NC, os três pilares operam em sincronia contínua e retroalimentada.
                   </p>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase">
-                  <div className="flex items-center gap-2 rounded-lg border border-primary/40 bg-[#161616] px-3.5 py-2 text-white">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] text-white">
-                      01
-                    </span>
-                    <span>Tráfego Pago</span>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-primary hidden sm:block" />
-                  <div className="flex items-center gap-2 rounded-lg border border-primary/40 bg-[#161616] px-3.5 py-2 text-white">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] text-white">
-                      02
-                    </span>
-                    <span>CRM & Automação</span>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-primary hidden sm:block" />
-                  <div className="flex items-center gap-2 rounded-lg border border-primary/40 bg-[#161616] px-3.5 py-2 text-white">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] text-white">
-                      03
-                    </span>
-                    <span>Inteligência Comercial</span>
-                  </div>
+                <div className="text-left lg:text-right shrink-0">
+                  <span className="text-[11px] font-mono text-white/50 block">Modo de Visualização:</span>
+                  <span className="text-xs font-semibold text-primary">
+                    {activeTriad === "all" && "⚡ Fluxo Contínuo Completo"}
+                    {activeTriad === "trafego" && "Pilar 01 • Atração de Alta Intenção"}
+                    {activeTriad === "crm" && "Pilar 02 • Velocidade & Gestão de Leads"}
+                    {activeTriad === "bi" && "Pilar 03 • Métricas, Giro & Margem"}
+                  </span>
                 </div>
+              </div>
+
+              {/* Barra do Feixe Luminoso Animado */}
+              <div className="relative my-6 h-1 w-full bg-white/10 rounded-full overflow-hidden circuit-beam" />
+
+              {/* Botões do Seletor Interativo da Tríade */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setActiveTriad("all")}
+                  className={`flex items-center gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 cursor-pointer ${
+                    activeTriad === "all"
+                      ? "circuit-btn-active"
+                      : "border-white/10 bg-white/5 hover:bg-white/8 text-white/80 hover:text-white"
+                  }`}
+                >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+                    <Activity className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-mono uppercase text-primary font-bold">Visão Geral</span>
+                    <span className="text-xs font-semibold text-white">Tração Integrada</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveTriad("trafego")}
+                  className={`flex items-center gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 cursor-pointer ${
+                    activeTriad === "trafego"
+                      ? "circuit-btn-active"
+                      : "border-white/10 bg-white/5 hover:bg-white/8 text-white/80 hover:text-white"
+                  }`}
+                >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+                    <Target className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-mono uppercase text-primary font-bold">01 • Atração</span>
+                    <span className="text-xs font-semibold text-white">Tráfego Pago</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveTriad("crm")}
+                  className={`flex items-center gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 cursor-pointer ${
+                    activeTriad === "crm"
+                      ? "circuit-btn-active"
+                      : "border-white/10 bg-white/5 hover:bg-white/8 text-white/80 hover:text-white"
+                  }`}
+                >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+                    <Workflow className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-mono uppercase text-primary font-bold">02 • Velocidade</span>
+                    <span className="text-xs font-semibold text-white">CRM & Automação</span>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveTriad("bi")}
+                  className={`flex items-center gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 cursor-pointer ${
+                    activeTriad === "bi"
+                      ? "circuit-btn-active"
+                      : "border-white/10 bg-white/5 hover:bg-white/8 text-white/80 hover:text-white"
+                  }`}
+                >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+                    <BarChart3 className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-mono uppercase text-primary font-bold">03 • Conversão</span>
+                    <span className="text-xs font-semibold text-white">Inteligência Comercial</span>
+                  </div>
+                </button>
+              </div>
+
+              {/* Descrição Dinâmica do Circuito */}
+              <div className="mt-4 rounded-lg bg-white/5 border border-white/5 px-4 py-2.5 text-xs text-white/80 flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                <span className="font-sans">
+                  {activeTriad === "all" &&
+                    "Fluxo Contínuo Ativo: Os compradores atraídos no Tráfego (01) são triados em < 40s pelo CRM (02), e os dados de venda alimentam o BI (03) que direciona os novos investimentos."}
+                  {activeTriad === "trafego" &&
+                    "Foco em Aquisição: Campanhas multicanal no Meta & Google com filtros geográficos e de crédito, atraindo oportunidades com perfil aprovado no raio de atendimento da loja."}
+                  {activeTriad === "crm" &&
+                    "Foco em Velocidade & Gestão: Triagem automática em menos de 40 segundos e esteira Kanban organizada para nenhum comprador ficar sem resposta ou esquecido no WhatsApp."}
+                  {activeTriad === "bi" &&
+                    "Foco em Lucro & Giro: Acompanhamento de dias de pátio, custo por oportunidade e conversão por vendedor. Os dados mostram exatamente onde alocar o orçamento para lucro máximo."}
+                </span>
               </div>
             </div>
 
             {/* BENTO GRID 3.0: 6 Módulos com Representações Gráficas Ricas e Próprias */}
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {/* CARD 1 (DESTAQUE TRÍADE - 2 COLUNAS NO LG): TRÁFEGO PAGO AUTOMOTIVO */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-primary/40 bg-[#141414] p-7 transition-all duration-300 hover:border-primary lg:col-span-2">
+              <div
+                className={`card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-7 transition-all duration-300 lg:col-span-2 ${
+                  activeTriad === "trafego" || activeTriad === "all"
+                    ? "circuit-card-active bg-[#141414]"
+                    : "border-white/10 bg-[#121212]"
+                }`}
+              >
                 <div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -558,20 +688,20 @@ function Index() {
                         <Target className="h-6 w-6" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary">
                           Pilar 01 • Atração de Alta Intenção
                         </span>
-                        <h3 className="font-display text-xl uppercase text-white sm:text-2xl">
+                        <h3 className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
                           Tráfego Pago Especializado
                         </h3>
                       </div>
                     </div>
-                    <span className="hidden sm:inline-flex rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary uppercase">
+                    <span className="hidden sm:inline-flex rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-mono font-bold text-primary uppercase">
                       Meta & Google Ads
                     </span>
                   </div>
 
-                  <p className="mt-4 text-sm text-[#9E9E9E] max-w-xl leading-relaxed">
+                  <p className="mt-4 font-sans text-sm text-muted-foreground max-w-xl leading-relaxed">
                     Estratégias multicanal desenhadas especificamente para o ciclo de compra
                     automotivo. Segmentação por geolocalização e raio de atendimento da loja,
                     atraindo oportunidades com perfil de crédito aprovado.
@@ -586,59 +716,88 @@ function Index() {
                           Campanhas Automotivas Ativas
                         </span>
                       </div>
-                      <span className="text-[10px] text-muted-foreground uppercase">
+                      <span className="text-[10px] font-mono text-muted-foreground uppercase">
                         Raio: 35km da loja
                       </span>
                     </div>
 
                     <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
                       <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block">
+                        <span className="text-[10px] text-muted-foreground block font-mono">
                           Público Alvo
                         </span>
                         <span className="font-bold text-white text-xs">Score / Financiamento</span>
                       </div>
                       <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block">
+                        <span className="text-[10px] text-muted-foreground block font-mono">
                           Segmentação
                         </span>
                         <span className="font-bold text-white text-xs">Troca + Entrada</span>
                       </div>
                       <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block">
+                        <span className="text-[10px] text-muted-foreground block font-mono">
                           Distribuição
                         </span>
                         <span className="font-bold text-primary text-xs">WhatsApp Direto</span>
                       </div>
                       <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block">
+                        <span className="text-[10px] text-muted-foreground block font-mono">
                           Qualidade Lead
                         </span>
                         <span className="font-bold text-emerald-400 text-xs">CPF Verificado</span>
                       </div>
                     </div>
+
+                    {/* Simulação Visual de Anúncio de Estoque */}
+                    <div className="mt-3.5 rounded-lg border border-white/5 bg-white/5 p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                      <div className="flex items-center gap-2.5">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/20 text-primary text-[11px] font-bold">
+                          ✓
+                        </span>
+                        <div>
+                          <span className="font-semibold text-white text-xs block">
+                            Veículos Seminovos Selecionados
+                          </span>
+                          <span className="text-[10px] text-muted-foreground">
+                            Entrada facilitada • Avaliação do veículo usado pela Tabela FIPE
+                          </span>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-1 rounded self-start sm:self-auto">
+                        Simulação em 1 min
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4 text-xs font-semibold text-primary">
-                  <span>Conectado à esteira de triagem de CRM</span>
+                  <div className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span>Conectado à esteira de triagem de CRM (&lt; 40s)</span>
+                  </div>
                   <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
 
               {/* CARD 2 (DESTAQUE TRÍADE - 1 COLUNA): CRM & PROCESSOS COMERCIAIS */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-primary/40 bg-[#141414] p-7 transition-all duration-300 hover:border-primary">
+              <div
+                className={`card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-7 transition-all duration-300 ${
+                  activeTriad === "crm" || activeTriad === "all"
+                    ? "circuit-card-active bg-[#141414]"
+                    : "border-white/10 bg-[#121212]"
+                }`}
+              >
                 <div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white shadow-glow">
                     <Database className="h-6 w-6" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-primary mt-4 block">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary mt-4 block">
                     Pilar 02 • Organização Comercial
                   </span>
-                  <h3 className="font-display text-xl uppercase text-white mt-1">
+                  <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-1">
                     CRM & Processos
                   </h3>
-                  <p className="mt-2.5 text-xs sm:text-sm text-[#9E9E9E] leading-relaxed">
+                  <p className="mt-2.5 font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed">
                     Organização centralizada de todas as oportunidades. Nenhum comprador fica
                     perdido em conversas soltas no celular do vendedor.
                   </p>
@@ -646,7 +805,7 @@ function Index() {
                   {/* Representação Gráfica: Mini Pipeline Kanban de Loja */}
                   <div className="mt-5 space-y-2 rounded-xl border border-white/10 bg-[#0A0A0A] p-3 text-[11px]">
                     <div className="flex items-center justify-between text-[10px] text-muted-foreground font-semibold">
-                      <span>Pipeline Comercial NC</span>
+                      <span className="font-mono">Pipeline Comercial da Loja</span>
                       <span className="text-primary font-bold">100% Organizado</span>
                     </div>
                     <div className="flex items-center justify-between rounded bg-white/5 px-2.5 py-1.5 text-white">
@@ -671,18 +830,24 @@ function Index() {
               </div>
 
               {/* CARD 3 (DESTAQUE TRÍADE - 1 COLUNA): AUTOMAÇÕES DE PRÉ-ATENDIMENTO */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-primary/40 bg-[#141414] p-7 transition-all duration-300 hover:border-primary">
+              <div
+                className={`card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-7 transition-all duration-300 ${
+                  activeTriad === "crm" || activeTriad === "all"
+                    ? "circuit-card-active bg-[#141414]"
+                    : "border-white/10 bg-[#121212]"
+                }`}
+              >
                 <div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white shadow-glow">
                     <Bot className="h-6 w-6" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-primary mt-4 block">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary mt-4 block">
                     Pilar 02 (B) • Velocidade Instantânea
                   </span>
-                  <h3 className="font-display text-xl uppercase text-white mt-1">
+                  <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-1">
                     Automações Inteligentes
                   </h3>
-                  <p className="mt-2.5 text-xs sm:text-sm text-[#9E9E9E] leading-relaxed">
+                  <p className="mt-2.5 font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed">
                     Triagem automática de interesse, modelo e valor de entrada em menos de 40
                     segundos, distribuindo o lead quente diretamente para o vendedor disponível.
                   </p>
@@ -690,19 +855,19 @@ function Index() {
                   {/* Representação Gráfica: Fluxo de Resposta em Segundos */}
                   <div className="mt-5 rounded-xl border border-white/10 bg-[#0A0A0A] p-3 text-xs">
                     <div className="flex items-center gap-2 text-emerald-400 font-bold text-[11px]">
-                      <Zap className="h-3.5 w-3.5" /> Tempo de Resposta: &lt; 40 segundos
+                      <Zap className="h-3.5 w-3.5 animate-pulse" /> Tempo de Resposta: &lt; 40 segundos
                     </div>
                     <div className="mt-2 space-y-1.5 text-[11px] text-[#A3A3A3]">
                       <div className="flex items-center gap-2">
-                        <span className="text-white font-mono">01.</span>
+                        <span className="text-white font-mono font-bold">01.</span>
                         <span>Coleta de Modelo Desejado & Troca</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-white font-mono">02.</span>
+                        <span className="text-white font-mono font-bold">02.</span>
                         <span>Verificação de Entrada e Simulação</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-white font-mono">03.</span>
+                        <span className="text-white font-mono font-bold">03.</span>
                         <span>Encaminhamento ao Consultor</span>
                       </div>
                     </div>
@@ -716,7 +881,13 @@ function Index() {
               </div>
 
               {/* CARD 4 (DESTAQUE TRÍADE - 2 COLUNAS NO LG): INTELIGÊNCIA COMERCIAL & DASHBOARDS */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-primary/40 bg-[#141414] p-7 transition-all duration-300 hover:border-primary lg:col-span-2">
+              <div
+                className={`card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-7 transition-all duration-300 lg:col-span-2 ${
+                  activeTriad === "bi" || activeTriad === "all"
+                    ? "circuit-card-active bg-[#141414]"
+                    : "border-white/10 bg-[#121212]"
+                }`}
+              >
                 <div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -724,39 +895,76 @@ function Index() {
                         <BarChart3 className="h-6 w-6" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary">
                           Pilar 03 • Métricas & Conversão
                         </span>
-                        <h3 className="font-display text-xl uppercase text-white sm:text-2xl">
+                        <h3 className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
                           Inteligência Comercial & Indicadores
                         </h3>
                       </div>
                     </div>
-                    <span className="hidden sm:inline-flex rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-bold text-white/80 uppercase">
+                    <span className="hidden sm:inline-flex rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-mono font-bold text-white/80 uppercase">
                       Simulação Painel de BI NC
                     </span>
                   </div>
 
-                  <p className="mt-4 text-sm text-[#9E9E9E] max-w-xl leading-relaxed">
+                  <p className="mt-4 font-sans text-sm text-muted-foreground max-w-xl leading-relaxed">
                     Acompanhamento sistemático de indicadores essenciais: giro de pátio, custo
                     por oportunidade qualificada, taxa de conversão por vendedor e margem líquida
                     por veículo vendido.
                   </p>
 
-                  {/* Representação Gráfica: Dashboard Demonstrativo de Inteligência Comercial */}
+                  {/* Representação Gráfica: Dashboard Demonstrativo com Gráfico SVG */}
                   <div className="mt-6 rounded-xl border border-white/10 bg-[#0A0A0A] p-4">
                     <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs">
                       <span className="font-semibold text-white">
                         Painel Gerencial de Indicadores da Loja
                       </span>
-                      <span className="text-emerald-400 font-bold text-[11px]">
+                      <span className="text-emerald-400 font-mono font-bold text-[11px]">
                         Atualização em Tempo Real
                       </span>
                     </div>
 
+                    {/* Gráfico SVG com Animação .draw-chart */}
+                    <div className="mt-3 h-20 w-full overflow-hidden">
+                      <svg
+                        viewBox="0 0 400 70"
+                        className="w-full h-full"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                      >
+                        <defs>
+                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#EF4045" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#EF4045" stopOpacity="0.0" />
+                          </linearGradient>
+                        </defs>
+                        {/* Linhas de grade sutis */}
+                        <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
+                        <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
+                        {/* Área sob a curva */}
+                        <path
+                          d="M0,60 Q80,50 150,38 T280,24 T400,10 L400,70 L0,70 Z"
+                          fill="url(#chartGradient)"
+                        />
+                        {/* Linha principal com animação .draw-chart */}
+                        <path
+                          d="M0,60 Q80,50 150,38 T280,24 T400,10"
+                          fill="none"
+                          stroke="#EF4045"
+                          strokeWidth="2.5"
+                          className="draw-chart"
+                        />
+                        {/* Pontos de controle */}
+                        <circle cx="150" cy="38" r="3.5" fill="#EF4045" />
+                        <circle cx="280" cy="24" r="3.5" fill="#EF4045" />
+                        <circle cx="400" cy="10" r="4" fill="#ffffff" />
+                      </svg>
+                    </div>
+
                     <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 text-xs">
                       <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block">
+                        <span className="text-[10px] text-muted-foreground block font-mono">
                           Giro Médio de Estoque
                         </span>
                         <span className="font-bold text-white text-base">26 dias</span>
@@ -766,8 +974,8 @@ function Index() {
                       </div>
 
                       <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block">
-                          Taxa de Conversão Agendada
+                        <span className="text-[10px] text-muted-foreground block font-mono">
+                          Taxa de Conversão
                         </span>
                         <span className="font-bold text-white text-base">34,2%</span>
                         <span className="text-[10px] text-primary block mt-0.5">
@@ -776,8 +984,8 @@ function Index() {
                       </div>
 
                       <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block">
-                          Custo por Lead Qualificado
+                        <span className="text-[10px] text-muted-foreground block font-mono">
+                          Custo por Oportunidade
                         </span>
                         <span className="font-bold text-white text-base">Otimizado</span>
                         <span className="text-[10px] text-muted-foreground block mt-0.5">
@@ -786,12 +994,12 @@ function Index() {
                       </div>
 
                       <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block">
+                        <span className="text-[10px] text-muted-foreground block font-mono">
                           Controle de Vendedores
                         </span>
-                        <span className="font-bold text-emerald-400 text-base">100% Monitorado</span>
+                        <span className="font-bold text-emerald-400 text-base">100% Ativo</span>
                         <span className="text-[10px] text-muted-foreground block mt-0.5">
-                          Follow-up ativo
+                          Follow-up monitorado
                         </span>
                       </div>
                     </div>
@@ -799,24 +1007,27 @@ function Index() {
                 </div>
 
                 <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4 text-xs font-semibold text-primary">
-                  <span>Retroalimenta as campanhas de tráfego com dados reais de vendas</span>
+                  <div className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span>Retroalimenta as campanhas com dados reais de fechamento</span>
+                  </div>
                   <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
 
               {/* CARD 5 (COMPLEMENTAR - 1 COLUNA): CRIATIVOS DE PERFORMANCE */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121212] p-7 transition-all duration-300 hover:border-white/30">
+              <div className="card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121212] p-7 transition-all duration-300">
                 <div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-white">
                     <Video className="h-6 w-6" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mt-4 block">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground mt-4 block">
                     Engenharia Criativa
                   </span>
-                  <h3 className="font-display text-xl uppercase text-white mt-1">
+                  <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-1">
                     Criativos de Alta Demanda
                   </h3>
-                  <p className="mt-2.5 text-xs sm:text-sm text-[#9E9E9E] leading-relaxed">
+                  <p className="mt-2.5 font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed">
                     Produção visual e roteirização automotiva focada em gerar desejo imediato e
                     destacar condições de compra que aceleram a decisão do comprador.
                   </p>
@@ -825,7 +1036,7 @@ function Index() {
                   <div className="mt-5 rounded-xl border border-white/10 bg-[#0A0A0A] p-3 text-xs">
                     <div className="flex items-center justify-between text-[11px] font-semibold text-white">
                       <span>Anúncio Focado em Giro</span>
-                      <span className="text-primary text-[10px] uppercase">Formato Validado</span>
+                      <span className="text-primary text-[10px] font-mono uppercase">Formato Validado</span>
                     </div>
                     <div className="mt-2 space-y-1 text-[11px] text-muted-foreground">
                       <p>✓ Fotos detalhadas de itens de conforto e motor</p>
@@ -842,18 +1053,18 @@ function Index() {
               </div>
 
               {/* CARD 6 (COMPLEMENTAR - 1 COLUNA): TREINAMENTO & PROCESSOS */}
-              <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121212] p-7 transition-all duration-300 hover:border-white/30">
+              <div className="card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121212] p-7 transition-all duration-300">
                 <div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-white">
                     <Award className="h-6 w-6" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mt-4 block">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground mt-4 block">
                     Capacitação Comercial
                   </span>
-                  <h3 className="font-display text-xl uppercase text-white mt-1">
+                  <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-1">
                     Treinamento & Cultura
                   </h3>
-                  <p className="mt-2.5 text-xs sm:text-sm text-[#9E9E9E] leading-relaxed">
+                  <p className="mt-2.5 font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed">
                     Alinhamento com a equipe de vendas da sua loja: scripts de resposta rápida,
                     contorno de objeções de financiamento e protocolo de visita presencial.
                   </p>
@@ -884,51 +1095,119 @@ function Index() {
 
             {/* CTA de Fechamento do Ecossistema */}
             <div className="mt-14 flex flex-col items-center justify-center text-center">
-              <p className="text-sm text-[#A3A3A3] mb-4">
+              <p className="font-sans text-sm text-muted-foreground mb-4">
                 Quer entender como aplicar esse ecossistema completo no estoque atual da sua loja?
               </p>
               <DiagnosticButton
                 position="hero"
-                label="SOLICITAR DIAGNÓSTICO DO MEU ESTOQUE"
-                className="h-14 px-8 text-sm font-bold shadow-glow"
+                label="Solicitar diagnóstico do meu estoque"
+                className="h-14 px-8 text-sm font-semibold shadow-glow tracking-normal"
               />
             </div>
           </Container>
         </section>
 
-        {/* 6. MÉTODO NC (PRESERVADO PARA EVOLUÇÃO NAS FASES SEGUINTES) */}
-        <section className="py-24 sm:py-28 bg-[#080808] border-t border-white/8" id="metodo">
+        {/* 6. MÉTODO NC (PROGRESSÃO VISUAL EM TRILHA CONECTADA) */}
+        <section
+          ref={metodoRef}
+          className="py-24 sm:py-28 bg-[#080808] border-t border-white/8"
+          id="metodo"
+        >
           <Container>
-            <div className="text-center">
-              <SectionBadge>Processo Estruturado</SectionBadge>
-              <h2 className="mt-4 font-display text-2xl uppercase text-white sm:text-3xl md:text-4xl">
-                Nossa Metodologia: Simples, Direta e Focada em Resultados
+            <div className="mx-auto max-w-3xl text-center">
+              <div className={`reveal-init stagger-delay-1 ${metodoInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Processo Estruturado</SectionBadge>
+              </div>
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
+                  metodoInView ? "reveal-visible" : ""
+                }`}
+              >
+                Nossa Metodologia:{" "}
+                <span className="text-primary">Simples, Direta e Focada em Giro</span>
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-[#A3A3A3] sm:text-base">
-                Transformamos a maneira como sua revenda atrai, atende e converte clientes.
+              <p
+                className={`mx-auto mt-4 max-w-2xl text-center font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                  metodoInView ? "reveal-visible" : ""
+                }`}
+              >
+                Transformamos a maneira como sua revenda atrai, atende e converte clientes
+                em um processo contínuo de três etapas complementares.
               </p>
             </div>
 
-            <div className="mt-16 grid gap-8 md:grid-cols-3">
-              {methodologySteps.map(({ step, phase, title, text }) => (
-                <div
-                  key={title}
-                  className="group relative flex flex-col rounded-xl border border-white/10 bg-[#121212] p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10"
-                >
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
-                    {step} • {phase}
-                  </span>
+            {/* Trilha Progressiva Conectada */}
+            <div className="relative mt-16 sm:mt-20">
+              {/* Linha Conectora Superior Desktop */}
+              <div
+                className="absolute top-10 left-[16%] right-[16%] h-0.5 bg-white/10 hidden md:block"
+                aria-hidden="true"
+              >
+                <div className="h-full bg-gradient-to-r from-primary/30 via-primary to-primary/30 circuit-beam" />
+              </div>
 
-                  <div className="mx-auto mt-5 flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 border border-primary/40 text-primary shadow-glow transition-transform duration-300 group-hover:scale-110">
-                    <TrendingUp className="h-7 w-7 text-primary" />
-                  </div>
+              {/* Cards das 3 Estações da Metodologia */}
+              <div className="grid gap-8 md:grid-cols-3 relative">
+                {methodologySteps.map(({ step, phase, tag, title, text, icon: StepIcon, deliverables }, index) => {
+                  const delayClass = `stagger-delay-${index + 1}`;
+                  return (
+                    <div
+                      key={title}
+                      className={`card-editorial group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#121212] p-8 transition-all duration-300 hover:border-primary/50 reveal-init ${delayClass} ${
+                        metodoInView ? "reveal-visible" : ""
+                      }`}
+                    >
+                      <div>
+                        {/* Topo com Marcador Numérico e Ícone */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-sm method-node-glow">
+                            {step}
+                          </div>
+                          <span className="rounded-full bg-white/5 border border-white/10 px-2.5 py-0.5 text-[10px] font-mono tracking-wide text-primary uppercase font-bold">
+                            {phase}
+                          </span>
+                        </div>
 
-                  <h3 className="mt-6 font-display text-xl uppercase tracking-wide text-white">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#A3A3A3]">{text}</p>
-                </div>
-              ))}
+                        <div className="mt-6 flex items-center gap-3">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/90">
+                            <StepIcon className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <span className="text-[10px] font-mono text-muted-foreground uppercase block">
+                              {tag}
+                            </span>
+                            <h3 className="font-display font-semibold text-xl text-white tracking-tight">
+                              {title}
+                            </h3>
+                          </div>
+                        </div>
+
+                        <p className="mt-4 font-sans text-sm leading-relaxed text-muted-foreground">
+                          {text}
+                        </p>
+
+                        {/* Entregáveis Práticos */}
+                        <div className="mt-6 space-y-2 border-t border-white/8 pt-4">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block">
+                            Entregáveis Principais:
+                          </span>
+                          {deliverables.map((item, itemIdx) => (
+                            <div key={itemIdx} className="flex items-start gap-2 text-xs text-white/80">
+                              <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
+                              <span className="font-sans leading-tight">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-white/8 flex items-center justify-between text-xs font-semibold text-primary">
+                        <span>Fase {step} do Ecossistema</span>
+                        <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </Container>
         </section>

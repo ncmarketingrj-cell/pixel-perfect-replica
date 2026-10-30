@@ -182,9 +182,68 @@
   background-color: #151515;
 }
 
+/* Circuito NC - Animação de Feixe de Conexão */
+@keyframes circuitBeam {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.circuit-beam {
+  position: relative;
+  overflow: hidden;
+}
+
+.circuit-beam::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(239, 64, 69, 0.8) 50%, transparent 100%);
+  animation: circuitBeam 3s ease-in-out infinite;
+}
+
+/* Destaque do Pilar Conectado no Circuito */
+.circuit-card-active {
+  border-color: rgba(239, 64, 69, 0.7) !important;
+  box-shadow: 0 0 35px -8px rgba(239, 64, 69, 0.4);
+}
+
+.circuit-btn-active {
+  background-color: rgba(239, 64, 69, 0.15) !important;
+  border-color: rgba(239, 64, 69, 0.8) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px -4px rgba(239, 64, 69, 0.35);
+}
+
+/* Animação do Gráfico SVG de BI */
+@keyframes drawGraph {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+.draw-chart {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawGraph 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Método NC - Trilha Visual de Progresso */
+.method-track {
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.method-node-glow {
+  box-shadow: 0 0 25px -4px rgba(239, 64, 69, 0.5);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .circuit-beam::after {
     animation-play-state: paused !important;
+  }
+  .draw-chart {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
   }
   .hero-seq-badge,
   .hero-seq-h1-1,
