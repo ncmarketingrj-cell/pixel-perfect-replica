@@ -123,29 +123,31 @@ export function LegalModals({ activeModal, onClose }: LegalModalsProps) {
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">1</span>
-                  Compromisso com a Proteção de Dados
+                  Funcionamento Real do Formulário & Coleta
                 </h3>
-                <p>
-                  A <strong>NC Agência</strong> preza pela segurança, confidencialidade e privacidade de todos os lojistas, parceiros e visitantes que interagem conosco. Esta Política descreve de forma clara como tratamos, armazenamos e protegemos as informações fornecidas em nossa landing page e canais de comunicação.
-                </p>
+                <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 text-white">
+                  <p className="font-medium leading-relaxed">
+                    As informações preenchidas no formulário são utilizadas exclusivamente para preparar uma mensagem de contato comercial, que será encaminhada pelo próprio usuário por meio do WhatsApp. A NC Agência não mantém um banco de dados próprio com as respostas enviadas por esse formulário. Após o envio, as informações passam a integrar a conversa comercial no WhatsApp e são tratadas conforme a finalidade do atendimento.
+                  </p>
+                </div>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">2</span>
-                  Dados Coletados no Formulário
+                  Dados Estruturados para a Mensagem
                 </h3>
                 <p>
-                  Para a realização do diagnóstico comercial automotivo, solicitamos as seguintes informações corporativas e de contato:
+                  Os campos disponíveis no formulário destinam-se exclusivamente a organizar as informações comerciais para otimizar o atendimento prévio no WhatsApp:
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-neutral-400 mt-2">
                   <div className="rounded-lg border border-white/5 bg-white/5 p-3">
                     <strong className="text-white block mb-1">Contato do Responsável:</strong>
-                    Nome completo, e-mail de trabalho, número de telefone comercial com WhatsApp e perfil do Instagram da loja.
+                    Nome completo, e-mail comercial, número de WhatsApp e perfil no Instagram da loja.
                   </div>
                   <div className="rounded-lg border border-white/5 bg-white/5 p-3">
-                    <strong className="text-white block mb-1">Métricas da Operação:</strong>
-                    Cargo na loja, existência de SDR, faixa de estoque em pátio, média de vendas mensais e orçamento de anúncios.
+                    <strong className="text-white block mb-1">Perfil Operacional da Loja:</strong>
+                    Cargo na loja, existência de SDR, volume de estoque em pátio, média de vendas e faixa de investimento pretendida.
                   </div>
                 </div>
               </section>
@@ -153,46 +155,30 @@ export function LegalModals({ activeModal, onClose }: LegalModalsProps) {
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">3</span>
-                  Finalidade do Tratamento
+                  Finalidade e Tratamento no Atendimento
                 </h3>
                 <p>
-                  Os dados são coletados exclusivamente para:
+                  O objetivo único da mensagem preparada é permitir uma conversa ágil e direcionada entre o lojista e a estrategista comercial da NC Agência no WhatsApp Oficial <strong>(21) 97162-5597</strong>, avaliando o momento do estoque e a viabilidade da metodologia.
                 </p>
-                <ul className="list-disc pl-5 space-y-1 text-neutral-400">
-                  <li>Iniciar o atendimento personalizado via WhatsApp Oficial <strong>(21) 97162-5597</strong>;</li>
-                  <li>Avaliar previamente o cenário do seu estoque e dimensionar a estratégia comercial;</li>
-                  <li>Apresentar propostas personalizadas e agendar reuniões com nossos especialistas;</li>
-                  <li>Cumprir obrigações legais e regulatórias cabíveis.</li>
-                </ul>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">4</span>
-                  Não Comercialização de Dados
+                  Sigilo Profissional e Não Compartilhamento
                 </h3>
                 <p>
-                  A NC Agência <strong>jamais vende, aluga ou transfere seus dados pessoais e de contato para terceiros</strong> para fins publicitários alheios. Os dados só são manipulados internamente pela equipe técnica e em ferramentas seguras de CRM e comunicação sob acordos rígidos de segurança.
+                  A NC Agência <strong>jamais comercializa, aluga ou compartilha seus dados e conversas com terceiros</strong>. Todos os dados compartilhados na conversa privada do WhatsApp são resguardados pelo sigilo comercial necessário à assessoria estratégica de revendas de veículos.
                 </p>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">5</span>
-                  Segurança e Armazenamento
+                  Canal Direto de Privacidade
                 </h3>
                 <p>
-                  Utilizamos criptografia padrão de mercado (TLS/SSL em todas as páginas), controles restritos de acesso a bancos de dados e medidas ativas de prevenção a ataques cibernéticos para proteger suas informações contra acessos não autorizados.
-                </p>
-              </section>
-
-              <section className="space-y-2">
-                <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">6</span>
-                  Canal do Titular de Dados
-                </h3>
-                <p>
-                  Para dúvidas, atualizações cadastrais ou cancelamento de comunicações, entre em contato através do e-mail <strong>privacidade@ncagencia.com.br</strong> ou pelo nosso WhatsApp Oficial.
+                  Para quaisquer dúvidas sobre privacidade, encerramento de conversas ou solicitações relacionadas a dados, o contato direto é disponibilizado pelo WhatsApp Oficial ou através do e-mail <strong>privacidade@ncagencia.com.br</strong>.
                 </p>
               </section>
             </>
@@ -206,7 +192,7 @@ export function LegalModals({ activeModal, onClose }: LegalModalsProps) {
                   Declaração de Conformidade com a LGPD
                 </h3>
                 <p>
-                  A <strong>NC Agência</strong> reafirma seu compromisso incondicional com a Lei Geral de Proteção de Dados Pessoais (Lei Federal nº 13.709/2018 - LGPD). Adotamos princípios de <em>Privacy by Design</em> e boas práticas de governança de dados em todas as etapas de prospecção e execução das estratégias comerciais.
+                  A <strong>NC Agência</strong> atua em consonância com a Lei Geral de Proteção de Dados Pessoais (Lei Federal nº 13.709/2018 - LGPD). Em respeito ao princípio da necessidade e minimização de dados, nossa plataforma opera sem armazenamento em banco de dados próprio para o formulário de diagnóstico: as informações são processadas no próprio navegador do usuário para formatar a mensagem de WhatsApp, passando a existir na conversa mantida diretamente entre as partes.
                 </p>
               </section>
 

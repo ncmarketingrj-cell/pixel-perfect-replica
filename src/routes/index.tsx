@@ -75,7 +75,9 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
+      { property: "og:site_name", content: "NC Agência - Inteligência Comercial Automotiva" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "index, follow" },
     ],
   }),
   component: Index,
@@ -229,7 +231,7 @@ const testimonials = [
       "Triagem automática via WhatsApp em menos de 1 minuto",
       "Equipe comercial focada em visitas presenciais agendadas",
     ],
-    verifiedBadge: "Operação Ativa • Auditada",
+    verifiedBadge: "Estudo de Caso • Modelo NC",
   },
   {
     quote:
@@ -245,7 +247,7 @@ const testimonials = [
       "Implantação de CRM com histórico centralizado de clientes",
       "Taxa de comparecimento às visitas agendadas ampliada",
     ],
-    verifiedBadge: "Operação Ativa • Auditada",
+    verifiedBadge: "Estudo de Caso • Modelo NC",
   },
   {
     quote:
@@ -261,7 +263,7 @@ const testimonials = [
       "Campanhas multicanal no Meta e Google no raio da loja",
       "Retroalimentação contínua nos modelos mais lucrativos",
     ],
-    verifiedBadge: "Operação Ativa • Auditada",
+    verifiedBadge: "Estudo de Caso • Modelo NC",
   },
 ];
 
@@ -1249,23 +1251,22 @@ function Index() {
           <Container>
             <div className="mx-auto max-w-3xl text-center">
               <div className={`reveal-init stagger-delay-1 ${depoimentosInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Evidências & Casos Reais</SectionBadge>
+                <SectionBadge>Estudos de Caso & Métricas de Referência</SectionBadge>
               </div>
               <h2
                 className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
                   depoimentosInView ? "reveal-visible" : ""
                 }`}
               >
-                Resultados Reais Documentados no{" "}
-                <span className="text-primary">Mercado Automotivo</span>
+                Estudos de Caso & Resultados na{" "}
+                <span className="text-primary">Prática Automotiva</span>
               </h2>
               <p
                 className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
                   depoimentosInView ? "reveal-visible" : ""
                 }`}
               >
-                Como concessionárias e revendas parceiras substituíram a incerteza comercial e o
-                estoque parado por previsibilidade de caixa através do Ecossistema NC.
+                Exemplos práticos de transformações comerciais e parâmetros de desempenho observados em concessionárias e revendas que implementaram a metodologia do Ecossistema NC.
               </p>
             </div>
 
@@ -1338,6 +1339,13 @@ function Index() {
                   </div>
                 );
               })}
+            </div>
+
+            {/* Nota Institucional de Transparência e Credibilidade */}
+            <div className="mt-12 rounded-xl border border-white/8 bg-white/[0.02] p-4 text-center">
+              <p className="text-xs text-muted-foreground/80 max-w-2xl mx-auto font-sans leading-relaxed">
+                * Os percentuais e métricas apresentados acima constituem estudos de caso e parâmetros médios apurados na aplicação do método em lojas e concessionárias parceiras. Os resultados individuais variam conforme o estoque ativo, margem líquida, praça de atuação, agilidade da equipe comercial no WhatsApp e volume de investimento em mídia.
+              </p>
             </div>
           </Container>
         </section>

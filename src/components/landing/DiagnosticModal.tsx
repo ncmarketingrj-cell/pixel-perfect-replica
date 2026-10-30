@@ -309,14 +309,14 @@ export function DiagnosticProvider({ children }: { children: ReactNode }) {
 
   const handleStep1Next = () => {
     if (validateStep1()) {
-      trackEvent("form_step", { step: 2 });
+      trackEvent("form_step_complete", { step: 1 });
       setCurrentStep(2);
     }
   };
 
   const handleStep2Next = () => {
     if (validateStep2()) {
-      trackEvent("form_step", { step: 3 });
+      trackEvent("form_step_complete", { step: 2 });
       setCurrentStep(3);
     }
   };
@@ -331,11 +331,15 @@ export function DiagnosticProvider({ children }: { children: ReactNode }) {
     const message = buildWhatsAppMessage(formData);
     setSubmittedMessage(message);
 
-    trackEvent("whatsapp_redirect", {
+    // Eventos principais de conversão (estritamente sem dados pessoais / PII)
+    trackEvent("form_step_complete", { step: 3 });
+    trackEvent("generate_lead", {
+      lead_type: "automotive_diagnostic",
       store_relationship: formData.storeRelationship,
-      stock: formData.stock,
-      ads_investment: formData.adsInvestment,
+      stock_range: formData.stock,
+      ads_range: formData.adsInvestment,
     });
+    trackEvent("whatsapp_click", { action: "form_submission" });
 
     const encoded = encodeURIComponent(message);
     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
@@ -385,6 +389,7 @@ export function DiagnosticProvider({ children }: { children: ReactNode }) {
                   size="lg"
                   className="h-13 bg-primary px-6 font-bold uppercase tracking-wide text-white hover:bg-primary/90 shadow-glow"
                   onClick={() => {
+                    trackEvent("whatsapp_click", { action: "fallback_button" });
                     const encoded = encodeURIComponent(submittedMessage);
                     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, "_blank");
                   }}
