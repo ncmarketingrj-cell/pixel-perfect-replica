@@ -1362,15 +1362,20 @@ function Index() {
                   <div className="absolute -inset-2 rounded-2xl bg-primary/20 blur-2xl" />
 
                   {/* Moldura da Fotografia */}
-                  <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#121212] p-2 shadow-2xl">
-                    <img
-                      src={victoriaMaia}
-                      alt="Victoria Maia — Fundadora da NC Agência e Especialista no Mercado Automotivo"
-                      loading="lazy"
-                      width={800}
-                      height={1100}
-                      className="w-full rounded-xl object-cover grayscale contrast-110 transition-all duration-500 hover:grayscale-0"
-                    />
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/15 bg-[#121212] p-2 shadow-2xl transition-all duration-500 hover:border-primary/40">
+                    <div className="relative overflow-hidden rounded-xl">
+                      <img
+                        src={victoriaMaia}
+                        alt="Victoria Maia — Fundadora da NC Agência e Especialista no Mercado Automotivo"
+                        loading="lazy"
+                        width={800}
+                        height={1000}
+                        className="w-full rounded-xl object-cover grayscale contrast-105 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
+                      />
+                      <div className="pointer-events-none absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-lg bg-black/60 text-white/60 backdrop-blur-sm transition-colors group-hover:text-primary">
+                        <Sparkles className="h-3.5 w-3.5" />
+                      </div>
+                    </div>
 
                     {/* Card de Autoridade Sobreposto */}
                     <div className="mt-3 rounded-xl border border-white/10 bg-[#0A0A0A]/90 p-4 backdrop-blur-md">
