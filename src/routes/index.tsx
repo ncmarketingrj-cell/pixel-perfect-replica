@@ -42,6 +42,7 @@ import {
   DiagnosticProvider,
   DiagnosticButton,
 } from "@/components/landing/DiagnosticModal";
+import { LegalModals, type LegalModalType } from "@/components/landing/LegalModals";
 import { useInView } from "@/hooks/use-in-view";
 
 export const Route = createFileRoute("/")({
@@ -270,6 +271,7 @@ function Index() {
   const { ref: depoimentosRef, isInView: depoimentosInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: sobreRef, isInView: sobreInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const [activeTriad, setActiveTriad] = useState<"all" | "trafego" | "crm" | "bi">("all");
+  const [legalModal, setLegalModal] = useState<LegalModalType>(null);
 
   return (
     <DiagnosticProvider>
@@ -1620,15 +1622,27 @@ function Index() {
           <Logo className="h-9" />
 
           <nav className="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-wider text-muted-foreground">
-            <span className="hover:text-white transition-colors cursor-pointer">
+            <button
+              type="button"
+              onClick={() => setLegalModal("terms")}
+              className="hover:text-white transition-colors cursor-pointer uppercase tracking-wider bg-transparent border-0 p-0 text-xs font-semibold text-muted-foreground hover:underline focus:outline-none"
+            >
               Termos de Uso
-            </span>
-            <span className="hover:text-white transition-colors cursor-pointer">
+            </button>
+            <button
+              type="button"
+              onClick={() => setLegalModal("privacy")}
+              className="hover:text-white transition-colors cursor-pointer uppercase tracking-wider bg-transparent border-0 p-0 text-xs font-semibold text-muted-foreground hover:underline focus:outline-none"
+            >
               Política de Privacidade
-            </span>
-            <span className="hover:text-white transition-colors cursor-pointer">
+            </button>
+            <button
+              type="button"
+              onClick={() => setLegalModal("lgpd")}
+              className="hover:text-white transition-colors cursor-pointer uppercase tracking-wider bg-transparent border-0 p-0 text-xs font-semibold text-muted-foreground hover:underline focus:outline-none"
+            >
               Conformidade LGPD
-            </span>
+            </button>
           </nav>
 
           <a
@@ -1649,6 +1663,9 @@ function Index() {
           </p>
         </Container>
       </footer>
+
+      {/* MODAIS LEGAIS EXECUTIVOS (Termos de Uso, Política de Privacidade e LGPD) */}
+      <LegalModals activeModal={legalModal} onClose={() => setLegalModal(null)} />
     </DiagnosticProvider>
   );
 }
