@@ -102,9 +102,9 @@ function Container({
 
 function SectionBadge({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-      {children}
+    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1 text-[11px] font-mono tracking-wide text-white/85">
+      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+      <span>{children}</span>
     </div>
   );
 }
@@ -237,8 +237,8 @@ function Index() {
             </a>
             <DiagnosticButton
               position="header"
-              label="QUERO VENDER MAIS CARROS"
-              className="!h-11 px-5 text-xs font-bold tracking-wider"
+              label="Quero vender mais carros"
+              className="!h-10 px-4 text-xs font-semibold tracking-normal"
             />
           </div>
         </Container>
@@ -262,64 +262,71 @@ function Index() {
           <Container className="relative z-10 grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             {/* Bloco de Mensagem Principal (Esquerda - 7 Colunas) */}
             <div className="lg:col-span-7 xl:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-                <Sparkles className="h-3.5 w-3.5 text-primary" />
-                <span>Inteligência Comercial Automotiva • Especialistas em Revendas</span>
+              {/* 1. Etiqueta Institucional */}
+              <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1 text-[11px] font-mono tracking-wide text-white/90">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                <span>Inteligência Comercial Automotiva</span>
+                <span className="text-white/30">•</span>
+                <span className="text-muted-foreground">+10 Anos de Mercado</span>
               </div>
 
-              <h1 className="mt-5 font-display text-4xl uppercase leading-[1.03] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
-                Sua loja tem carros.{" "}
-                <span className="block text-primary underline decoration-primary/40 underline-offset-8">
+              {/* 2. Headline Editorial com Capitalização Natural */}
+              <div className="mt-6">
+                <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.5rem,5.5vw,4.5rem)] leading-[1.04] tracking-[-0.03em] text-white">
+                  Sua loja tem carros.
+                </h1>
+                <p className="hero-seq-h1-2 font-display font-semibold text-[clamp(2.5rem,5.5vw,4.5rem)] leading-[1.04] tracking-[-0.03em] text-primary mt-1">
                   A NC tem estratégia para vender.
-                </span>
-              </h1>
+                </p>
+              </div>
 
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#A3A3A3] sm:text-lg md:text-xl">
+              {/* 3. Subtítulo em Inter */}
+              <p className="hero-seq-sub mt-6 max-w-2xl font-sans text-base sm:text-lg lg:text-[18px] leading-[1.6] text-muted-foreground">
                 Marketing, tecnologia e inteligência comercial trabalhando juntos para
                 transformar oportunidades em vendas reais para sua loja de veículos.
               </p>
 
-              {/* Badges de Autoridade Institucional Verificada */}
-              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 max-w-xl">
-                <div className="rounded-xl border border-white/10 bg-[#121212]/90 p-3.5 backdrop-blur-sm">
-                  <div className="font-display text-2xl font-bold text-white sm:text-3xl">
+              {/* 4. Indicadores Institucionais Verificados */}
+              <div className="hero-seq-metrics mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 max-w-xl">
+                <div className="rounded-xl border border-white/8 bg-[#121212]/85 p-4 backdrop-blur-sm">
+                  <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">
                     +100
                   </div>
-                  <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground mt-0.5">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-1">
                     Lojas Atendidas
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-white/10 bg-[#121212]/90 p-3.5 backdrop-blur-sm">
-                  <div className="font-display text-2xl font-bold text-white sm:text-3xl">
+                <div className="rounded-xl border border-white/8 bg-[#121212]/85 p-4 backdrop-blur-sm">
+                  <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">
                     10 Anos
                   </div>
-                  <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground mt-0.5">
-                    Experiência Automotiva
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-1">
+                    Experiência Setorial
                   </div>
                 </div>
 
-                <div className="col-span-2 sm:col-span-1 rounded-xl border border-primary/20 bg-primary/5 p-3.5 backdrop-blur-sm">
-                  <div className="font-display text-2xl font-bold text-primary sm:text-3xl">
+                <div className="col-span-2 sm:col-span-1 rounded-xl border border-white/8 bg-[#121212]/85 p-4 backdrop-blur-sm">
+                  <div className="font-display font-semibold text-2xl sm:text-3xl text-primary tracking-tight">
                     100%
                   </div>
-                  <div className="text-[11px] font-medium uppercase tracking-wider text-white/80 mt-0.5">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-1">
                     Foco no Mercado Auto
                   </div>
                 </div>
               </div>
 
-              {/* CTAs Duplos: Primário Comercial + Secundário de Exploração */}
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+              {/* 5. CTAs com Microinterações Refinadas */}
+              <div className="hero-seq-cta mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <DiagnosticButton
                   position="hero"
-                  label="QUERO VENDER MAIS CARROS"
-                  className="h-14 px-8 text-sm sm:text-base font-bold shadow-glow"
+                  label="Quero vender mais carros"
+                  className="h-13 sm:h-14 px-8 text-sm font-semibold tracking-wide"
                 />
 
                 <a
                   href="#ecossistema"
-                  className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-white/10 hover:border-white/30"
+                  className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-6 font-sans text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25 active:brightness-95"
                 >
                   <span>Conheça o Ecossistema NC</span>
                   <ChevronRight className="h-4 w-4 text-primary" />
@@ -327,40 +334,37 @@ function Index() {
               </div>
             </div>
 
-            {/* Bloco Editorial com a Fundadora Victoria Maia (Direita - 5 Colunas) */}
-            <div className="flex justify-center lg:col-span-5 lg:justify-end">
+            {/* 6. Fotografia da Fundadora Victoria Maia (Composição Editorial com Máscara Suave) */}
+            <div className="hero-seq-photo flex justify-center lg:col-span-5 lg:justify-end">
               <div className="relative w-full max-w-md">
-                {/* Glow elegante atrás da foto */}
-                <div className="absolute -inset-3 rounded-3xl bg-primary/15 blur-2xl" />
-
-                {/* Container da fotografia original com recorte editorial */}
-                <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#121212] shadow-2xl [mask-image:linear-gradient(to_bottom,black_88%,transparent)]">
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#121212] shadow-2xl [mask-image:linear-gradient(to_bottom,black_90%,transparent)]">
                   <img
                     src={victoriaMaia}
                     alt="Victoria Maia — Fundadora da NC Agência e especialista em inteligência comercial para lojas de veículos"
                     width={800}
                     height={1100}
-                    className="h-auto w-full object-cover object-top filter contrast-105"
+                    fetchPriority="high"
+                    className="h-auto w-full object-cover object-top filter contrast-[1.04]"
                   />
 
-                  {/* Card Flutuante de Autoridade sobre a Imagem */}
-                  <div className="absolute inset-x-4 bottom-4 rounded-xl border border-white/15 bg-[#080808]/90 p-4 backdrop-blur-md">
+                  {/* Card Flutuante de Autoridade */}
+                  <div className="absolute inset-x-4 bottom-4 rounded-xl border border-white/12 bg-[#080808]/92 p-4 backdrop-blur-md">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-display text-base font-bold uppercase text-white">
+                        <p className="font-display font-semibold text-base text-white">
                           Victoria Maia
                         </p>
-                        <p className="text-[11px] font-semibold text-primary uppercase tracking-wider">
-                          Fundadora da NC Agência
+                        <p className="text-[11px] font-mono text-primary tracking-wide">
+                          Fundadora & Estrategista Comercial
                         </p>
                       </div>
-                      <span className="flex h-2.5 w-2.5 relative">
+                      <span className="flex h-2 w-2 relative">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
                       </span>
                     </div>
 
-                    <div className="mt-3 flex items-center gap-2 border-t border-white/10 pt-2.5 text-[11px] text-[#A3A3A3]">
+                    <div className="mt-3 flex items-center gap-2 border-t border-white/8 pt-2.5 text-[11px] font-sans text-muted-foreground">
                       <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
                       <span>Metodologia validada em concessionárias e revendas</span>
                     </div>

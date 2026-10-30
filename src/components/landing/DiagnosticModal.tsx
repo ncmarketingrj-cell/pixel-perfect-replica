@@ -703,7 +703,7 @@ export function DiagnosticProvider({ children }: { children: ReactNode }) {
 export function DiagnosticButton({
   className = "",
   position = "hero",
-  label = "⚡ AGENDE SEU DIAGNÓSTICO GRATUITO",
+  label = "Quero vender mais carros",
 }: {
   className?: string;
   position?: CtaPosition;
@@ -720,7 +720,7 @@ export function DiagnosticButton({
     <Button
       size="lg"
       onClick={handleClick}
-      className={`h-14 px-8 font-bold uppercase tracking-wider text-white bg-primary hover:bg-primary/90 shadow-glow transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] ${className}`}
+      className={`h-13 sm:h-14 px-7 font-sans font-semibold text-sm tracking-wide text-white bg-primary hover:bg-[#d93439] rounded-xl shadow-glow btn-interaction active:brightness-95 ${className}`}
     >
       {label}
     </Button>
