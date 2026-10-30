@@ -37,6 +37,7 @@ import {
   DiagnosticProvider,
   DiagnosticButton,
 } from "@/components/landing/DiagnosticModal";
+import { useInView } from "@/hooks/use-in-view";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -210,6 +211,8 @@ const testimonials = [
 ];
 
 function Index() {
+  const { ref: gargalosRef, isInView: gargalosInView } = useInView<HTMLElement>({ threshold: 0.1 });
+
   return (
     <DiagnosticProvider>
       {/* 1. HEADER STICKY EXECUTIVO */}
@@ -375,17 +378,17 @@ function Index() {
           </Container>
         </section>
 
-        {/* 3. TICKER DE PILARES TECNOLÓGICOS (LOOP CONTÍNUO) */}
+        {/* 3. TICKER DE PILARES TECNOLÓGICOS (LOOP CONTÍNUO LINEAR) */}
         <div
           aria-label="Pilares de Crescimento NC"
-          className="relative overflow-hidden border-y border-white/10 bg-[#0B0B0B] py-3.5 select-none"
+          className="relative overflow-hidden border-y border-white/8 bg-[#090909] py-3.5 select-none"
         >
           <div className="animate-marquee flex items-center">
             {/* Bloco 1 */}
             <div className="flex shrink-0 items-center gap-10 pr-10">
               {tickerPilares.map((pilar, i) => (
                 <Fragment key={`pilar-1-${i}`}>
-                  <span className="whitespace-nowrap font-display text-sm uppercase tracking-wider text-white sm:text-base">
+                  <span className="whitespace-nowrap font-display font-medium text-sm sm:text-base tracking-wide text-white/90">
                     {pilar}
                   </span>
                   <div className="flex items-center gap-1.5 opacity-80">
@@ -404,7 +407,7 @@ function Index() {
             <div className="flex shrink-0 items-center gap-10 pr-10" aria-hidden="true">
               {tickerPilares.map((pilar, i) => (
                 <Fragment key={`pilar-2-${i}`}>
-                  <span className="whitespace-nowrap font-display text-sm uppercase tracking-wider text-white sm:text-base">
+                  <span className="whitespace-nowrap font-display font-medium text-sm sm:text-base tracking-wide text-white/90">
                     {pilar}
                   </span>
                   <div className="flex items-center gap-1.5 opacity-80">
@@ -421,51 +424,66 @@ function Index() {
           </div>
         </div>
 
-        {/* 4. NOVA SEÇÃO: O PROBLEMA NÃO É APENAS GERAR LEADS */}
-        <section className="py-24 sm:py-28 bg-[#080808]" id="problema">
+        {/* 4. SEÇÃO: GARGALOS DOS LOJISTAS COM REVELAÇÃO PROGRESSIVA */}
+        <section ref={gargalosRef} className="py-24 sm:py-28 bg-[#080808]" id="problema">
           <Container>
             <div className="mx-auto max-w-3xl text-center">
-              <SectionBadge>Diagnóstico de Mercado</SectionBadge>
-              <h2 className="mt-4 font-display text-2xl uppercase leading-tight text-white sm:text-3xl md:text-4xl">
+              <div className={`reveal-init stagger-delay-1 ${gargalosInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Diagnóstico de Mercado</SectionBadge>
+              </div>
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
+                  gargalosInView ? "reveal-visible" : ""
+                }`}
+              >
                 O problema da maioria das lojas não é falta de leads.{" "}
                 <span className="text-primary">É falta de sistema comercial.</span>
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-[#A3A3A3] sm:text-base">
+              <p
+                className={`mt-4 font-sans text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                  gargalosInView ? "reveal-visible" : ""
+                }`}
+              >
                 Colocar dinheiro em anúncio sem ter processo de triagem, CRM e velocidade no
                 atendimento é queimar verba. Identifique onde sua operação está travando:
               </p>
             </div>
 
             <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {gargalosComerciais.map(({ icon: Icon, title, description, tag }) => (
-                <div
-                  key={title}
-                  className="group relative flex flex-col justify-between rounded-xl border border-white/10 bg-[#121212] p-7 transition-all duration-300 hover:border-primary/40 hover:-translate-y-1"
-                >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                        <Icon className="h-6 w-6" />
+              {gargalosComerciais.map(({ icon: Icon, title, description, tag }, index) => {
+                const delayClass = `stagger-delay-${index + 1}`;
+                return (
+                  <div
+                    key={title}
+                    className={`card-editorial relative flex flex-col justify-between rounded-xl border border-white/8 bg-[#121212] p-7 reveal-init ${delayClass} ${
+                      gargalosInView ? "reveal-visible" : ""
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-mono tracking-wide text-primary">
+                          {tag}
+                        </span>
                       </div>
-                      <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
-                        {tag}
-                      </span>
+
+                      <h3 className="mt-6 font-display font-semibold text-xl text-white tracking-tight">
+                        {title}
+                      </h3>
+                      <p className="mt-2.5 font-sans text-sm leading-relaxed text-muted-foreground">
+                        {description}
+                      </p>
                     </div>
 
-                    <h3 className="mt-6 font-display text-lg uppercase text-white">
-                      {title}
-                    </h3>
-                    <p className="mt-2.5 text-xs leading-relaxed text-[#9E9E9E] sm:text-sm">
-                      {description}
-                    </p>
+                    <div className="mt-6 border-t border-white/8 pt-4 flex items-center gap-1.5 text-[11px] font-sans text-white/50">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                      <span>Solucionado no Ecossistema NC</span>
+                    </div>
                   </div>
-
-                  <div className="mt-6 border-t border-white/5 pt-4 flex items-center gap-1.5 text-[11px] font-medium text-white/60">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span>Solucionado no Ecossistema NC</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </Container>
         </section>
