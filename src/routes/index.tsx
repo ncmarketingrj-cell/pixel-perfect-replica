@@ -32,7 +32,8 @@ import {
 
 import ncLogo from "@/assets/nc-logo.png";
 import heroDealership from "@/assets/hero-dealership.jpg";
-import victoriaMaia from "@/assets/victoria-maia.jpg";
+import victoriaHero from "@/assets/victoria-sitting.jpg";
+import victoriaAbout from "@/assets/victoria-founder.png";
 import partnerRio2 from "@/assets/partner-rio2.png";
 import partnerAlfacar from "@/assets/partner-alfacar.jpg";
 import partnersImg from "@/assets/partners.png.asset.json";
@@ -399,10 +400,10 @@ function Index() {
               <div className="relative w-full max-w-md">
                 <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#121212] shadow-2xl [mask-image:linear-gradient(to_bottom,black_90%,transparent)]">
                   <img
-                    src={victoriaMaia}
+                    src={victoriaHero}
                     alt="Victoria Maia — Fundadora da NC Agência e especialista em inteligência comercial para lojas de veículos"
                     width={800}
-                    height={1100}
+                    height={1000}
                     fetchPriority="high"
                     className="h-auto w-full object-cover object-top filter contrast-[1.04]"
                   />
@@ -1365,11 +1366,11 @@ function Index() {
                   <div className="group relative overflow-hidden rounded-2xl border border-white/15 bg-[#121212] p-2 shadow-2xl transition-all duration-500 hover:border-primary/40">
                     <div className="relative overflow-hidden rounded-xl">
                       <img
-                        src={victoriaMaia}
+                        src={victoriaAbout}
                         alt="Victoria Maia — Fundadora da NC Agência e Especialista no Mercado Automotivo"
                         loading="lazy"
                         width={800}
-                        height={1000}
+                        height={1100}
                         className="w-full rounded-xl object-cover grayscale contrast-105 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
                       />
                       <div className="pointer-events-none absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-lg bg-black/60 text-white/60 backdrop-blur-sm transition-colors group-hover:text-primary">
