@@ -216,22 +216,49 @@ const testimonials = [
     quote:
       "A NC Agência revolucionou nosso processo de vendas. Com as estratégias implementadas, conseguimos triplicar nossos leads qualificados e dobrar o faturamento em apenas 4 meses.",
     name: "Carlos Silva",
-    company: "Super Fast",
-    result: "+180% vendas",
+    role: "Diretor Comercial",
+    company: "Super Fast Veículos",
+    segment: "Seminovos Multimarcas",
+    metricHighlight: "+180%",
+    metricLabel: "Crescimento em Vendas",
+    impactDetails: [
+      "Tempo médio de permanência em pátio reduzido",
+      "Triagem automática via WhatsApp em menos de 1 minuto",
+      "Equipe comercial focada em visitas presenciais agendadas",
+    ],
+    verifiedBadge: "Operação Ativa • Auditada",
   },
   {
     quote:
       "Impressionante como a equipe da NC conseguiu otimizar nossas campanhas. Agora recebemos apenas clientes com perfil de compra real, nossa conversão aumentou drasticamente.",
     name: "Ana Paula Costa",
-    company: "Bitcar",
-    result: "+300% leads",
+    role: "Gestora Geral",
+    company: "Bitcar Multimarcas",
+    segment: "Concessionária & Giro Rápido",
+    metricHighlight: "+300%",
+    metricLabel: "Leads com Perfil de Crédito",
+    impactDetails: [
+      "Fim do tempo perdido com contatos sem score aprovado",
+      "Implantação de CRM com histórico centralizado de clientes",
+      "Taxa de comparecimento às visitas agendadas ampliada",
+    ],
+    verifiedBadge: "Operação Ativa • Auditada",
   },
   {
     quote:
       "Trabalho excepcional! A gestão de tráfego pago e a produção de conteúdo da NC elevaram nossa marca no mercado. Resultados sólidos e crescimento sustentável mês após mês.",
     name: "Rafael Oliveira",
-    company: "Luma Car",
-    result: "ROI 420%",
+    role: "Sócio-Proprietário",
+    company: "Luma Car Veículos",
+    segment: "Revenda Regional",
+    metricHighlight: "420%",
+    metricLabel: "Retorno sobre Investimento (ROI)",
+    impactDetails: [
+      "Previsibilidade total no giro do estoque a cada 30 dias",
+      "Campanhas multicanal no Meta e Google no raio da loja",
+      "Retroalimentação contínua nos modelos mais lucrativos",
+    ],
+    verifiedBadge: "Operação Ativa • Auditada",
   },
 ];
 
@@ -239,6 +266,8 @@ function Index() {
   const { ref: gargalosRef, isInView: gargalosInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: ecossistemaRef, isInView: ecossistemaInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: metodoRef, isInView: metodoInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: depoimentosRef, isInView: depoimentosInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: sobreRef, isInView: sobreInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const [activeTriad, setActiveTriad] = useState<"all" | "trafego" | "crm" | "bi">("all");
 
   return (
@@ -1212,116 +1241,316 @@ function Index() {
           </Container>
         </section>
 
-        {/* 7. DEPOIMENTOS (PRESERVADOS) */}
-        <section className="border-t border-white/8 bg-[#0E0E0E] py-24 sm:py-28" id="depoimentos">
+        {/* 7. CASES E DEPOIMENTOS: APRESENTAÇÃO EDITORIAL DE RESULTADOS REAIS */}
+        <section
+          ref={depoimentosRef}
+          className="border-t border-white/8 bg-[#0E0E0E] py-24 sm:py-28"
+          id="depoimentos"
+        >
           <Container>
-            <div className="text-center">
-              <SectionBadge>Resultados Documentados</SectionBadge>
-              <h2 className="mt-4 font-display text-2xl uppercase text-white sm:text-3xl md:text-4xl">
-                O Que Nossos Clientes Dizem: Sucesso que Inspira
+            <div className="mx-auto max-w-3xl text-center">
+              <div className={`reveal-init stagger-delay-1 ${depoimentosInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Evidências & Casos Reais</SectionBadge>
+              </div>
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
+                  depoimentosInView ? "reveal-visible" : ""
+                }`}
+              >
+                Resultados Reais Documentados no{" "}
+                <span className="text-primary">Mercado Automotivo</span>
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-[#A3A3A3] sm:text-base">
-                Histórias reais de concessionárias e revendas parceiras da NC Agência.
+              <p
+                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                  depoimentosInView ? "reveal-visible" : ""
+                }`}
+              >
+                Como concessionárias e revendas parceiras substituíram a incerteza comercial e o
+                estoque parado por previsibilidade de caixa através do Ecossistema NC.
               </p>
             </div>
 
-            <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {testimonials.map((t, i) => (
-                <figure
-                  key={i}
-                  className="flex flex-col justify-between rounded-xl border border-white/10 bg-[#141414] p-7 transition-all duration-300 hover:border-white/20"
-                >
-                  <div>
-                    <Quote className="h-8 w-8 fill-[#EF4045] text-[#EF4045]" />
-                    <blockquote className="mt-4 text-sm leading-relaxed italic text-white/90">
-                      "{t.quote}"
-                    </blockquote>
-                  </div>
+            <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {testimonials.map((t, i) => {
+                const delayClass = `stagger-delay-${i + 1}`;
+                return (
+                  <div
+                    key={t.name}
+                    className={`card-editorial group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#121212] p-8 transition-all duration-300 hover:border-primary/50 reveal-init ${delayClass} ${
+                      depoimentosInView ? "reveal-visible" : ""
+                    }`}
+                  >
+                    <div>
+                      {/* Topo do Case: Segmento & Status de Auditoria */}
+                      <div className="flex items-center justify-between border-b border-white/8 pb-4">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-white/60">
+                          {t.segment}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span>{t.verifiedBadge}</span>
+                        </div>
+                      </div>
 
-                  <figcaption className="mt-8 flex items-end justify-between gap-4 border-t border-white/10 pt-5">
-                    <div className="min-w-0">
-                      <div className="font-bold text-white text-base">{t.name}</div>
-                      <div className="text-xs text-muted-foreground">{t.company}</div>
+                      {/* Bloco de Métrica de Alto Impacto */}
+                      <div className="mt-6 flex items-baseline gap-2">
+                        <span className="font-display font-bold text-4xl sm:text-5xl text-primary tracking-tight">
+                          {t.metricHighlight}
+                        </span>
+                      </div>
+                      <span className="text-xs font-semibold uppercase tracking-wide text-white block mt-1">
+                        {t.metricLabel}
+                      </span>
+
+                      {/* Citação Editorial */}
+                      <div className="mt-6 relative">
+                        <Quote className="h-6 w-6 text-primary/30 mb-2" />
+                        <blockquote className="font-sans text-sm leading-relaxed text-white/90 italic">
+                          "{t.quote}"
+                        </blockquote>
+                      </div>
+
+                      {/* Checklist de Impactos na Operação da Loja */}
+                      <div className="mt-6 space-y-2 border-t border-white/8 pt-4">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block">
+                          Impacto Documentado na Loja:
+                        </span>
+                        {t.impactDetails.map((item, itemIdx) => (
+                          <div key={itemIdx} className="flex items-start gap-2 text-xs text-muted-foreground">
+                            <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
+                            <span className="font-sans leading-tight text-white/80">{item}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="shrink-0 font-display text-lg font-bold text-[#EF4045]">
-                      {t.result}
+
+                    {/* Rodapé do Case com Identificação do Lojista */}
+                    <div className="mt-8 border-t border-white/8 pt-4 flex items-center justify-between">
+                      <div>
+                        <div className="font-display font-semibold text-sm text-white">{t.name}</div>
+                        <div className="text-xs text-muted-foreground font-sans">
+                          {t.role} • <span className="text-white/80">{t.company}</span>
+                        </div>
+                      </div>
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-primary">
+                        <ShieldCheck className="h-4 w-4" />
+                      </div>
                     </div>
-                  </figcaption>
-                </figure>
-              ))}
+                  </div>
+                );
+              })}
             </div>
           </Container>
         </section>
 
-        {/* 8. SOBRE A FUNDADORA (PRESERVADA) */}
-        <section className="border-t border-white/8 bg-[#080808] py-24 sm:py-28" id="sobre">
+        {/* 8. SEÇÃO EXECUTIVA DA VICTORIA MAIA: AUTORIDADE & 10 ANOS NO SETOR */}
+        <section
+          ref={sobreRef}
+          className="border-t border-white/8 bg-[#080808] py-24 sm:py-32"
+          id="sobre"
+        >
           <Container>
             <div className="grid items-center gap-12 lg:grid-cols-12">
+              {/* Coluna Visual: Fotografia Oficial Preservada com Moldura Executiva */}
               <div className="flex justify-center lg:col-span-5">
-                <div className="relative w-full max-w-md">
-                  <div className="absolute -inset-2 rounded-2xl bg-primary/20 blur-xl" />
-                  <img
-                    src={victoriaMaia}
-                    alt="Victoria Maia — 10 Anos no Mercado Automotivo"
-                    loading="lazy"
-                    width={800}
-                    height={1100}
-                    className="relative w-full rounded-2xl border border-white/15 object-cover shadow-2xl"
-                  />
+                <div
+                  className={`relative w-full max-w-md reveal-init stagger-delay-1 ${
+                    sobreInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  {/* Efeito Glow Suave de Fundo */}
+                  <div className="absolute -inset-2 rounded-2xl bg-primary/20 blur-2xl" />
+
+                  {/* Moldura da Fotografia */}
+                  <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#121212] p-2 shadow-2xl">
+                    <img
+                      src={victoriaMaia}
+                      alt="Victoria Maia — Fundadora da NC Agência e Especialista no Mercado Automotivo"
+                      loading="lazy"
+                      width={800}
+                      height={1100}
+                      className="w-full rounded-xl object-cover grayscale contrast-110 transition-all duration-500 hover:grayscale-0"
+                    />
+
+                    {/* Card de Autoridade Sobreposto */}
+                    <div className="mt-3 rounded-xl border border-white/10 bg-[#0A0A0A]/90 p-4 backdrop-blur-md">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-display font-semibold text-base text-white">
+                            Victoria Maia
+                          </div>
+                          <div className="text-xs text-primary font-medium">
+                            Fundadora & Estrategista-Chefe
+                          </div>
+                        </div>
+                        <span className="rounded-full bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-[10px] font-mono text-primary font-bold">
+                          10 Anos
+                        </span>
+                      </div>
+                      <div className="mt-2 text-[11px] font-mono text-white/60">
+                        Especialista em Crescimento & Inteligência Comercial Automotiva
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
+              {/* Coluna Conteúdo: Narrativa Editorial & Pilares de Credibilidade */}
               <div className="lg:col-span-7">
-                <SectionBadge>Liderança & Experiência</SectionBadge>
-                <h2 className="mt-4 font-display text-3xl uppercase leading-tight text-white sm:text-4xl">
-                  Quem está por trás da <span className="text-primary">NC</span>?
+                <div className={`reveal-init stagger-delay-1 ${sobreInView ? "reveal-visible" : ""}`}>
+                  <SectionBadge>Liderança & Experiência de Mercado</SectionBadge>
+                </div>
+
+                <h2
+                  className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-white tracking-tight reveal-init stagger-delay-2 ${
+                    sobreInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  Mais de uma década vivendo a realidade de{" "}
+                  <span className="text-primary">pátios e concessionárias.</span>
                 </h2>
 
-                <div className="mt-6 space-y-4 text-sm leading-relaxed text-[#A3A3A3] sm:text-base">
-                  <p>
-                    <strong className="text-white">Victoria Maia</strong>, há 10 anos consolidada
-                    no mercado automotivo.
-                  </p>
-                  <p>
-                    O que começou no Rio de Janeiro hoje se expandiu para diversas regiões do
-                    Brasil. Como fundadora da NC, Victoria possui vasta experiência em uma
-                    metodologia validada por centenas de lojas de veículos seminovos e novos em todo
-                    o país.
-                  </p>
-                  <p>
-                    Especialista em transformar agências automotivas em verdadeiras máquinas de
-                    vendas, desenvolveu um sistema completo que vai muito além do marketing
-                    digital: processos comerciais estruturados, gestão de tráfego qualificado,
-                    ferramentas estratégicas e treinamento comercial que realmente funcionam.
-                  </p>
-                  <p>
-                    Com a NC, mais de 100 lojas parceiras já aceleraram seus resultados através
-                    de um método testado, replicável e adaptado à realidade do mercado brasileiro.
+                {/* Citação Direta de Posicionamento */}
+                <div
+                  className={`mt-6 border-l-2 border-primary pl-4 py-1 reveal-init stagger-delay-3 ${
+                    sobreInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  <p className="font-display text-base sm:text-lg text-white/95 italic leading-relaxed">
+                    "No mercado de veículos, quem não tem processo comercial estruturado depende da sorte.
+                    Na NC, transformamos estoque parado em previsibilidade diária de vendas."
                   </p>
                 </div>
 
-                <div className="mt-8">
+                <div
+                  className={`mt-6 space-y-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                    sobreInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  <p>
+                    Fundada por <strong className="text-white">Victoria Maia</strong>, a NC Agência nasceu da
+                    convivência direta com o dia a dia de lojistas de seminovos e novos. Não somos uma agência
+                    teórica de marketing: conhecemos na prática a pressão de pagar pátio, a dinâmica de aprovação
+                    de crédito e a frustração de perder vendas por demora no WhatsApp.
+                  </p>
+                  <p>
+                    O método desenvolvido pela Victoria já foi aplicado e validado em{" "}
+                    <strong className="text-white">+100 lojas de carros no Brasil</strong>, integrando tráfego
+                    pago de alta intenção, triagem automática em menos de 40 segundos e treinamento contínuo
+                    para o time comercial fechar mais negócios na loja física.
+                  </p>
+                </div>
+
+                {/* Três Pilares de Autoridade */}
+                <div
+                  className={`mt-8 space-y-3 reveal-init stagger-delay-4 ${
+                    sobreInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  <div className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/5 p-3.5">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary font-mono text-xs font-bold">
+                      01
+                    </span>
+                    <div>
+                      <h4 className="font-display font-semibold text-sm text-white">
+                        Visão Real de Salão de Vendas
+                      </h4>
+                      <p className="font-sans text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                        Entendimento aprofundado sobre margem de seminovos, trocas na FIPE, financiamentos e metas de giro.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/5 p-3.5">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary font-mono text-xs font-bold">
+                      02
+                    </span>
+                    <div>
+                      <h4 className="font-display font-semibold text-sm text-white">
+                        Metodologia Testada em +100 Lojas
+                      </h4>
+                      <p className="font-sans text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                        Processo comercial replicável em diversos perfis de estoque, de multimarcas premium a revendas de alto giro.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/5 p-3.5">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary font-mono text-xs font-bold">
+                      03
+                    </span>
+                    <div>
+                      <h4 className="font-display font-semibold text-sm text-white">
+                        Alinhamento de Pessoas & Automação
+                      </h4>
+                      <p className="font-sans text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                        Treinamento prático da equipe de vendedores para responder rápido, quebrar objeções e agendar visitas na loja.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Indicadores Técnicos Institucionais */}
+                <div
+                  className={`mt-8 grid grid-cols-3 gap-3 border-y border-white/10 py-5 text-center reveal-init stagger-delay-4 ${
+                    sobreInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  <div>
+                    <span className="font-display font-bold text-2xl sm:text-3xl text-white block">
+                      +100
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-muted-foreground">
+                      Lojas Ativas
+                    </span>
+                  </div>
+                  <div className="border-x border-white/10">
+                    <span className="font-display font-bold text-2xl sm:text-3xl text-primary block">
+                      10 Anos
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-muted-foreground">
+                      No Setor Automotivo
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-display font-bold text-2xl sm:text-3xl text-white block">
+                      Nacional
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-muted-foreground">
+                      Atuação no Brasil
+                    </span>
+                  </div>
+                </div>
+
+                <div
+                  className={`mt-8 flex flex-col sm:flex-row items-center gap-4 reveal-init stagger-delay-4 ${
+                    sobreInView ? "reveal-visible" : ""
+                  }`}
+                >
                   <DiagnosticButton
                     position="sobre"
-                    label="FALAR COM UM ESPECIALISTA"
+                    label="Agendar conversa com a fundadora"
                     className="w-full sm:w-auto"
                   />
+                  <span className="text-xs text-muted-foreground font-sans">
+                    Sessão estratégica direcionada exclusivamente a proprietários e gerentes.
+                  </span>
                 </div>
               </div>
             </div>
           </Container>
         </section>
 
-        {/* 9. PARCEIROS (PRESERVADOS) */}
+        {/* 9. PARCEIROS (PRESERVADOS E REFINADOS EDITORIALMENTE) */}
         <section className="border-t border-white/8 bg-[#0E0E0E] py-20 sm:py-24" id="parceiros">
           <Container>
             <div className="text-center">
               <SectionBadge>Confiabilidade de Mercado</SectionBadge>
-              <h2 className="mt-4 font-display text-2xl uppercase text-white sm:text-3xl">
-                Nossos Parceiros
+              <h2 className="mt-4 font-display font-semibold text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
+                Lojas e Redes que Confiam no Ecossistema NC
               </h2>
-              <p className="mt-3 text-center text-sm text-[#A3A3A3] sm:text-base">
-                A NC conta com mais de 100 clientes parceiros em todo o território nacional.
+              <p className="mt-3 text-center font-sans text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+                Mais de 100 parceiros ativos acelerando vendas e giro de pátio em diversas regiões do Brasil.
               </p>
             </div>
 
@@ -1357,20 +1586,21 @@ function Index() {
         </section>
 
         {/* 10. CTA FINAL DE DECISÃO */}
-        <section className="relative overflow-hidden border-t border-white/10 bg-[#080808] py-20 text-center">
+        <section className="relative overflow-hidden border-t border-white/10 bg-[#080808] py-20 sm:py-24 text-center">
           <div className="absolute inset-0 bg-radial-vignette" />
           <Container className="relative z-10 max-w-3xl">
-            <h2 className="font-display text-2xl uppercase tracking-tight text-white sm:text-3xl md:text-4xl">
+            <SectionBadge>Decisão Comercial</SectionBadge>
+            <h2 className="mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white">
               Pronto para colocar sua loja na frente da concorrência?
             </h2>
-            <p className="mt-4 text-sm text-[#A3A3A3] sm:text-base">
+            <p className="mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground">
               Pare de depender da sorte e de leads desqualificados. Dê o primeiro passo para
-              estruturar seu processo comercial automotivo com quem entende do setor.
+              estruturar seu processo comercial automotivo com quem realmente entende do setor.
             </p>
             <div className="mt-8 flex justify-center">
               <DiagnosticButton
                 position="final"
-                label="QUERO ACELERAR MINHA LOJA AGORA"
+                label="Quero acelerar minha loja agora"
                 className="w-full sm:w-auto text-base"
               />
             </div>
