@@ -6,8 +6,8 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { FileText, Shield, Scale, CheckCircle2, Lock } from "lucide-react";
+import { FileText, Shield, Scale } from "lucide-react";
+import { CRM_CONFIG } from "@/config/platform";
 
 export type LegalModalType = "terms" | "privacy" | "lgpd" | null;
 
@@ -40,7 +40,7 @@ export function LegalModals({ activeModal, onClose }: LegalModalsProps) {
                 {activeModal === "lgpd" && "Conformidade LGPD — Lei nº 13.709/2018"}
               </DialogTitle>
               <DialogDescription id="legal-modal-desc" className="text-xs text-muted-foreground mt-0.5">
-                NC - Inteligência Comercial Automotiva • Última atualização: Outubro de 2026
+                {CRM_CONFIG.productName} ({CRM_CONFIG.signature}) • Termos de Software e Plataforma
               </DialogDescription>
             </div>
           </DialogHeader>
@@ -53,66 +53,40 @@ export function LegalModals({ activeModal, onClose }: LegalModalsProps) {
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">1</span>
-                  Aceitação dos Termos
+                  Aceitação dos Termos do Software
                 </h3>
                 <p>
-                  Ao acessar o website oficial da <strong>NC Agência</strong> (NC - Inteligência Comercial Automotiva) ou utilizar nosso formulário de diagnóstico comercial, você declara ter lido, compreendido e concordado integralmente com as condições estipuladas nestes Termos de Uso. Caso não concorde com qualquer disposição aqui presente, recomendamos a não utilização de nossos serviços e canais.
+                  Ao acessar a plataforma e landing page do <strong>{CRM_CONFIG.productName}</strong>, desenvolvido pela <strong>NC Agência</strong>, ou solicitar a ativação do período de teste gratuito de 7 dias, você declara ter lido, compreendido e concordado com as condições descritas nestes Termos de Uso.
                 </p>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">2</span>
-                  Objeto e Escopo de Atuação
+                  Natureza do Produto e Licenciamento
                 </h3>
                 <p>
-                  A NC Agência é uma assessoria especializada em crescimento e inteligência comercial direcionada com exclusividade a lojistas de veículos, revendas de seminovos multimarcas e concessionárias no território nacional. Nossos serviços englobam:
+                  O {CRM_CONFIG.productName} é um software como serviço (SaaS) composto por sistema de CRM automotivo com inteligência artificial para primeiro atendimento, gestão de contatos e funil comercial em formato Kanban, concebido para lojas de veículos, revendas de seminovos e concessionárias.
                 </p>
-                <ul className="list-disc pl-5 space-y-1 text-neutral-400">
-                  <li>Planejamento e gestão de tráfego pago de alta intenção (Meta Ads, Google Ads);</li>
-                  <li>Implementação e estruturação de rotinas de CRM para o pátio de vendas;</li>
-                  <li>Implantação de células de pré-vendas (SDR) e automação de triagem rápida;</li>
-                  <li>Treinamento comercial contínuo e acompanhamento de indicadores de giro de estoque.</li>
-                </ul>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">3</span>
-                  Diagnóstico Comercial & Pré-Qualificação
+                  Período de Teste Gratuito de 7 Dias
                 </h3>
                 <p>
-                  O preenchimento do formulário de diagnóstico não configura contratação compulsória nem gera obrigação de prestação imediata de serviços. A NC Agência reserva-se o direito de avaliar a maturidade operacional, volume de estoque e compatibilidade da loja para determinar a viabilidade de atendimento personalizado.
+                  A solicitação do teste gratuito por 7 dias concede ao lojista acesso assistido para avaliação das funcionalidades do software em ambiente operacional. O teste não exige inserção antecipada de dados de cartão de crédito e não acarreta cobrança automática ao término do período sem o consentimento formal e contratação expressa da loja.
                 </p>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">4</span>
-                  Sigilo Comercial e Confidencialidade
+                  Sigilo Comercial e Propriedade Intelectual
                 </h3>
                 <p>
-                  Reconhecemos a sensibilidade das informações comerciais do setor automotivo. Todos os dados compartilhados pelo lojista — incluindo giro de estoque, média de vendas, faturamento estimado e rotinas internas de comissão — são protegidos por estrito dever de confidencialidade profissional e jamais serão divulgados a terceiros ou concorrentes da mesma praça.
-                </p>
-              </section>
-
-              <section className="space-y-2">
-                <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">5</span>
-                  Propriedade Intelectual
-                </h3>
-                <p>
-                  Todas as metodologias, estruturas de automação, roteiros comerciais, logotipos, identidades visuais, códigos-fonte e conteúdos disponíveis nesta plataforma são de propriedade exclusiva da NC Agência e da sua fundadora Victoria Maia, protegidos pela legislação de direitos autorais e propriedade industrial.
-                </p>
-              </section>
-
-              <section className="space-y-2">
-                <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">6</span>
-                  Legislação Aplicável e Foro
-                </h3>
-                <p>
-                  Estes Termos são regidos pelas leis da República Federativa do Brasil. Para dirimir qualquer controvérsia decorrente da aplicação destes termos, fica eleito o Foro da Comarca da Capital do Estado do Rio de Janeiro / RJ, com renúncia expressa a qualquer outro.
+                  Todas as informações comerciais inseridas pela loja no CRM — como dados de leads, veículos em negociação e anotações dos vendedores — pertencem exclusivamente à loja contratante. A plataforma, seus algoritmos de IA, interfaces e a marca {CRM_CONFIG.productName} são de propriedade intelectual da NC Agência e sua fundadora {CRM_CONFIG.founderName}.
                 </p>
               </section>
             </>
@@ -123,62 +97,30 @@ export function LegalModals({ activeModal, onClose }: LegalModalsProps) {
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">1</span>
-                  Funcionamento Real do Formulário & Coleta
+                  Tratamento de Dados no CRM
                 </h3>
-                <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 text-white">
-                  <p className="font-medium leading-relaxed">
-                    As informações preenchidas no formulário são utilizadas exclusivamente para preparar uma mensagem de contato comercial, que será encaminhada pelo próprio usuário por meio do WhatsApp. A NC Agência não mantém um banco de dados próprio com as respostas enviadas por esse formulário. Após o envio, as informações passam a integrar a conversa comercial no WhatsApp e são tratadas conforme a finalidade do atendimento.
-                  </p>
-                </div>
+                <p>
+                  A privacidade e a integridade das informações dos lojistas e de seus respectivos clientes finais são prioridade absoluta no <strong>{CRM_CONFIG.productName}</strong>. Coletamos apenas as informações necessárias para a configuração do ambiente de teste e para a operação do fluxo de triagem com inteligência artificial.
+                </p>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">2</span>
-                  Dados Estruturados para a Mensagem
+                  Finalidade da Coleta
                 </h3>
                 <p>
-                  Os campos disponíveis no formulário destinam-se exclusivamente a organizar as informações comerciais para otimizar o atendimento prévio no WhatsApp:
+                  Os dados fornecidos no formulário de teste (nome, loja, WhatsApp e porte de estoque) são utilizados exclusivamente para entrar em contato com o responsável comercial e viabilizar o onboarding e parametrização da ferramenta. Não comercializamos, compartilhamos ou repassamos contatos para terceiros ou revendas concorrentes.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-neutral-400 mt-2">
-                  <div className="rounded-lg border border-white/5 bg-white/5 p-3">
-                    <strong className="text-white block mb-1">Contato do Responsável:</strong>
-                    Nome completo, e-mail comercial, número de WhatsApp e perfil no Instagram da loja.
-                  </div>
-                  <div className="rounded-lg border border-white/5 bg-white/5 p-3">
-                    <strong className="text-white block mb-1">Perfil Operacional da Loja:</strong>
-                    Cargo na loja, existência de SDR, volume de estoque em pátio, média de vendas e faixa de investimento pretendida.
-                  </div>
-                </div>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">3</span>
-                  Finalidade e Tratamento no Atendimento
+                  Segurança e Criptografia
                 </h3>
                 <p>
-                  O objetivo único da mensagem preparada é permitir uma conversa ágil e direcionada entre o lojista e a estrategista comercial da NC Agência no WhatsApp Oficial <strong>(21) 97162-5597</strong>, avaliando o momento do estoque e a viabilidade da metodologia.
-                </p>
-              </section>
-
-              <section className="space-y-2">
-                <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">4</span>
-                  Sigilo Profissional e Não Compartilhamento
-                </h3>
-                <p>
-                  A NC Agência <strong>jamais comercializa, aluga ou compartilha seus dados e conversas com terceiros</strong>. Todos os dados compartilhados na conversa privada do WhatsApp são resguardados pelo sigilo comercial necessário à assessoria estratégica de revendas de veículos.
-                </p>
-              </section>
-
-              <section className="space-y-2">
-                <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">5</span>
-                  Canal Direto de Privacidade
-                </h3>
-                <p>
-                  Para quaisquer dúvidas sobre privacidade, encerramento de conversas ou solicitações relacionadas a dados, o contato direto é disponibilizado pelo WhatsApp Oficial ou através do e-mail <strong>privacidade@ncagencia.com.br</strong>.
+                  Empregamos protocolos modernos de segurança e criptografia no trânsito das informações. O lojista pode, a qualquer momento, solicitar a exclusão definitiva dos dados de sua loja dos nossos registros após o término do período de teste.
                 </p>
               </section>
             </>
@@ -189,99 +131,34 @@ export function LegalModals({ activeModal, onClose }: LegalModalsProps) {
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">1</span>
-                  Declaração de Conformidade com a LGPD
+                  Conformidade com a LGPD (Lei nº 13.709/2018)
                 </h3>
                 <p>
-                  A <strong>NC Agência</strong> atua em consonância com a Lei Geral de Proteção de Dados Pessoais (Lei Federal nº 13.709/2018 - LGPD). Em respeito ao princípio da necessidade e minimização de dados, nossa plataforma opera sem armazenamento em banco de dados próprio para o formulário de diagnóstico: as informações são processadas no próprio navegador do usuário para formatar a mensagem de WhatsApp, passando a existir na conversa mantida diretamente entre as partes.
+                  O <strong>{CRM_CONFIG.productName}</strong> foi concebido observando os princípios de finalidade, necessidade, transparência e segurança previstos na Lei Geral de Proteção de Dados Pessoais.
                 </p>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">2</span>
-                  Bases Legais de Tratamento
+                  Papéis de Controlador e Operador
                 </h3>
                 <p>
-                  O tratamento de dados pessoais realizado pela NC Agência fundamenta-se nas seguintes hipóteses legais expressas no Artigo 7º da LGPD:
+                  Nas interações com leads e clientes das lojas usuárias do CRM, a loja atua como Controladora dos dados de seus compradores, cabendo à plataforma {CRM_CONFIG.productName} o papel de Operadora tecnológica segura do processamento e da esteira de mensagens.
                 </p>
-                <div className="space-y-2 text-neutral-400 mt-2">
-                  <div className="border border-white/5 bg-white/5 p-3 rounded-lg">
-                    <strong className="text-white block">Art. 7º, I — Consentimento:</strong>
-                    Manifestação livre, informada e inequívoca ao preencher o diagnóstico e solicitar contato com nossa equipe comercial.
-                  </div>
-                  <div className="border border-white/5 bg-white/5 p-3 rounded-lg">
-                    <strong className="text-white block">Art. 7º, V — Execução de Procedimentos Pré-Contratuais:</strong>
-                    Tratamento de dados necessários para elaboração de proposta técnica e alinhamento de escopo operacional.
-                  </div>
-                  <div className="border border-white/5 bg-white/5 p-3 rounded-lg">
-                    <strong className="text-white block">Art. 7º, IX — Legítimo Interesse:</strong>
-                    Comunicação estritamente profissional e desenvolvimento de inteligência de mercado direcionada a empresas do setor.
-                  </div>
-                </div>
               </section>
 
               <section className="space-y-2">
                 <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">3</span>
-                  Direitos Garantidos ao Titular (Art. 18 da LGPD)
+                  Canal de Atendimento ao Titular
                 </h3>
                 <p>
-                  Você, na condição de titular dos dados pessoais, pode exercer a qualquer momento os seguintes direitos:
+                  Para exercer seus direitos como titular de dados pessoais (confirmação de tratamento, acesso, correção ou eliminação), entre em contato pelo canal de atendimento oficial da NC Agência no WhatsApp ou e-mail corporativo.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-neutral-400">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                    <span>Confirmação da existência de tratamento</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                    <span>Acesso facilitado aos dados coletados</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                    <span>Correção de dados incompletos ou errôneos</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                    <span>Eliminação dos dados mediante revogação</span>
-                  </div>
-                </div>
-              </section>
-
-              <section className="space-y-2">
-                <h3 className="font-display font-semibold text-white text-sm sm:text-base flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[11px] font-mono text-primary font-bold">4</span>
-                  Encarregado de Proteção de Dados (DPO)
-                </h3>
-                <p>
-                  Para exercer seus direitos como titular de dados ou esclarecer dúvidas operacionais sobre nossa política de segurança, contate nosso Encarregado pelo Tratamento de Dados Pessoais (DPO):
-                </p>
-                <div className="rounded-xl border border-white/10 bg-[#0A0A0A] p-4 text-white">
-                  <div className="flex items-center gap-2 font-mono text-xs text-primary mb-1">
-                    <Lock className="h-3.5 w-3.5" />
-                    <span>CANAL EXCLUSIVO DE PRIVACIDADE</span>
-                  </div>
-                  <p className="text-sm font-semibold">Encarregado de Dados (DPO) — NC Agência</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">E-mail: privacidade@ncagencia.com.br</p>
-                  <p className="text-xs text-muted-foreground">Prazo de resposta: em até 15 dias úteis (Art. 19 da LGPD)</p>
-                </div>
               </section>
             </>
           )}
-        </div>
-
-        {/* Rodapé do Modal */}
-        <div className="border-t border-white/10 bg-[#161616] px-6 py-4 flex items-center justify-between">
-          <span className="text-[11px] text-muted-foreground hidden sm:inline">
-            NC Agência • Inteligência Comercial Automotiva
-          </span>
-          <Button
-            size="sm"
-            onClick={onClose}
-            className="ml-auto bg-primary px-5 font-semibold text-white hover:bg-primary/90"
-          >
-            Entendido
-          </Button>
         </div>
       </DialogContent>
     </Dialog>

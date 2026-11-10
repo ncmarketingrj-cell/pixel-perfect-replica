@@ -1,81 +1,83 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Fragment, useState } from "react";
 import {
-  Search,
-  Settings2,
-  TrendingUp,
-  Quote,
-  MessageCircle,
   CheckCircle2,
-  AlertTriangle,
   Clock,
   Database,
   ArrowRight,
   BarChart3,
   Bot,
-  Cpu,
-  Layers,
   Sparkles,
   Target,
   Users,
-  Video,
   Zap,
   ChevronRight,
   ShieldCheck,
   Building2,
-  Award,
-  Activity,
   Workflow,
   Check,
-  RotateCcw,
+  Car,
+  MessageSquare,
+  Menu,
+  X,
+  Layers,
+  ArrowUpRight,
+  Phone,
+  HelpCircle,
+  Eye,
 } from "lucide-react";
 
 import ncLogo from "@/assets/nc-logo.png";
 import heroDealership from "@/assets/hero-dealership.jpg";
-import victoriaHero from "@/assets/victoria-sitting.jpg";
 import victoriaAbout from "@/assets/victoria-founder.png";
-import partnerRio2 from "@/assets/partner-rio2.png";
-import partnerAlfacar from "@/assets/partner-alfacar.jpg";
-import partnersImg from "@/assets/partners.png.asset.json";
+import kanbanRealImg from "@/assets/real-crm-kanban.png";
+import dashboardRealImg from "@/assets/real-crm-dashboard.png";
+import conversasRealImg from "@/assets/real-crm-conversas.png";
 
+import { CRM_CONFIG, getOfficialWhatsAppTrialUrl } from "@/config/platform";
 import {
-  DiagnosticProvider,
-  DiagnosticButton,
-  PhoneDiagnosticButton,
-} from "@/components/landing/DiagnosticModal";
+  TrialProvider,
+  TrialCtaButton,
+  useTrial,
+} from "@/components/landing/TrialModal";
+import { InteractivePlatformTabs } from "@/components/landing/InteractivePlatformTabs";
 import { LegalModals, type LegalModalType } from "@/components/landing/LegalModals";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useInView } from "@/hooks/use-in-view";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title:
-          "NC Agência 3.0 — Crescimento & Inteligência Comercial para o Setor Automotivo",
+        title: "NC Performance Suite — CRM Automotivo com Inteligência Artificial | by NC Agência",
       },
       {
         name: "description",
         content:
-          "Sua loja tem carros. A NC tem estratégia para vender. Plataforma de crescimento, tráfego pago, CRM, automações e inteligência comercial para lojistas e concessionárias.",
+          "Pare de perder oportunidades por demora no atendimento. Conheça o CRM automotivo com inteligência artificial que ajuda sua loja a responder mais rápido, qualificar compradores e organizar cada negociação.",
       },
       {
         name: "keywords",
         content:
-          "inteligência comercial automotiva, crescimento para lojas de carros, tráfego pago automotivo, CRM para concessionárias, vendas de veículos, giro de estoque automotivo",
+          "CRM automotivo, inteligência artificial para lojas de carros, software para revenda de veículos, CRM para concessionárias, gestão de leads automotivos, Kanban automotivo, primeiro atendimento rápido, NC Performance Suite, NC Agência",
       },
       {
         property: "og:title",
-        content:
-          "NC Agência 3.0 — Crescimento & Inteligência Comercial para o Setor Automotivo",
+        content: "NC Performance Suite — CRM Automotivo com Inteligência Artificial",
       },
       {
         property: "og:description",
         content:
-          "Marketing, tecnologia e inteligência comercial trabalhando juntos para transformar estoque parado em vendas com alta previsibilidade.",
+          "Pare de perder oportunidades por demora no atendimento. Conheça o CRM automotivo com inteligência artificial feito especialmente para lojas de veículos.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:site_name", content: "NC Agência - Inteligência Comercial Automotiva" },
+      { property: "og:site_name", content: "NC Performance Suite by NC Agência" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index, follow" },
     ],
@@ -87,7 +89,7 @@ function Logo({ className = "h-9" }: { className?: string }) {
   return (
     <img
       src={ncLogo}
-      alt="NC Agência — Inteligência Comercial Automotiva"
+      alt="NC Performance Suite by NC Agência"
       className={`${className} object-contain transition-transform duration-200 hover:scale-105`}
       width={140}
       height={54}
@@ -119,361 +121,506 @@ function SectionBadge({ children }: { children: React.ReactNode }) {
   );
 }
 
-const tickerPilares = [
-  "Aquisição com Tráfego Pago",
-  "Criativos de Performance",
-  "Estruturação de CRM",
-  "Processos Comerciais",
-  "Automações de Pré-Atendimento",
-  "Treinamento de Vendas",
-  "Inteligência de Dados",
+const tickerItems = [
+  "CRM Automotivo com Inteligência Artificial",
+  "Primeiro Atendimento Instantâneo via WhatsApp",
+  "Kanban de Oportunidades em 5 Estágios",
+  "Histórico Completo de Interações e Veículos",
+  "Qualificação de Troca & Entrada com IA",
+  "Acompanhamento e Follow-up da Equipe",
+  "Visibilidade Total da Operação Comercial",
+  "Teste Gratuito por 7 Dias",
 ];
 
-const gargalosComerciais = [
-  {
-    icon: Users,
-    title: "Leads Sem Perfil de Compra",
-    description:
-      "Contatos sem score, com CPF reprovado ou curiosos sem poder de entrada, roubando o tempo e a paciência da sua equipe comercial.",
-    tag: "Filtro Inadequado",
-  },
+const painPoints = [
   {
     icon: Clock,
-    title: "Demora Fatal no 1º Atendimento",
+    title: "Demora no primeiro atendimento",
     description:
-      "O cliente automotivo envia mensagem para 3 lojas simultaneamente. Quem responde após 10 minutos perde mais de 70% da chance de agendamento.",
-    tag: "Gargalo de Velocidade",
+      "Enquanto o comprador pesquisa em diversas lojas simultaneamente, a demora para responder no WhatsApp faz o interesse esfriar e a oportunidade migrar para a concorrência.",
+    tag: "Gargalo de Tempo",
   },
   {
-    icon: Database,
-    title: "Vendedores Sem CRM e Sem Processo",
+    icon: Users,
+    title: "Leads que se perdem entre vendedores e conversas",
     description:
-      "Atendimentos dispersos em WhatsApps pessoais dos vendedores. Sem histórico, sem régua de follow-up e com dezenas de negociações esquecidas.",
-    tag: "Perda Operacional",
+      "Contatos espalhados nos celulares pessoais da equipe comercial, sem centralização, sem registro de mensagens e sem histórico claro do veículo de interesse.",
+    tag: "Falta de Centralização",
   },
   {
-    icon: AlertTriangle,
-    title: "Investimento em Anúncios no 'Escuro'",
+    icon: Workflow,
+    title: "Falta de acompanhamento e follow-up",
     description:
-      "Verba gasta sem saber qual anúncio, canal ou modelo de veículo gerou a venda faturada no final do mês, impossibilitando a escala assertiva.",
-    tag: "Desperdício de Verba",
-  },
-  {
-    icon: Layers,
-    title: "Pátio Parado & Depreciação Contínua",
-    description:
-      "Veículos que passam de 45 dias no pátio geram custo financeiro de oportunidade e forçam concessão de descontos que corroem a margem da loja.",
-    tag: "Custo de Giro",
+      "Negociações pausadas que nunca mais são retomadas. Sem rotina e sem lembretes de contato, clientes com real intenção de compra são simplesmente esquecidos.",
+    tag: "Perda de Oportunidades",
   },
   {
     icon: BarChart3,
-    title: "Decisões no Achismo sem Indicadores",
+    title: "Gestão sem visão clara do funil de vendas",
     description:
-      "Falta de clareza sobre taxa de conversão por vendedor, tempo de permanência no pátio e ticket médio de fechamento por tipo de financiamento.",
-    tag: "Falta de Gestão",
+      "Proprietários e gestores sem visibilidade sobre quantos compradores estão em triagem, quantos agendaram visita física ao pátio e em qual etapa o processo está travando.",
+    tag: "Falta de Indicadores",
   },
 ];
 
-const methodologySteps = [
+const crmFeatures = [
+  {
+    number: "01",
+    title: "Kanban de oportunidades",
+    description:
+      "Visualize cada negociação em cartões organizados por etapas claras: Novo Lead, Chatbot/IA, Aguardando Atendimento, Atendimento Humano e Follow-up.",
+    icon: Workflow,
+    badge: "Fluxo Visual",
+  },
+  {
+    number: "02",
+    title: "Funil comercial",
+    description:
+      "Estrutura de avanço de negociações desenhada para o ciclo de decisão de compra de veículos novos e seminovos.",
+    icon: Target,
+    badge: "Processo Claro",
+  },
+  {
+    number: "03",
+    title: "Inteligência artificial de atendimento",
+    description:
+      "Acolhimento imediato com respostas coerentes às dúvidas comuns de quem está interessado em um veículo do seu estoque.",
+    icon: Bot,
+    badge: "Atendimento Rápido",
+  },
+  {
+    number: "04",
+    title: "Gestão de contatos",
+    description:
+      "Base de clientes centralizada na loja, evitando que o histórico das negociações fique restrito aos celulares pessoais dos vendedores.",
+    icon: Users,
+    badge: "Patrimônio da Loja",
+  },
+  {
+    number: "05",
+    title: "Histórico de interações",
+    description:
+      "Registro de todas as conversas, anotações de contrapropostas, veículos avaliados na troca e preferências de financiamento.",
+    icon: Database,
+    badge: "Memória Comercial",
+  },
+  {
+    number: "06",
+    title: "Acompanhamento e follow-up",
+    description:
+      "Organização das tarefas diárias da equipe para garantir que nenhum comprador fique sem retorno ou proposta atualizada.",
+    icon: Clock,
+    badge: "Régua Ativa",
+  },
+  {
+    number: "07",
+    title: "Visibilidade da operação comercial",
+    description:
+      "Painel unificado para o gestor acompanhar a velocidade de resposta, distribuição dos contatos e volume de oportunidades em andamento.",
+    icon: BarChart3,
+    badge: "Controle Gerencial",
+  },
+];
+
+const commercialJourneySteps = [
   {
     step: "01",
-    phase: "DIAGNOSTICAR",
-    tag: "Auditoria Inicial",
-    title: "Mapeamento & Gargalos",
-    text: "Análise minuciosa da operação da sua loja: tempo de permanência de cada veículo no pátio, taxa de perdas no WhatsApp e identificação precisa de onde sua margem está sendo consumida.",
-    icon: Search,
-    deliverables: [
-      "Auditoria de tempo de pátio e estoque parado",
-      "Identificação dos canais de perda de contato",
-      "Mapeamento dos veículos com maior potencial de giro",
-    ],
+    title: "O interessado entra em contato",
+    description:
+      "O comprador envia uma mensagem demonstrando interesse por um veículo específico do estoque a partir do WhatsApp, anúncios ou site da loja.",
+    icon: MessageSquare,
+    tag: "Entrada do Lead",
   },
   {
     step: "02",
-    phase: "ESTRUTURAR",
-    tag: "Implementação Integrada",
-    title: "Campanhas, CRM & Automações",
-    text: "Implantação das ferramentas do ecossistema: campanhas de alta intenção por raio de atendimento, automações com triagem em menos de 40 segundos e funil Kanban estruturado.",
-    icon: Cpu,
-    deliverables: [
-      "Campanhas Meta & Google segmentadas por perfil de crédito",
-      "Automações de pré-atendimento com triagem em < 40s",
-      "Pipeline comercial e regras de follow-up no CRM",
-    ],
+    title: "A IA realiza a qualificação inicial",
+    description:
+      "A inteligência artificial responde em segundos, acolhe o cliente e coleta detalhes essenciais como pretensão de entrada e veículo usado na troca.",
+    icon: Bot,
+    tag: "Triagem Imediata",
   },
   {
     step: "03",
-    phase: "ACELERAR",
-    tag: "Escala & Giro Máximo",
-    title: "Escala & Otimização Contínua",
-    text: "Acompanhamento contínuo dos indicadores de venda, auditoria da postura comercial da equipe e retroalimentação de verba nos veículos que geram maior margem líquida para a revenda.",
-    icon: TrendingUp,
-    deliverables: [
-      "Acompanhamento semanal de giro e taxa de conversão",
-      "Treinamento de vendas e superação de objeções de crédito",
-      "Remanejamento de orçamento para modelos mais lucrativos",
-    ],
+    title: "A oportunidade é organizada no CRM",
+    description:
+      "O contato é automaticamente inserido no funil Kanban com o resumo da conversa e dados do veículo desejado devidamente cadastrados.",
+    icon: Workflow,
+    tag: "Estruturação no Funil",
+  },
+  {
+    step: "04",
+    title: "O vendedor assume a negociação com mais contexto",
+    description:
+      "A equipe comercial entra em contato já sabendo o modelo de interesse, condição de pagamento e carro na troca, acelerando o agendamento da visita.",
+    icon: CheckCircle2,
+    tag: "Negociação & Venda",
   },
 ];
 
-const testimonials = [
+const faqItems = [
   {
-    quote:
-      "A NC Agência revolucionou nosso processo de vendas. Com as estratégias implementadas, conseguimos triplicar nossos leads qualificados e dobrar o faturamento em apenas 4 meses.",
-    name: "Carlos Silva",
-    role: "Diretor Comercial",
-    company: "Super Fast Veículos",
-    segment: "Seminovos Multimarcas",
-    metricHighlight: "+180%",
-    metricLabel: "Crescimento em Vendas",
-    impactDetails: [
-      "Tempo médio de permanência em pátio reduzido",
-      "Triagem automática via WhatsApp em menos de 1 minuto",
-      "Equipe comercial focada em visitas presenciais agendadas",
-    ],
-    verifiedBadge: "Estudo de Caso • Modelo NC",
+    question: "O NC Performance Suite é exclusivo para o setor automotivo?",
+    answer:
+      "Sim. O software foi concebido e configurado especificamente para a realidade de lojas de veículos, revendas de seminovos, multimarcas e concessionárias. Seus fluxos de triagem, etapas de funil e termos da IA consideram veículos na troca, intenção de entrada e rotina de salão de vendas.",
   },
   {
-    quote:
-      "Impressionante como a equipe da NC conseguiu otimizar nossas campanhas. Agora recebemos apenas clientes com perfil de compra real, nossa conversão aumentou drasticamente.",
-    name: "Ana Paula Costa",
-    role: "Gestora Geral",
-    company: "Bitcar Multimarcas",
-    segment: "Concessionária & Giro Rápido",
-    metricHighlight: "+300%",
-    metricLabel: "Leads com Perfil de Crédito",
-    impactDetails: [
-      "Fim do tempo perdido com contatos sem score aprovado",
-      "Implantação de CRM com histórico centralizado de clientes",
-      "Taxa de comparecimento às visitas agendadas ampliada",
-    ],
-    verifiedBadge: "Estudo de Caso • Modelo NC",
+    question: "Como funciona a IA de atendimento?",
+    answer:
+      "A IA atua como um primeiro assistente ágil conectado ao canal de atendimento. Assim que o cliente manda mensagem demonstrando interesse em um carro, a IA responde cordialmente, tira dúvidas preliminares frequentes e coleta dados cruciais (como valor de entrada pretendido ou modelo de carro na troca), organizando o contexto para o vendedor.",
   },
   {
-    quote:
-      "Trabalho excepcional! A gestão de tráfego pago e a produção de conteúdo da NC elevaram nossa marca no mercado. Resultados sólidos e crescimento sustentável mês após mês.",
-    name: "Rafael Oliveira",
-    role: "Sócio-Proprietário",
-    company: "Luma Car Veículos",
-    segment: "Revenda Regional",
-    metricHighlight: "420%",
-    metricLabel: "Retorno sobre Investimento (ROI)",
-    impactDetails: [
-      "Previsibilidade total no giro do estoque a cada 30 dias",
-      "Campanhas multicanal no Meta e Google no raio da loja",
-      "Retroalimentação contínua nos modelos mais lucrativos",
-    ],
-    verifiedBadge: "Estudo de Caso • Modelo NC",
+    question: "A IA substitui o vendedor?",
+    answer:
+      "Não. A IA não substitui o vendedor, ela o apoia. Seu papel é eliminar a demora inicial no primeiro contato e poupar a equipe de tarefas repetitivas de triagem. O fechamento, a negociação de valores, a avaliação do veículo usado e a assinatura do contrato continuam sendo conduzidos pelos seus consultores comerciais.",
+  },
+  {
+    question: "Posso organizar minhas oportunidades em Kanban?",
+    answer:
+      "Sim. O NC Performance Suite oferece um painel visual em formato Kanban, permitindo visualizar com clareza em qual etapa cada comprador se encontra: triagem inicial, qualificação, visita agendada na loja ou proposta em andamento.",
+  },
+  {
+    question: "O que posso testar durante os 7 dias?",
+    answer:
+      "Durante o período de teste de 7 dias você tem acesso completo para vivenciar a experiência do software na rotina da sua loja: organização do funil comercial, gestão de contatos, histórico de conversas e demonstração prática do atendimento inicial assistido por inteligência artificial.",
+  },
+  {
+    question: "Como começo a usar a plataforma?",
+    answer:
+      "Basta clicar em qualquer botão de 'Testar grátis por 7 dias' nesta página para abrir o WhatsApp oficial da nossa central de vendas com a mensagem de ativação já preenchida. Nossa equipe libera seu acesso e auxilia na configuração inicial da sua loja.",
   },
 ];
 
 function Index() {
-  const { ref: gargalosRef, isInView: gargalosInView } = useInView<HTMLElement>({ threshold: 0.1 });
-  const { ref: ecossistemaRef, isInView: ecossistemaInView } = useInView<HTMLElement>({ threshold: 0.1 });
-  const { ref: metodoRef, isInView: metodoInView } = useInView<HTMLElement>({ threshold: 0.1 });
-  const { ref: depoimentosRef, isInView: depoimentosInView } = useInView<HTMLElement>({ threshold: 0.1 });
-  const { ref: sobreRef, isInView: sobreInView } = useInView<HTMLElement>({ threshold: 0.1 });
-  const [activeTriad, setActiveTriad] = useState<"all" | "trafego" | "crm" | "bi">("all");
+  const { ref: dorRef, isInView: dorInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: plataformaRef, isInView: plataformaInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: iaRef, isInView: iaInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: funcionalidadesRef, isInView: funcionalidadesInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: jornadaRef, isInView: jornadaInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: autoridadeRef, isInView: autoridadeInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: ofertaRef, isInView: ofertaInView } = useInView<HTMLElement>({ threshold: 0.1 });
+  const { ref: faqRef, isInView: faqInView } = useInView<HTMLElement>({ threshold: 0.1 });
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [legalModal, setLegalModal] = useState<LegalModalType>(null);
 
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
-    <DiagnosticProvider>
-      {/* 1. HEADER STICKY EXECUTIVO */}
-      <header className="sticky top-0 z-50 w-full border-b border-white/8 bg-[#080808]/90 backdrop-blur-lg">
+    <TrialProvider>
+      {/* 1. NAVBAR FIXA EXECUTIVA */}
+      <header className="sticky top-0 z-50 w-full border-b border-white/8 bg-[#080808]/92 backdrop-blur-lg">
         <Container className="flex h-20 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <a href="#" aria-label="NC Agência 3.0">
-              <Logo className="h-9 sm:h-10" />
+          {/* Logo e Assinatura de Produto */}
+          <div className="flex items-center gap-4 sm:gap-6">
+            <a href="#" aria-label={`${CRM_CONFIG.productName} ${CRM_CONFIG.signature}`}>
+              <Logo className="h-8 sm:h-9" />
             </a>
-            <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/70 lg:flex">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              <span>+100 Lojas Ativas • 10 Anos de Mercado</span>
+            <div className="hidden lg:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/70">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              <span>{CRM_CONFIG.category}</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <PhoneDiagnosticButton
+          {/* Links de Navegação Desktop por Âncora */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-medium text-neutral-300">
+            <a
+              href="#plataforma"
+              className="hover:text-white transition-colors duration-150 py-1"
+            >
+              Plataforma
+            </a>
+            <a
+              href="#inteligencia-artificial"
+              className="hover:text-white transition-colors duration-150 py-1"
+            >
+              Inteligência Artificial
+            </a>
+            <a
+              href="#funcionalidades"
+              className="hover:text-white transition-colors duration-150 py-1"
+            >
+              Funcionalidades
+            </a>
+            <a
+              href="#como-funciona"
+              className="hover:text-white transition-colors duration-150 py-1"
+            >
+              Como funciona
+            </a>
+            <a
+              href="#duvidas"
+              className="hover:text-white transition-colors duration-150 py-1"
+            >
+              Dúvidas
+            </a>
+          </nav>
+
+          {/* CTA Desktop & Toggle Mobile */}
+          <div className="flex items-center gap-3">
+            <TrialCtaButton
               position="header"
-              className="hidden text-xs font-semibold text-muted-foreground transition-colors hover:text-white sm:flex"
+              label="Testar grátis por 7 dias"
+              className="hidden sm:inline-flex !h-10 !px-5 text-xs font-semibold normal-case tracking-normal"
             />
-            <DiagnosticButton
-              position="header"
-              label="Quero vender mais carros"
-              className="!h-10 px-4 text-xs font-semibold tracking-normal"
-            />
+
+            {/* Botão Menu Mobile */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="inline-flex md:hidden items-center justify-center rounded-lg border border-white/10 bg-white/5 p-2 text-white hover:bg-white/10 focus:outline-none"
+              aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </Container>
+
+        {/* Menu Mobile Retrátil */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-b border-white/10 bg-[#0e0e10] px-5 py-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+            <nav className="flex flex-col space-y-3 text-sm font-medium text-white/80">
+              <a
+                href="#plataforma"
+                onClick={closeMobileMenu}
+                className="py-1.5 hover:text-white border-b border-white/5"
+              >
+                Plataforma
+              </a>
+              <a
+                href="#inteligencia-artificial"
+                onClick={closeMobileMenu}
+                className="py-1.5 hover:text-white border-b border-white/5"
+              >
+                Inteligência Artificial
+              </a>
+              <a
+                href="#funcionalidades"
+                onClick={closeMobileMenu}
+                className="py-1.5 hover:text-white border-b border-white/5"
+              >
+                Funcionalidades
+              </a>
+              <a
+                href="#como-funciona"
+                onClick={closeMobileMenu}
+                className="py-1.5 hover:text-white border-b border-white/5"
+              >
+                Como funciona
+              </a>
+              <a
+                href="#duvidas"
+                onClick={closeMobileMenu}
+                className="py-1.5 hover:text-white border-b border-white/5"
+              >
+                Dúvidas
+              </a>
+            </nav>
+
+            <div className="pt-2">
+              <TrialCtaButton
+                position="header"
+                label="Testar grátis por 7 dias"
+                className="w-full !h-11 text-xs font-semibold normal-case"
+              />
+            </div>
+          </div>
+        )}
       </header>
 
       <main>
-        {/* 2. HERO 3.0: COMPOSIÇÃO EDITORIAL ASSIMÉTRICA & PAINEL DE INTELIGÊNCIA */}
-        <section className="relative overflow-hidden border-b border-white/8 bg-[#080808] bg-tech-grid py-16 sm:py-20 lg:py-28">
-          {/* Fundo do showroom de concessionária com iluminação radial sutil */}
+        {/* ============================================================== */}
+        {/* 2. HERO: PRIMEIRA DOBRA PERSUASIVA COM CAPTURA REAL DO KANBAN */}
+        {/* ============================================================== */}
+        <section className="relative overflow-hidden border-b border-white/8 bg-[#080808] bg-tech-grid py-14 sm:py-20 lg:py-24">
+          {/* Fundo de Concessionária com Vinheta e Máscara */}
           <img
             src={heroDealership}
             alt="Concessionária de alto padrão"
             width={1920}
             height={1088}
             fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover opacity-20 filter grayscale contrast-125"
+            className="absolute inset-0 h-full w-full object-cover opacity-15 filter grayscale contrast-125"
           />
           <div className="absolute inset-0 bg-radial-vignette" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-[#080808]/40" />
 
-          <Container className="relative z-10 grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            {/* Bloco de Mensagem Principal (Esquerda - 7 Colunas) */}
-            <div className="lg:col-span-7 xl:col-span-7">
-              {/* 1. Etiqueta Institucional */}
-              <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1 text-[11px] font-mono tracking-wide text-white/90">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                <span>Inteligência Comercial Automotiva</span>
-                <span className="text-white/30">•</span>
-                <span className="text-muted-foreground">+10 Anos de Mercado</span>
+          <Container className="relative z-10 grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
+            {/* Bloco de Mensagem Principal (Esquerda - 6 Colunas) */}
+            <div className="lg:col-span-6 xl:col-span-6">
+              {/* Eyebrow de Posicionamento */}
+              <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
               </div>
 
-              {/* 2. Headline Editorial com Capitalização Natural */}
+              {/* Headline Otimizada da Fase 2 */}
               <div className="mt-6">
-                <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.5rem,5.5vw,4.5rem)] leading-[1.04] tracking-[-0.03em] text-white">
-                  Sua loja tem carros.
+                <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.3rem,4.6vw,4rem)] leading-[1.08] tracking-[-0.03em] text-white">
+                  Pare de perder oportunidades por{" "}
+                  <span className="text-primary block sm:inline mt-1 sm:mt-0">
+                    demora no atendimento.
+                  </span>
                 </h1>
-                <p className="hero-seq-h1-2 font-display font-semibold text-[clamp(2.5rem,5.5vw,4.5rem)] leading-[1.04] tracking-[-0.03em] text-primary mt-1">
-                  A NC tem estratégia para vender.
-                </p>
               </div>
 
-              {/* 3. Subtítulo em Inter */}
-              <p className="hero-seq-sub mt-6 max-w-2xl font-sans text-base sm:text-lg lg:text-[18px] leading-[1.6] text-muted-foreground">
-                Marketing, tecnologia e inteligência comercial trabalhando juntos para
-                transformar oportunidades em vendas reais para sua loja de veículos.
+              {/* Subheadline Otimizada da Fase 2 */}
+              <p className="hero-seq-sub mt-6 max-w-xl font-sans text-base sm:text-lg leading-[1.6] text-muted-foreground">
+                Conheça o CRM automotivo com inteligência artificial que ajuda sua loja a responder mais rápido, qualificar compradores e organizar cada negociação.
               </p>
 
-              {/* 4. Indicadores Institucionais Verificados */}
-              <div className="hero-seq-metrics mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 max-w-xl">
-                <div className="rounded-xl border border-white/8 bg-[#121212]/85 p-4 backdrop-blur-sm">
-                  <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">
-                    +100
+              {/* CTAs do Hero */}
+              <div className="hero-seq-cta mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
+                <TrialCtaButton
+                  position="hero"
+                  label="TESTAR GRÁTIS POR 7 DIAS"
+                  className="h-13 sm:h-14 px-8 text-xs sm:text-sm font-semibold tracking-wider"
+                />
+
+                <a
+                  href="#plataforma"
+                  className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-6 font-sans text-xs sm:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25"
+                >
+                  <span>CONHECER A PLATAFORMA</span>
+                  <ChevronRight className="h-4 w-4 text-primary" />
+                </a>
+              </div>
+
+              {/* Microcopy e Garantia */}
+              <p className="mt-3.5 font-sans text-xs text-white/50 flex items-center gap-2">
+                <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
+                <span>Ativação assistida pela nossa central oficial no WhatsApp.</span>
+              </p>
+
+              {/* Indicadores Institucionais Verificados */}
+              <div className="hero-seq-metrics mt-8 grid grid-cols-3 gap-3 max-w-lg border-t border-white/8 pt-6">
+                <div>
+                  <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
+                    {CRM_CONFIG.storesServed}
                   </div>
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-1">
+                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
                     Lojas Atendidas
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-white/8 bg-[#121212]/85 p-4 backdrop-blur-sm">
-                  <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">
-                    10 Anos
+                <div>
+                  <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
+                    {CRM_CONFIG.experienceYears}
                   </div>
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-1">
-                    Experiência Setorial
-                  </div>
-                </div>
-
-                <div className="col-span-2 sm:col-span-1 rounded-xl border border-white/8 bg-[#121212]/85 p-4 backdrop-blur-sm">
-                  <div className="font-display font-semibold text-2xl sm:text-3xl text-primary tracking-tight">
-                    100%
-                  </div>
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-1">
-                    Foco no Mercado Auto
+                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
+                    No Setor Auto
                   </div>
                 </div>
-              </div>
 
-              {/* 5. CTAs com Microinterações Refinadas */}
-              <div className="hero-seq-cta mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <DiagnosticButton
-                  position="hero"
-                  label="Quero vender mais carros"
-                  className="h-13 sm:h-14 px-8 text-sm font-semibold tracking-wide"
-                />
-
-                <a
-                  href="#ecossistema"
-                  className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-6 font-sans text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25 active:brightness-95"
-                >
-                  <span>Conheça o Ecossistema NC</span>
-                  <ChevronRight className="h-4 w-4 text-primary" />
-                </a>
+                <div>
+                  <div className="font-display font-semibold text-xl sm:text-2xl text-primary tracking-tight">
+                    7 Dias
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
+                    Acesso Gratuito
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* 6. Fotografia da Fundadora Victoria Maia (Composição Editorial com Máscara Suave) */}
-            <div className="hero-seq-photo flex justify-center lg:col-span-5 lg:justify-end">
-              <div className="relative w-full max-w-md">
-                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#121212] shadow-2xl [mask-image:linear-gradient(to_bottom,black_90%,transparent)]">
-                  <img
-                    src={victoriaHero}
-                    alt="Victoria Maia — Fundadora da NC Agência e especialista em inteligência comercial para lojas de veículos"
-                    width={800}
-                    height={1000}
-                    fetchPriority="high"
-                    className="h-auto w-full object-cover object-top filter contrast-[1.04]"
-                  />
-
-                  {/* Card Flutuante de Autoridade */}
-                  <div className="absolute inset-x-4 bottom-4 rounded-xl border border-white/12 bg-[#080808]/92 p-4 backdrop-blur-md">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-display font-semibold text-base text-white">
-                          Victoria Maia
-                        </p>
-                        <p className="text-[11px] font-mono text-primary tracking-wide">
-                          Fundadora & Estrategista Comercial
-                        </p>
-                      </div>
-                      <span className="flex h-2 w-2 relative">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-                      </span>
+            {/* Apresentação Visual da Captura Real do Kanban (Direita - 6 Colunas) */}
+            <div className="hero-seq-photo flex justify-center lg:col-span-6 lg:justify-end">
+              <div className="relative w-full max-w-2xl rounded-2xl border border-white/12 bg-[#0c0c0e] shadow-2xl overflow-hidden font-sans group">
+                {/* Barra Superior da Aplicação Real */}
+                <div className="flex items-center justify-between border-b border-white/8 bg-[#141416] px-4 py-2.5 text-[11px] text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-1.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
                     </div>
-
-                    <div className="mt-3 flex items-center gap-2 border-t border-white/8 pt-2.5 text-[11px] font-sans text-muted-foreground">
-                      <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
-                      <span>Metodologia validada em concessionárias e revendas</span>
-                    </div>
+                    <span className="font-mono text-[10px] text-white/50 ml-2 hidden sm:inline">
+                      NC Agência › Funil
+                    </span>
                   </div>
+                  <div className="flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono text-primary font-medium">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                    <span>Interface Real • Funil & Kanban</span>
+                  </div>
+                </div>
+
+                {/* Captura Real do Kanban Sanitizada */}
+                <div className="p-2 sm:p-3 bg-[#0a0a0c]">
+                  <img
+                    src={kanbanRealImg}
+                    alt="Interface Real do Funil Kanban no NC Performance Suite"
+                    className="w-full rounded-xl object-cover border border-white/5 shadow-inner transition-transform duration-500 group-hover:scale-[1.01]"
+                    loading="eager"
+                    width={1024}
+                    height={451}
+                  />
+                </div>
+
+                {/* Destaque das 5 Etapas do Funil */}
+                <div className="border-t border-white/8 bg-[#101012] px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-white/70">
+                  <span className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-amber-400" />
+                    <span>Novo Lead</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-primary" />
+                    <span>Chatbot / IA</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-amber-500" />
+                    <span>Aguardando Atendimento</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-blue-400" />
+                    <span>Atendimento Humano</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                    <span>Follow-up 6h</span>
+                  </span>
                 </div>
               </div>
             </div>
           </Container>
         </section>
 
-        {/* 3. TICKER DE PILARES TECNOLÓGICOS (LOOP CONTÍNUO LINEAR) */}
+        {/* ============================================================== */}
+        {/* TICKER DE CAPACIDADES DA PLATAFORMA (LOOP CONTÍNUO)          */}
+        {/* ============================================================== */}
         <div
-          aria-label="Pilares de Crescimento NC"
+          aria-label="Capacidades do NC Performance Suite"
           className="relative overflow-hidden border-y border-white/8 bg-[#090909] py-3.5 select-none"
         >
           <div className="animate-marquee flex items-center">
-            {/* Bloco 1 */}
             <div className="flex shrink-0 items-center gap-10 pr-10">
-              {tickerPilares.map((pilar, i) => (
-                <Fragment key={`pilar-1-${i}`}>
-                  <span className="whitespace-nowrap font-display font-medium text-sm sm:text-base tracking-wide text-white/90">
-                    {pilar}
+              {tickerItems.map((item, i) => (
+                <Fragment key={`item-1-${i}`}>
+                  <span className="whitespace-nowrap font-display font-medium text-xs sm:text-sm tracking-wide text-white/85">
+                    {item}
                   </span>
                   <div className="flex items-center gap-1.5 opacity-80">
                     <img
                       src={ncLogo}
                       alt=""
                       aria-hidden="true"
-                      className="h-4 w-auto object-contain brightness-125"
+                      className="h-3.5 w-auto object-contain brightness-125"
                     />
                   </div>
                 </Fragment>
               ))}
             </div>
 
-            {/* Bloco 2 Simétrico */}
             <div className="flex shrink-0 items-center gap-10 pr-10" aria-hidden="true">
-              {tickerPilares.map((pilar, i) => (
-                <Fragment key={`pilar-2-${i}`}>
-                  <span className="whitespace-nowrap font-display font-medium text-sm sm:text-base tracking-wide text-white/90">
-                    {pilar}
+              {tickerItems.map((item, i) => (
+                <Fragment key={`item-2-${i}`}>
+                  <span className="whitespace-nowrap font-display font-medium text-xs sm:text-sm tracking-wide text-white/85">
+                    {item}
                   </span>
                   <div className="flex items-center gap-1.5 opacity-80">
                     <img
                       src={ncLogo}
                       alt=""
                       aria-hidden="true"
-                      className="h-4 w-auto object-contain brightness-125"
+                      className="h-3.5 w-auto object-contain brightness-125"
                     />
                   </div>
                 </Fragment>
@@ -482,62 +629,68 @@ function Index() {
           </div>
         </div>
 
-        {/* 4. SEÇÃO: GARGALOS DOS LOJISTAS COM REVELAÇÃO PROGRESSIVA */}
-        <section ref={gargalosRef} className="py-24 sm:py-28 bg-[#080808]" id="problema">
+        {/* ============================================================== */}
+        {/* SEÇÃO 2 — A DOR DO LOJISTA                                   */}
+        {/* ============================================================== */}
+        <section ref={dorRef} className="py-24 sm:py-28 bg-[#080808]" id="problema">
           <Container>
             <div className="mx-auto max-w-3xl text-center">
-              <div className={`reveal-init stagger-delay-1 ${gargalosInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Diagnóstico de Mercado</SectionBadge>
+              <div className={`reveal-init stagger-delay-1 ${dorInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Diagnóstico de Operação Comercial</SectionBadge>
               </div>
+
               <h2
                 className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  gargalosInView ? "reveal-visible" : ""
+                  dorInView ? "reveal-visible" : ""
                 }`}
               >
-                O problema da maioria das lojas não é falta de leads.{" "}
-                <span className="text-primary">É falta de sistema comercial.</span>
+                Sua loja não precisa apenas de mais leads.{" "}
+                <span className="text-primary block sm:inline mt-1 sm:mt-0">
+                  Precisa aproveitar melhor cada oportunidade.
+                </span>
               </h2>
+
               <p
                 className={`mt-4 font-sans text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  gargalosInView ? "reveal-visible" : ""
+                  dorInView ? "reveal-visible" : ""
                 }`}
               >
-                Colocar dinheiro em anúncio sem ter processo de triagem, CRM e velocidade no
-                atendimento é queimar verba. Identifique onde sua operação está travando:
+                Gerar contatos no WhatsApp sem um sistema estruturado para atender rápido e acompanhar as negociações resulta em esforço desperdiçado e vendas perdidas para a concorrência.
               </p>
             </div>
 
-            <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {gargalosComerciais.map(({ icon: Icon, title, description, tag }, index) => {
+            {/* Grid dos 4 Problemas */}
+            <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {painPoints.map(({ icon: Icon, title, description, tag }, index) => {
                 const delayClass = `stagger-delay-${index + 1}`;
                 return (
                   <div
                     key={title}
-                    className={`card-editorial relative flex flex-col justify-between rounded-xl border border-white/8 bg-[#121212] p-7 reveal-init ${delayClass} ${
-                      gargalosInView ? "reveal-visible" : ""
+                    className={`card-editorial relative flex flex-col justify-between rounded-xl border border-white/8 bg-[#121212] p-6 reveal-init ${delayClass} ${
+                      dorInView ? "reveal-visible" : ""
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
                           <Icon className="h-5 w-5" />
                         </div>
-                        <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-mono tracking-wide text-primary">
+                        <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-mono tracking-wide text-primary font-medium">
                           {tag}
                         </span>
                       </div>
 
-                      <h3 className="mt-6 font-display font-semibold text-xl text-white tracking-tight">
+                      <h3 className="mt-5 font-display font-semibold text-lg text-white tracking-tight">
                         {title}
                       </h3>
-                      <p className="mt-2.5 font-sans text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-2.5 font-sans text-xs sm:text-sm leading-relaxed text-muted-foreground">
                         {description}
                       </p>
                     </div>
 
-                    <div className="mt-6 border-t border-white/8 pt-4 flex items-center gap-1.5 text-[11px] font-sans text-white/50">
+                    <div className="mt-6 border-t border-white/8 pt-3 flex items-center gap-1.5 text-[11px] font-sans text-white/50">
                       <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                      <span>Solucionado no Ecossistema NC</span>
+                      <span>Resolvido no {CRM_CONFIG.productName}</span>
                     </div>
                   </div>
                 );
@@ -546,1084 +699,593 @@ function Index() {
           </Container>
         </section>
 
-        {/* 5. NOVA SEÇÃO: ECOSSISTEMA NC 3.0 (CIRCUITO INTERATIVO DA TRÍADE & BENTO GRID) */}
+        {/* ============================================================== */}
+        {/* SEÇÃO 3 — SEÇÃO INTERATIVA: VEJA A PLATAFORMA EM AÇÃO        */}
+        {/* ============================================================== */}
         <section
-          ref={ecossistemaRef}
-          className="border-t border-white/8 bg-[#0B0B0B] py-24 sm:py-32"
-          id="ecossistema"
+          ref={plataformaRef}
+          className="border-t border-white/8 bg-[#0b0b0d] py-24 sm:py-32"
+          id="plataforma"
         >
           <Container>
-            {/* Header da Seção */}
             <div className="mx-auto max-w-3xl text-center">
-              <div className={`reveal-init stagger-delay-1 ${ecossistemaInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Engenharia de Crescimento Automotivo</SectionBadge>
+              <div className={`reveal-init stagger-delay-1 ${plataformaInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Experiência Real</SectionBadge>
               </div>
+
               <h2
                 className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  ecossistemaInView ? "reveal-visible" : ""
+                  plataformaInView ? "reveal-visible" : ""
                 }`}
               >
-                O Ecossistema Completo da <span className="text-primary">NC Agência</span>
+                Veja a plataforma{" "}
+                <span className="text-primary">em ação.</span>
               </h2>
+
               <p
                 className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  ecossistemaInView ? "reveal-visible" : ""
+                  plataformaInView ? "reveal-visible" : ""
                 }`}
               >
-                Muito além de uma agência tradicional de campanhas: uma operação integrada que
-                conecta atração qualificada, velocidade no atendimento e inteligência de vendas.
+                Navegue pelas capturas reais do NC Performance Suite e descubra como o software organiza o funil de vendas, a gestão da loja e o atendimento inicial com inteligência artificial.
               </p>
             </div>
 
-            {/* Painel Interativo: Circuito de Tração Automotiva (Tríade Conectada) */}
+            {/* Seletor das 3 Abas com Telas Reais */}
             <div
-              className={`mt-14 mb-12 rounded-2xl border border-white/10 bg-[#121212]/95 p-6 sm:p-8 backdrop-blur-md relative overflow-hidden transition-all duration-300 reveal-init stagger-delay-3 ${
-                ecossistemaInView ? "reveal-visible" : ""
+              className={`mt-14 reveal-init stagger-delay-3 ${
+                plataformaInView ? "reveal-visible" : ""
               }`}
             >
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div>
-                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-0.5 text-[10px] font-mono font-bold uppercase tracking-widest text-primary">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                    <span>Circuito Integrado de Tração Automotiva</span>
-                  </div>
-                  <h3 className="mt-2 font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
-                    A Tríade que separa a NC de agências convencionais
-                  </h3>
-                  <p className="mt-1 font-sans text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
-                    Tráfego sem CRM é lead perdido. CRM sem inteligência é esforço sem lucro.
-                    Na NC, os três pilares operam em sincronia contínua e retroalimentada.
-                  </p>
-                </div>
-
-                <div className="text-left lg:text-right shrink-0">
-                  <span className="text-[11px] font-mono text-white/50 block">Modo de Visualização:</span>
-                  <span className="text-xs font-semibold text-primary">
-                    {activeTriad === "all" && "⚡ Fluxo Contínuo Completo"}
-                    {activeTriad === "trafego" && "Pilar 01 • Atração de Alta Intenção"}
-                    {activeTriad === "crm" && "Pilar 02 • Velocidade & Gestão de Leads"}
-                    {activeTriad === "bi" && "Pilar 03 • Métricas, Giro & Margem"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Barra do Feixe Luminoso Animado */}
-              <div className="relative my-6 h-1 w-full bg-white/10 rounded-full overflow-hidden circuit-beam" />
-
-              {/* Botões do Seletor Interativo da Tríade */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setActiveTriad("all")}
-                  className={`flex items-center gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 cursor-pointer ${
-                    activeTriad === "all"
-                      ? "circuit-btn-active"
-                      : "border-white/10 bg-white/5 hover:bg-white/8 text-white/80 hover:text-white"
-                  }`}
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <Activity className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] font-mono uppercase text-primary font-bold">Visão Geral</span>
-                    <span className="text-xs font-semibold text-white">Tração Integrada</span>
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setActiveTriad("trafego")}
-                  className={`flex items-center gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 cursor-pointer ${
-                    activeTriad === "trafego"
-                      ? "circuit-btn-active"
-                      : "border-white/10 bg-white/5 hover:bg-white/8 text-white/80 hover:text-white"
-                  }`}
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <Target className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] font-mono uppercase text-primary font-bold">01 • Atração</span>
-                    <span className="text-xs font-semibold text-white">Tráfego Pago</span>
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setActiveTriad("crm")}
-                  className={`flex items-center gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 cursor-pointer ${
-                    activeTriad === "crm"
-                      ? "circuit-btn-active"
-                      : "border-white/10 bg-white/5 hover:bg-white/8 text-white/80 hover:text-white"
-                  }`}
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <Workflow className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] font-mono uppercase text-primary font-bold">02 • Velocidade</span>
-                    <span className="text-xs font-semibold text-white">CRM & Automação</span>
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setActiveTriad("bi")}
-                  className={`flex items-center gap-3 rounded-xl border p-3.5 text-left transition-all duration-200 cursor-pointer ${
-                    activeTriad === "bi"
-                      ? "circuit-btn-active"
-                      : "border-white/10 bg-white/5 hover:bg-white/8 text-white/80 hover:text-white"
-                  }`}
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                    <BarChart3 className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] font-mono uppercase text-primary font-bold">03 • Conversão</span>
-                    <span className="text-xs font-semibold text-white">Inteligência Comercial</span>
-                  </div>
-                </button>
-              </div>
-
-              {/* Descrição Dinâmica do Circuito */}
-              <div className="mt-4 rounded-lg bg-white/5 border border-white/5 px-4 py-2.5 text-xs text-white/80 flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                <span className="font-sans">
-                  {activeTriad === "all" &&
-                    "Fluxo Contínuo Ativo: Os compradores atraídos no Tráfego (01) são triados em < 40s pelo CRM (02), e os dados de venda alimentam o BI (03) que direciona os novos investimentos."}
-                  {activeTriad === "trafego" &&
-                    "Foco em Aquisição: Campanhas multicanal no Meta & Google com filtros geográficos e de crédito, atraindo oportunidades com perfil aprovado no raio de atendimento da loja."}
-                  {activeTriad === "crm" &&
-                    "Foco em Velocidade & Gestão: Triagem automática em menos de 40 segundos e esteira Kanban organizada para nenhum comprador ficar sem resposta ou esquecido no WhatsApp."}
-                  {activeTriad === "bi" &&
-                    "Foco em Lucro & Giro: Acompanhamento de dias de pátio, custo por oportunidade e conversão por vendedor. Os dados mostram exatamente onde alocar o orçamento para lucro máximo."}
-                </span>
-              </div>
-            </div>
-
-            {/* BENTO GRID 3.0: 6 Módulos com Representações Gráficas Ricas e Próprias */}
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {/* CARD 1 (DESTAQUE TRÍADE - 2 COLUNAS NO LG): TRÁFEGO PAGO AUTOMOTIVO */}
-              <div
-                className={`card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-7 transition-all duration-300 lg:col-span-2 ${
-                  activeTriad === "trafego" || activeTriad === "all"
-                    ? "circuit-card-active bg-[#141414]"
-                    : "border-white/10 bg-[#121212]"
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white shadow-glow">
-                        <Target className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary">
-                          Pilar 01 • Atração de Alta Intenção
-                        </span>
-                        <h3 className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
-                          Tráfego Pago Especializado
-                        </h3>
-                      </div>
-                    </div>
-                    <span className="hidden sm:inline-flex rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-mono font-bold text-primary uppercase">
-                      Meta & Google Ads
-                    </span>
-                  </div>
-
-                  <p className="mt-4 font-sans text-sm text-muted-foreground max-w-xl leading-relaxed">
-                    Estratégias multicanal desenhadas especificamente para o ciclo de compra
-                    automotivo. Segmentação por geolocalização e raio de atendimento da loja,
-                    atraindo oportunidades com perfil de crédito aprovado.
-                  </p>
-
-                  {/* Representação Gráfica: Interface de Campanha Automotiva */}
-                  <div className="mt-6 rounded-xl border border-white/10 bg-[#0A0A0A] p-4 text-xs">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                      <div className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="font-semibold text-white">
-                          Campanhas Automotivas Ativas
-                        </span>
-                      </div>
-                      <span className="text-[10px] font-mono text-muted-foreground uppercase">
-                        Raio: 35km da loja
-                      </span>
-                    </div>
-
-                    <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                      <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block font-mono">
-                          Público Alvo
-                        </span>
-                        <span className="font-bold text-white text-xs">Score / Financiamento</span>
-                      </div>
-                      <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block font-mono">
-                          Segmentação
-                        </span>
-                        <span className="font-bold text-white text-xs">Troca + Entrada</span>
-                      </div>
-                      <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block font-mono">
-                          Distribuição
-                        </span>
-                        <span className="font-bold text-primary text-xs">WhatsApp Direto</span>
-                      </div>
-                      <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block font-mono">
-                          Qualidade Lead
-                        </span>
-                        <span className="font-bold text-emerald-400 text-xs">CPF Verificado</span>
-                      </div>
-                    </div>
-
-                    {/* Simulação Visual de Anúncio de Estoque */}
-                    <div className="mt-3.5 rounded-lg border border-white/5 bg-white/5 p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <div className="flex items-center gap-2.5">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/20 text-primary text-[11px] font-bold">
-                          ✓
-                        </span>
-                        <div>
-                          <span className="font-semibold text-white text-xs block">
-                            Veículos Seminovos Selecionados
-                          </span>
-                          <span className="text-[10px] text-muted-foreground">
-                            Entrada facilitada • Avaliação do veículo usado pela Tabela FIPE
-                          </span>
-                        </div>
-                      </div>
-                      <span className="text-[10px] font-mono font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-1 rounded self-start sm:self-auto">
-                        Simulação em 1 min
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4 text-xs font-semibold text-primary">
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span>Conectado à esteira de triagem de CRM (&lt; 40s)</span>
-                  </div>
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </div>
-
-              {/* CARD 2 (DESTAQUE TRÍADE - 1 COLUNA): CRM & PROCESSOS COMERCIAIS */}
-              <div
-                className={`card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-7 transition-all duration-300 ${
-                  activeTriad === "crm" || activeTriad === "all"
-                    ? "circuit-card-active bg-[#141414]"
-                    : "border-white/10 bg-[#121212]"
-                }`}
-              >
-                <div>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white shadow-glow">
-                    <Database className="h-6 w-6" />
-                  </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary mt-4 block">
-                    Pilar 02 • Organização Comercial
-                  </span>
-                  <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-1">
-                    CRM & Processos
-                  </h3>
-                  <p className="mt-2.5 font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    Organização centralizada de todas as oportunidades. Nenhum comprador fica
-                    perdido em conversas soltas no celular do vendedor.
-                  </p>
-
-                  {/* Representação Gráfica: Mini Pipeline Kanban de Loja */}
-                  <div className="mt-5 space-y-2 rounded-xl border border-white/10 bg-[#0A0A0A] p-3 text-[11px]">
-                    <div className="flex items-center justify-between text-[10px] text-muted-foreground font-semibold">
-                      <span className="font-mono">Pipeline Comercial da Loja</span>
-                      <span className="text-primary font-bold">100% Organizado</span>
-                    </div>
-                    <div className="flex items-center justify-between rounded bg-white/5 px-2.5 py-1.5 text-white">
-                      <span>1. Triagem & Score</span>
-                      <span className="h-2 w-2 rounded-full bg-amber-400" />
-                    </div>
-                    <div className="flex items-center justify-between rounded bg-white/5 px-2.5 py-1.5 text-white">
-                      <span>2. Visita Agendada</span>
-                      <span className="h-2 w-2 rounded-full bg-blue-400" />
-                    </div>
-                    <div className="flex items-center justify-between rounded bg-primary/20 px-2.5 py-1.5 text-white font-semibold">
-                      <span>3. Proposta & Venda</span>
-                      <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4 text-xs font-semibold text-primary">
-                  <span>Régua de follow-up ativa</span>
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </div>
-
-              {/* CARD 3 (DESTAQUE TRÍADE - 1 COLUNA): AUTOMAÇÕES DE PRÉ-ATENDIMENTO */}
-              <div
-                className={`card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-7 transition-all duration-300 ${
-                  activeTriad === "crm" || activeTriad === "all"
-                    ? "circuit-card-active bg-[#141414]"
-                    : "border-white/10 bg-[#121212]"
-                }`}
-              >
-                <div>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white shadow-glow">
-                    <Bot className="h-6 w-6" />
-                  </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary mt-4 block">
-                    Pilar 02 (B) • Velocidade Instantânea
-                  </span>
-                  <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-1">
-                    Automações Inteligentes
-                  </h3>
-                  <p className="mt-2.5 font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    Triagem automática de interesse, modelo e valor de entrada em menos de 40
-                    segundos, distribuindo o lead quente diretamente para o vendedor disponível.
-                  </p>
-
-                  {/* Representação Gráfica: Fluxo de Resposta em Segundos */}
-                  <div className="mt-5 rounded-xl border border-white/10 bg-[#0A0A0A] p-3 text-xs">
-                    <div className="flex items-center gap-2 text-emerald-400 font-bold text-[11px]">
-                      <Zap className="h-3.5 w-3.5 animate-pulse" /> Tempo de Resposta: &lt; 40 segundos
-                    </div>
-                    <div className="mt-2 space-y-1.5 text-[11px] text-[#A3A3A3]">
-                      <div className="flex items-center gap-2">
-                        <span className="text-white font-mono font-bold">01.</span>
-                        <span>Coleta de Modelo Desejado & Troca</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-white font-mono font-bold">02.</span>
-                        <span>Verificação de Entrada e Simulação</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-white font-mono font-bold">03.</span>
-                        <span>Encaminhamento ao Consultor</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4 text-xs font-semibold text-primary">
-                  <span>Zero leads esquecidos</span>
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </div>
-
-              {/* CARD 4 (DESTAQUE TRÍADE - 2 COLUNAS NO LG): INTELIGÊNCIA COMERCIAL & DASHBOARDS */}
-              <div
-                className={`card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-7 transition-all duration-300 lg:col-span-2 ${
-                  activeTriad === "bi" || activeTriad === "all"
-                    ? "circuit-card-active bg-[#141414]"
-                    : "border-white/10 bg-[#121212]"
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white shadow-glow">
-                        <BarChart3 className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary">
-                          Pilar 03 • Métricas & Conversão
-                        </span>
-                        <h3 className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
-                          Inteligência Comercial & Indicadores
-                        </h3>
-                      </div>
-                    </div>
-                    <span className="hidden sm:inline-flex rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-mono font-bold text-white/80 uppercase">
-                      Simulação Painel de BI NC
-                    </span>
-                  </div>
-
-                  <p className="mt-4 font-sans text-sm text-muted-foreground max-w-xl leading-relaxed">
-                    Acompanhamento sistemático de indicadores essenciais: giro de pátio, custo
-                    por oportunidade qualificada, taxa de conversão por vendedor e margem líquida
-                    por veículo vendido.
-                  </p>
-
-                  {/* Representação Gráfica: Dashboard Demonstrativo com Gráfico SVG */}
-                  <div className="mt-6 rounded-xl border border-white/10 bg-[#0A0A0A] p-4">
-                    <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs">
-                      <span className="font-semibold text-white">
-                        Painel Gerencial de Indicadores da Loja
-                      </span>
-                      <span className="text-emerald-400 font-mono font-bold text-[11px]">
-                        Atualização em Tempo Real
-                      </span>
-                    </div>
-
-                    {/* Gráfico SVG com Animação .draw-chart */}
-                    <div className="mt-3 h-20 w-full overflow-hidden">
-                      <svg
-                        viewBox="0 0 400 70"
-                        className="w-full h-full"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                      >
-                        <defs>
-                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#EF4045" stopOpacity="0.3" />
-                            <stop offset="100%" stopColor="#EF4045" stopOpacity="0.0" />
-                          </linearGradient>
-                        </defs>
-                        {/* Linhas de grade sutis */}
-                        <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
-                        <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
-                        {/* Área sob a curva */}
-                        <path
-                          d="M0,60 Q80,50 150,38 T280,24 T400,10 L400,70 L0,70 Z"
-                          fill="url(#chartGradient)"
-                        />
-                        {/* Linha principal com animação .draw-chart */}
-                        <path
-                          d="M0,60 Q80,50 150,38 T280,24 T400,10"
-                          fill="none"
-                          stroke="#EF4045"
-                          strokeWidth="2.5"
-                          className="draw-chart"
-                        />
-                        {/* Pontos de controle */}
-                        <circle cx="150" cy="38" r="3.5" fill="#EF4045" />
-                        <circle cx="280" cy="24" r="3.5" fill="#EF4045" />
-                        <circle cx="400" cy="10" r="4" fill="#ffffff" />
-                      </svg>
-                    </div>
-
-                    <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 text-xs">
-                      <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block font-mono">
-                          Giro Médio de Estoque
-                        </span>
-                        <span className="font-bold text-white text-base">26 dias</span>
-                        <span className="text-[10px] text-emerald-400 block mt-0.5">
-                          -18 dias no pátio
-                        </span>
-                      </div>
-
-                      <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block font-mono">
-                          Taxa de Conversão
-                        </span>
-                        <span className="font-bold text-white text-base">34,2%</span>
-                        <span className="text-[10px] text-primary block mt-0.5">
-                          Visita presencial
-                        </span>
-                      </div>
-
-                      <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block font-mono">
-                          Custo por Oportunidade
-                        </span>
-                        <span className="font-bold text-white text-base">Otimizado</span>
-                        <span className="text-[10px] text-muted-foreground block mt-0.5">
-                          Score validado
-                        </span>
-                      </div>
-
-                      <div className="rounded-lg bg-white/5 p-2.5">
-                        <span className="text-[10px] text-muted-foreground block font-mono">
-                          Controle de Vendedores
-                        </span>
-                        <span className="font-bold text-emerald-400 text-base">100% Ativo</span>
-                        <span className="text-[10px] text-muted-foreground block mt-0.5">
-                          Follow-up monitorado
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4 text-xs font-semibold text-primary">
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span>Retroalimenta as campanhas com dados reais de fechamento</span>
-                  </div>
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </div>
-
-              {/* CARD 5 (COMPLEMENTAR - 1 COLUNA): CRIATIVOS DE PERFORMANCE */}
-              <div className="card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121212] p-7 transition-all duration-300">
-                <div>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-white">
-                    <Video className="h-6 w-6" />
-                  </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground mt-4 block">
-                    Engenharia Criativa
-                  </span>
-                  <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-1">
-                    Criativos de Alta Demanda
-                  </h3>
-                  <p className="mt-2.5 font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    Produção visual e roteirização automotiva focada em gerar desejo imediato e
-                    destacar condições de compra que aceleram a decisão do comprador.
-                  </p>
-
-                  {/* Representação Gráfica: Mock de Anúncio Automotivo Validado */}
-                  <div className="mt-5 rounded-xl border border-white/10 bg-[#0A0A0A] p-3 text-xs">
-                    <div className="flex items-center justify-between text-[11px] font-semibold text-white">
-                      <span>Anúncio Focado em Giro</span>
-                      <span className="text-primary text-[10px] font-mono uppercase">Formato Validado</span>
-                    </div>
-                    <div className="mt-2 space-y-1 text-[11px] text-muted-foreground">
-                      <p>✓ Fotos detalhadas de itens de conforto e motor</p>
-                      <p>✓ Condição clara de entrada e parcelamento</p>
-                      <p>✓ Chamada direta para simulação no WhatsApp</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4 text-xs font-semibold text-white/80">
-                  <span>Testes contínuos A/B de estoque</span>
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </div>
-
-              {/* CARD 6 (COMPLEMENTAR - 1 COLUNA): TREINAMENTO & PROCESSOS */}
-              <div className="card-editorial group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121212] p-7 transition-all duration-300">
-                <div>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-white">
-                    <Award className="h-6 w-6" />
-                  </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground mt-4 block">
-                    Capacitação Comercial
-                  </span>
-                  <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-1">
-                    Treinamento & Cultura
-                  </h3>
-                  <p className="mt-2.5 font-sans text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    Alinhamento com a equipe de vendas da sua loja: scripts de resposta rápida,
-                    contorno de objeções de financiamento e protocolo de visita presencial.
-                  </p>
-
-                  {/* Representação Gráfica: Checklist da Rotina Comercial */}
-                  <div className="mt-5 space-y-1.5 rounded-xl border border-white/10 bg-[#0A0A0A] p-3 text-[11px] text-white">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-                      <span>Script de Primeiro Contato (Regra 5 Min)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-                      <span>Técnicas de Quebra de Objeção de Entrada</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-                      <span>Roteiro de Fechamento Presencial na Loja</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4 text-xs font-semibold text-white/80">
-                  <span>Desenvolvimento contínuo da equipe</span>
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </div>
-            </div>
-
-            {/* CTA de Fechamento do Ecossistema */}
-            <div className="mt-14 flex flex-col items-center justify-center text-center">
-              <p className="font-sans text-sm text-muted-foreground mb-4">
-                Quer entender como aplicar esse ecossistema completo no estoque atual da sua loja?
-              </p>
-              <DiagnosticButton
-                position="hero"
-                label="Solicitar diagnóstico do meu estoque"
-                className="h-14 px-8 text-sm font-semibold shadow-glow tracking-normal"
-              />
+              <InteractivePlatformTabs />
             </div>
           </Container>
         </section>
 
-        {/* 6. MÉTODO NC (PROGRESSÃO VISUAL EM TRILHA CONECTADA) */}
+        {/* ============================================================== */}
+        {/* SEÇÃO 4 — INTELIGÊNCIA ARTIFICIAL (COM TELA REAL CONVERSAS)   */}
+        {/* ============================================================== */}
         <section
-          ref={metodoRef}
-          className="py-24 sm:py-28 bg-[#080808] border-t border-white/8"
-          id="metodo"
-        >
-          <Container>
-            <div className="mx-auto max-w-3xl text-center">
-              <div className={`reveal-init stagger-delay-1 ${metodoInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Processo Estruturado</SectionBadge>
-              </div>
-              <h2
-                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  metodoInView ? "reveal-visible" : ""
-                }`}
-              >
-                Nossa Metodologia:{" "}
-                <span className="text-primary">Simples, Direta e Focada em Giro</span>
-              </h2>
-              <p
-                className={`mx-auto mt-4 max-w-2xl text-center font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  metodoInView ? "reveal-visible" : ""
-                }`}
-              >
-                Transformamos a maneira como sua revenda atrai, atende e converte clientes
-                em um processo contínuo de três etapas complementares.
-              </p>
-            </div>
-
-            {/* Trilha Progressiva Conectada */}
-            <div className="relative mt-16 sm:mt-20">
-              {/* Linha Conectora Superior Desktop */}
-              <div
-                className="absolute top-10 left-[16%] right-[16%] h-0.5 bg-white/10 hidden md:block"
-                aria-hidden="true"
-              >
-                <div className="h-full bg-gradient-to-r from-primary/30 via-primary to-primary/30 circuit-beam" />
-              </div>
-
-              {/* Cards das 3 Estações da Metodologia */}
-              <div className="grid gap-8 md:grid-cols-3 relative">
-                {methodologySteps.map(({ step, phase, tag, title, text, icon: StepIcon, deliverables }, index) => {
-                  const delayClass = `stagger-delay-${index + 1}`;
-                  return (
-                    <div
-                      key={title}
-                      className={`card-editorial group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#121212] p-8 transition-all duration-300 hover:border-primary/50 reveal-init ${delayClass} ${
-                        metodoInView ? "reveal-visible" : ""
-                      }`}
-                    >
-                      <div>
-                        {/* Topo com Marcador Numérico e Ícone */}
-                        <div className="flex items-center justify-between">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-sm method-node-glow">
-                            {step}
-                          </div>
-                          <span className="rounded-full bg-white/5 border border-white/10 px-2.5 py-0.5 text-[10px] font-mono tracking-wide text-primary uppercase font-bold">
-                            {phase}
-                          </span>
-                        </div>
-
-                        <div className="mt-6 flex items-center gap-3">
-                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-white/90">
-                            <StepIcon className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <span className="text-[10px] font-mono text-muted-foreground uppercase block">
-                              {tag}
-                            </span>
-                            <h3 className="font-display font-semibold text-xl text-white tracking-tight">
-                              {title}
-                            </h3>
-                          </div>
-                        </div>
-
-                        <p className="mt-4 font-sans text-sm leading-relaxed text-muted-foreground">
-                          {text}
-                        </p>
-
-                        {/* Entregáveis Práticos */}
-                        <div className="mt-6 space-y-2 border-t border-white/8 pt-4">
-                          <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block">
-                            Entregáveis Principais:
-                          </span>
-                          {deliverables.map((item, itemIdx) => (
-                            <div key={itemIdx} className="flex items-start gap-2 text-xs text-white/80">
-                              <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                              <span className="font-sans leading-tight">{item}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="mt-6 pt-4 border-t border-white/8 flex items-center justify-between text-xs font-semibold text-primary">
-                        <span>Fase {step} do Ecossistema</span>
-                        <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </Container>
-        </section>
-
-        {/* 7. CASES E DEPOIMENTOS: APRESENTAÇÃO EDITORIAL DE RESULTADOS REAIS */}
-        <section
-          ref={depoimentosRef}
-          className="border-t border-white/8 bg-[#0E0E0E] py-24 sm:py-28"
-          id="depoimentos"
-        >
-          <Container>
-            <div className="mx-auto max-w-3xl text-center">
-              <div className={`reveal-init stagger-delay-1 ${depoimentosInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Estudos de Caso & Métricas de Referência</SectionBadge>
-              </div>
-              <h2
-                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  depoimentosInView ? "reveal-visible" : ""
-                }`}
-              >
-                Estudos de Caso & Resultados na{" "}
-                <span className="text-primary">Prática Automotiva</span>
-              </h2>
-              <p
-                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  depoimentosInView ? "reveal-visible" : ""
-                }`}
-              >
-                Exemplos práticos de transformações comerciais e parâmetros de desempenho observados em concessionárias e revendas que implementaram a metodologia do Ecossistema NC.
-              </p>
-            </div>
-
-            <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {testimonials.map((t, i) => {
-                const delayClass = `stagger-delay-${i + 1}`;
-                return (
-                  <div
-                    key={t.name}
-                    className={`card-editorial group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#121212] p-8 transition-all duration-300 hover:border-primary/50 reveal-init ${delayClass} ${
-                      depoimentosInView ? "reveal-visible" : ""
-                    }`}
-                  >
-                    <div>
-                      {/* Topo do Case: Segmento & Status de Auditoria */}
-                      <div className="flex items-center justify-between border-b border-white/8 pb-4">
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-white/60">
-                          {t.segment}
-                        </span>
-                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          <span>{t.verifiedBadge}</span>
-                        </div>
-                      </div>
-
-                      {/* Bloco de Métrica de Alto Impacto */}
-                      <div className="mt-6 flex items-baseline gap-2">
-                        <span className="font-display font-bold text-4xl sm:text-5xl text-primary tracking-tight">
-                          {t.metricHighlight}
-                        </span>
-                      </div>
-                      <span className="text-xs font-semibold uppercase tracking-wide text-white block mt-1">
-                        {t.metricLabel}
-                      </span>
-
-                      {/* Citação Editorial */}
-                      <div className="mt-6 relative">
-                        <Quote className="h-6 w-6 text-primary/30 mb-2" />
-                        <blockquote className="font-sans text-sm leading-relaxed text-white/90 italic">
-                          "{t.quote}"
-                        </blockquote>
-                      </div>
-
-                      {/* Checklist de Impactos na Operação da Loja */}
-                      <div className="mt-6 space-y-2 border-t border-white/8 pt-4">
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 block">
-                          Impacto Documentado na Loja:
-                        </span>
-                        {t.impactDetails.map((item, itemIdx) => (
-                          <div key={itemIdx} className="flex items-start gap-2 text-xs text-muted-foreground">
-                            <Check className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                            <span className="font-sans leading-tight text-white/80">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Rodapé do Case com Identificação do Lojista */}
-                    <div className="mt-8 border-t border-white/8 pt-4 flex items-center justify-between">
-                      <div>
-                        <div className="font-display font-semibold text-sm text-white">{t.name}</div>
-                        <div className="text-xs text-muted-foreground font-sans">
-                          {t.role} • <span className="text-white/80">{t.company}</span>
-                        </div>
-                      </div>
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-primary">
-                        <ShieldCheck className="h-4 w-4" />
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Nota Institucional de Transparência e Credibilidade */}
-            <div className="mt-12 rounded-xl border border-white/8 bg-white/[0.02] p-4 text-center">
-              <p className="text-xs text-muted-foreground/80 max-w-2xl mx-auto font-sans leading-relaxed">
-                * Os percentuais e métricas apresentados acima constituem estudos de caso e parâmetros médios apurados na aplicação do método em lojas e concessionárias parceiras. Os resultados individuais variam conforme o estoque ativo, margem líquida, praça de atuação, agilidade da equipe comercial no WhatsApp e volume de investimento em mídia.
-              </p>
-            </div>
-          </Container>
-        </section>
-
-        {/* 8. SEÇÃO EXECUTIVA DA VICTORIA MAIA: AUTORIDADE & 10 ANOS NO SETOR */}
-        <section
-          ref={sobreRef}
+          ref={iaRef}
           className="border-t border-white/8 bg-[#080808] py-24 sm:py-32"
-          id="sobre"
+          id="inteligencia-artificial"
         >
           <Container>
             <div className="grid items-center gap-12 lg:grid-cols-12">
-              {/* Coluna Visual: Fotografia Oficial Preservada com Moldura Executiva */}
-              <div className="flex justify-center lg:col-span-5">
-                <div
-                  className={`relative w-full max-w-md reveal-init stagger-delay-1 ${
-                    sobreInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  {/* Efeito Glow Suave de Fundo */}
-                  <div className="absolute -inset-2 rounded-2xl bg-primary/20 blur-2xl" />
-
-                  {/* Moldura da Fotografia */}
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/15 bg-[#121212] p-2 shadow-2xl transition-all duration-500 hover:border-primary/40">
-                    <div className="relative overflow-hidden rounded-xl">
-                      <img
-                        src={victoriaAbout}
-                        alt="Victoria Maia — Fundadora da NC Agência e Especialista no Mercado Automotivo"
-                        loading="lazy"
-                        width={800}
-                        height={1100}
-                        className="w-full rounded-xl object-cover grayscale contrast-105 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.02]"
-                      />
-                      <div className="pointer-events-none absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-lg bg-black/60 text-white/60 backdrop-blur-sm transition-colors group-hover:text-primary">
-                        <Sparkles className="h-3.5 w-3.5" />
-                      </div>
-                    </div>
-
-                    {/* Card de Autoridade Sobreposto */}
-                    <div className="mt-3 rounded-xl border border-white/10 bg-[#0A0A0A]/90 p-4 backdrop-blur-md">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-display font-semibold text-base text-white">
-                            Victoria Maia
-                          </div>
-                          <div className="text-xs text-primary font-medium">
-                            Fundadora & Estrategista-Chefe
-                          </div>
-                        </div>
-                        <span className="rounded-full bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-[10px] font-mono text-primary font-bold">
-                          10 Anos
-                        </span>
-                      </div>
-                      <div className="mt-2 text-[11px] font-mono text-white/60">
-                        Especialista em Crescimento & Inteligência Comercial Automotiva
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Coluna Conteúdo: Narrativa Editorial & Pilares de Credibilidade */}
-              <div className="lg:col-span-7">
-                <div className={`reveal-init stagger-delay-1 ${sobreInView ? "reveal-visible" : ""}`}>
-                  <SectionBadge>Liderança & Experiência de Mercado</SectionBadge>
+              {/* Coluna da Esquerda: Textos e Benefícios */}
+              <div className="lg:col-span-6">
+                <div className={`reveal-init stagger-delay-1 ${iaInView ? "reveal-visible" : ""}`}>
+                  <SectionBadge>Qualificação Preliminar com IA</SectionBadge>
                 </div>
 
                 <h2
                   className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-white tracking-tight reveal-init stagger-delay-2 ${
-                    sobreInView ? "reveal-visible" : ""
+                    iaInView ? "reveal-visible" : ""
                   }`}
                 >
-                  Mais de uma década vivendo a realidade de{" "}
-                  <span className="text-primary">pátios e concessionárias.</span>
+                  A IA faz o primeiro atendimento.{" "}
+                  <span className="text-primary block mt-1">
+                    Seu vendedor entra com mais contexto.
+                  </span>
                 </h2>
 
-                {/* Citação Direta de Posicionamento */}
-                <div
-                  className={`mt-6 border-l-2 border-primary pl-4 py-1 reveal-init stagger-delay-3 ${
-                    sobreInView ? "reveal-visible" : ""
+                <p
+                  className={`mt-4 font-sans text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                    iaInView ? "reveal-visible" : ""
                   }`}
                 >
-                  <p className="font-display text-base sm:text-lg text-white/95 italic leading-relaxed">
-                    "No mercado de veículos, quem não tem processo comercial estruturado depende da sorte.
-                    Na NC, transformamos estoque parado em previsibilidade diária de vendas."
-                  </p>
-                </div>
+                  A IA de atendimento é um dos principais diferenciais do NC Performance Suite, agilizando o primeiro contato e coletando as respostas mais importantes para fechar o negócio.
+                </p>
 
+                {/* Situações Atendidas pela IA Destacadas */}
                 <div
-                  className={`mt-6 space-y-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                    sobreInView ? "reveal-visible" : ""
+                  className={`mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 reveal-init stagger-delay-4 ${
+                    iaInView ? "reveal-visible" : ""
                   }`}
                 >
-                  <p>
-                    Fundada por <strong className="text-white">Victoria Maia</strong>, a NC Agência nasceu da
-                    convivência direta com o dia a dia de lojistas de seminovos e novos. Não somos uma agência
-                    teórica de marketing: conhecemos na prática a pressão de pagar pátio, a dinâmica de aprovação
-                    de crédito e a frustração de perder vendas por demora no WhatsApp.
-                  </p>
-                  <p>
-                    O método desenvolvido pela Victoria já foi aplicado e validado em{" "}
-                    <strong className="text-white">+100 lojas de carros no Brasil</strong>, integrando tráfego
-                    pago de alta intenção, triagem automática em menos de 40 segundos e treinamento contínuo
-                    para o time comercial fechar mais negócios na loja física.
-                  </p>
-                </div>
-
-                {/* Três Pilares de Autoridade */}
-                <div
-                  className={`mt-8 space-y-3 reveal-init stagger-delay-4 ${
-                    sobreInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  <div className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/5 p-3.5">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary font-mono text-xs font-bold">
-                      01
-                    </span>
-                    <div>
-                      <h4 className="font-display font-semibold text-sm text-white">
-                        Visão Real de Salão de Vendas
-                      </h4>
-                      <p className="font-sans text-xs text-muted-foreground mt-0.5 leading-relaxed">
-                        Entendimento aprofundado sobre margem de seminovos, trocas na FIPE, financiamentos e metas de giro.
-                      </p>
-                    </div>
+                  <div className="rounded-xl border border-white/8 bg-[#121214] p-3.5">
+                    <Car className="h-4 w-4 text-primary mb-1.5" />
+                    <h3 className="font-display font-semibold text-sm text-white">
+                      Interesse em um veículo
+                    </h3>
+                    <p className="font-sans text-xs text-muted-foreground mt-0.5">
+                      Identificação do modelo desejado do estoque no primeiro contato.
+                    </p>
                   </div>
 
-                  <div className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/5 p-3.5">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary font-mono text-xs font-bold">
-                      02
-                    </span>
-                    <div>
-                      <h4 className="font-display font-semibold text-sm text-white">
-                        Metodologia Testada em +100 Lojas
-                      </h4>
-                      <p className="font-sans text-xs text-muted-foreground mt-0.5 leading-relaxed">
-                        Processo comercial replicável em diversos perfis de estoque, de multimarcas premium a revendas de alto giro.
-                      </p>
-                    </div>
+                  <div className="rounded-xl border border-white/8 bg-[#121214] p-3.5">
+                    <Database className="h-4 w-4 text-primary mb-1.5" />
+                    <h3 className="font-display font-semibold text-sm text-white">
+                      Financiamento & Entrada
+                    </h3>
+                    <p className="font-sans text-xs text-muted-foreground mt-0.5">
+                      Consulta da intenção de valor de entrada e forma de pagamento.
+                    </p>
                   </div>
 
-                  <div className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/5 p-3.5">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary font-mono text-xs font-bold">
-                      03
-                    </span>
-                    <div>
-                      <h4 className="font-display font-semibold text-sm text-white">
-                        Alinhamento de Pessoas & Automação
-                      </h4>
-                      <p className="font-sans text-xs text-muted-foreground mt-0.5 leading-relaxed">
-                        Treinamento prático da equipe de vendedores para responder rápido, quebrar objeções e agendar visitas na loja.
-                      </p>
-                    </div>
+                  <div className="rounded-xl border border-white/8 bg-[#121214] p-3.5">
+                    <Workflow className="h-4 w-4 text-primary mb-1.5" />
+                    <h3 className="font-display font-semibold text-sm text-white">
+                      Veículo na troca
+                    </h3>
+                    <p className="font-sans text-xs text-muted-foreground mt-0.5">
+                      Coleta antecipada de modelo e ano do carro usado do comprador.
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl border border-white/8 bg-[#121214] p-3.5">
+                    <Users className="h-4 w-4 text-primary mb-1.5" />
+                    <h3 className="font-display font-semibold text-sm text-white">
+                      Transição para o consultor
+                    </h3>
+                    <p className="font-sans text-xs text-muted-foreground mt-0.5">
+                      Encaminhamento com histórico salvo para o vendedor agendar a visita.
+                    </p>
                   </div>
                 </div>
 
-                {/* Indicadores Técnicos Institucionais */}
-                <div
-                  className={`mt-8 grid grid-cols-3 gap-3 border-y border-white/10 py-5 text-center reveal-init stagger-delay-4 ${
-                    sobreInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  <div>
-                    <span className="font-display font-bold text-2xl sm:text-3xl text-white block">
-                      +100
-                    </span>
-                    <span className="font-mono text-[10px] uppercase text-muted-foreground">
-                      Lojas Ativas
-                    </span>
-                  </div>
-                  <div className="border-x border-white/10">
-                    <span className="font-display font-bold text-2xl sm:text-3xl text-primary block">
-                      10 Anos
-                    </span>
-                    <span className="font-mono text-[10px] uppercase text-muted-foreground">
-                      No Setor Automotivo
-                    </span>
-                  </div>
-                  <div>
-                    <span className="font-display font-bold text-2xl sm:text-3xl text-white block">
-                      Nacional
-                    </span>
-                    <span className="font-mono text-[10px] uppercase text-muted-foreground">
-                      Atuação no Brasil
-                    </span>
-                  </div>
-                </div>
-
-                <div
-                  className={`mt-8 flex flex-col sm:flex-row items-center gap-4 reveal-init stagger-delay-4 ${
-                    sobreInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  <DiagnosticButton
-                    position="sobre"
-                    label="Agendar conversa com a fundadora"
-                    className="w-full sm:w-auto"
+                <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <TrialCtaButton
+                    position="features"
+                    label="TESTAR GRÁTIS POR 7 DIAS"
+                    className="h-12 px-7 text-xs sm:text-sm font-semibold"
                   />
-                  <span className="text-xs text-muted-foreground font-sans">
-                    Sessão estratégica direcionada exclusivamente a proprietários e gerentes.
+                  <span className="text-xs text-muted-foreground">
+                    Sem formulários complexos. Direto pelo WhatsApp.
                   </span>
                 </div>
               </div>
+
+              {/* Coluna da Direita: Captura Real de Conversas com IA */}
+              <div className="lg:col-span-6 flex justify-center">
+                <div
+                  className={`w-full max-w-2xl rounded-2xl border border-white/12 bg-[#0c0c0e] shadow-2xl overflow-hidden reveal-init stagger-delay-2 ${
+                    iaInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  <div className="flex items-center justify-between border-b border-white/8 bg-[#141416] px-4 py-2.5 text-[11px] text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <div className="flex gap-1.5">
+                        <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                      </div>
+                      <span className="font-mono text-[10px] text-white/50 ml-2">
+                        NC Agência › Conversas › WhatsApp
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono text-primary font-medium">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                      <span>Interface Real • IA Ativa</span>
+                    </div>
+                  </div>
+
+                  <div className="p-2 sm:p-3 bg-[#0a0a0c]">
+                    <img
+                      src={conversasRealImg}
+                      alt="Tela Real do Módulo de Conversas com IA do NC Performance Suite"
+                      className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
+                      loading="lazy"
+                      width={1024}
+                      height={449}
+                    />
+                  </div>
+
+                  {/* Detalhes de Funcionamento da IA */}
+                  <div className="border-t border-white/8 bg-[#101012] p-4 text-xs space-y-2">
+                    <div className="flex items-center gap-2 text-white font-medium">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <span>Atendimento automático sem interrupção de horário comercial</span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed pl-6">
+                      A IA realiza o primeiro acolhimento e coleta de informações. Ao enviar uma mensagem, o vendedor assume a conversa com todo o histórico pronto.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </Container>
         </section>
 
-        {/* 9. PARCEIROS (PRESERVADOS E REFINADOS EDITORIALMENTE) */}
-        <section className="border-t border-white/8 bg-[#0E0E0E] py-20 sm:py-24" id="parceiros">
+        {/* ============================================================== */}
+        {/* SEÇÃO 5 — FUNCIONALIDADES (BENTO GRID)                        */}
+        {/* ============================================================== */}
+        <section
+          ref={funcionalidadesRef}
+          className="border-t border-white/8 bg-[#0c0c0e] py-24 sm:py-32"
+          id="funcionalidades"
+        >
           <Container>
-            <div className="text-center">
-              <SectionBadge>Confiabilidade de Mercado</SectionBadge>
-              <h2 className="mt-4 font-display font-semibold text-2xl sm:text-3xl md:text-4xl text-white tracking-tight">
-                Lojas e Redes que Confiam no Ecossistema NC
+            <div className="mx-auto max-w-3xl text-center">
+              <div className={`reveal-init stagger-delay-1 ${funcionalidadesInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Arquitetura Funcional</SectionBadge>
+              </div>
+
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
+                  funcionalidadesInView ? "reveal-visible" : ""
+                }`}
+              >
+                Um CRM profissional.{" "}
+                <span className="text-primary">Feito para quem vende carros.</span>
               </h2>
-              <p className="mt-3 text-center font-sans text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-                Mais de 100 parceiros ativos acelerando vendas e giro de pátio em diversas regiões do Brasil.
+
+              <p
+                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                  funcionalidadesInView ? "reveal-visible" : ""
+                }`}
+              >
+                Desenvolvido sem complexidades desnecessárias para atender exatamente as demandas de atendimento e controle de estoque de revendas de veículos.
               </p>
             </div>
 
-            <div className="mt-14 flex flex-wrap items-center justify-center gap-8 sm:gap-12">
-              <div className="flex h-24 w-44 items-center justify-center rounded-xl border border-white/10 bg-[#141414] p-4 transition-all duration-300 hover:border-white/30">
-                <img
-                  src={partnerAlfacar}
-                  alt="Alfa Car Veículos"
-                  className="max-h-16 w-auto object-contain"
-                  loading="lazy"
-                />
+            {/* Bento Grid dos 7 Módulos */}
+            <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {crmFeatures.map(({ number, title, description, icon: FeatureIcon, badge }, idx) => {
+                const isHighlight = idx === 0 || idx === 6;
+                const delayClass = `stagger-delay-${(idx % 4) + 1}`;
+                return (
+                  <div
+                    key={title}
+                    className={`card-editorial group relative flex flex-col justify-between rounded-2xl border p-7 transition-all duration-300 ${
+                      isHighlight
+                        ? "lg:col-span-2 border-primary/30 bg-[#141418]"
+                        : "border-white/10 bg-[#121214]"
+                    } reveal-init ${delayClass} ${
+                      funcionalidadesInView ? "reveal-visible" : ""
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary">
+                          <FeatureIcon className="h-5 w-5" />
+                        </div>
+                        <span className="rounded-full bg-white/5 border border-white/8 px-2.5 py-0.5 text-[10px] font-mono text-primary font-bold">
+                          {badge}
+                        </span>
+                      </div>
+
+                      <div className="mt-5">
+                        <span className="text-[10px] font-mono text-white/40 uppercase block">
+                          Recurso {number}
+                        </span>
+                        <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-0.5">
+                          {title}
+                        </h3>
+                        <p className="mt-2.5 font-sans text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                          {description}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 border-t border-white/8 pt-3.5 flex items-center justify-between text-xs font-semibold text-primary">
+                      <span>Integrado ao ecossistema</span>
+                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-12 flex justify-center">
+              <TrialCtaButton
+                position="features"
+                label="TESTAR GRÁTIS POR 7 DIAS"
+                className="h-13 px-8 text-xs sm:text-sm font-semibold"
+              />
+            </div>
+          </Container>
+        </section>
+
+        {/* ============================================================== */}
+        {/* SEÇÃO 6 — JORNADA COMERCIAL ("COMO FUNCIONA")                */}
+        {/* ============================================================== */}
+        <section
+          ref={jornadaRef}
+          className="border-t border-white/8 bg-[#080808] py-24 sm:py-32"
+          id="como-funciona"
+        >
+          <Container>
+            <div className="mx-auto max-w-3xl text-center">
+              <div className={`reveal-init stagger-delay-1 ${jornadaInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Etapas da Jornada</SectionBadge>
               </div>
 
-              <div className="flex h-24 w-44 items-center justify-center rounded-xl border border-white/10 bg-[#141414] p-4 transition-all duration-300 hover:border-white/30">
-                <img
-                  src={partnerRio2}
-                  alt="Rio 2 Veículos"
-                  className="max-h-14 w-auto object-contain"
-                  loading="lazy"
-                />
-              </div>
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
+                  jornadaInView ? "reveal-visible" : ""
+                }`}
+              >
+                Do primeiro contato à{" "}
+                <span className="text-primary">próxima oportunidade de venda.</span>
+              </h2>
 
-              <div className="w-full max-w-2xl rounded-xl border border-white/10 bg-[#141414] p-4 text-center">
-                <img
-                  src={partnersImg.url}
-                  alt="LM, Alfacar, Quero Motos, Rio 2 Veículos, Luma Car, Fly Garage"
-                  loading="lazy"
-                  className="mx-auto max-h-24 w-auto object-contain opacity-90 transition-opacity hover:opacity-100"
-                />
+              <p
+                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                  jornadaInView ? "reveal-visible" : ""
+                }`}
+              >
+                Um fluxo contínuo e sincronizado para garantir velocidade na chegada do comprador e eficiência no salão de vendas.
+              </p>
+            </div>
+
+            {/* Trilha Progressiva de 4 Etapas */}
+            <div className="relative mt-16 sm:mt-20">
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 relative">
+                {commercialJourneySteps.map(
+                  ({ step, title, description, icon: StepIcon, tag }, idx) => {
+                    const delayClass = `stagger-delay-${idx + 1}`;
+                    return (
+                      <div
+                        key={title}
+                        className={`card-editorial group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#121214] p-7 transition-all duration-300 hover:border-primary/40 reveal-init ${delayClass} ${
+                          jornadaInView ? "reveal-visible" : ""
+                        }`}
+                      >
+                        <div>
+                          <div className="flex items-center justify-between">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-sm">
+                              {step}
+                            </span>
+                            <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-mono text-muted-foreground">
+                              {tag}
+                            </span>
+                          </div>
+
+                          <div className="mt-5 flex items-center gap-2.5">
+                            <StepIcon className="h-4 w-4 text-primary shrink-0" />
+                            <h3 className="font-display font-semibold text-base sm:text-lg text-white tracking-tight">
+                              {title}
+                            </h3>
+                          </div>
+
+                          <p className="mt-3 font-sans text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                            {description}
+                          </p>
+                        </div>
+
+                        <div className="mt-6 border-t border-white/8 pt-3 text-[11px] font-mono text-white/50">
+                          Etapa {step} de 04
+                        </div>
+                      </div>
+                    );
+                  }
+                )}
               </div>
             </div>
           </Container>
         </section>
 
-        {/* 10. CTA FINAL DE DECISÃO */}
-        <section className="relative overflow-hidden border-t border-white/10 bg-[#080808] py-20 sm:py-24 text-center">
+        {/* ============================================================== */}
+        {/* SEÇÃO 7 — AUTORIDADE NC AGÊNCIA                              */}
+        {/* ============================================================== */}
+        <section
+          ref={autoridadeRef}
+          className="border-t border-white/8 bg-[#0b0b0d] py-24 sm:py-32"
+          id="autoridade"
+        >
+          <Container>
+            <div className="grid items-center gap-12 lg:grid-cols-12">
+              {/* Fotografia Compacta de Victoria Maia */}
+              <div className="flex justify-center lg:col-span-4">
+                <div
+                  className={`relative w-full max-w-xs reveal-init stagger-delay-1 ${
+                    autoridadeInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#141418] p-2 shadow-2xl">
+                    <img
+                      src={victoriaAbout}
+                      alt="Victoria Maia — Fundadora da NC Agência e criadora do NC Performance Suite"
+                      loading="lazy"
+                      width={500}
+                      height={650}
+                      className="w-full rounded-xl object-cover grayscale contrast-105 transition-all duration-500 hover:grayscale-0"
+                    />
+                    <div className="mt-3 rounded-xl border border-white/10 bg-[#0e0e10] p-3 text-center">
+                      <div className="font-display font-semibold text-sm text-white">
+                        {CRM_CONFIG.founderName}
+                      </div>
+                      <div className="text-[11px] text-primary font-mono mt-0.5">
+                        {CRM_CONFIG.founderRole}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Narrativa Editorial de Conhecimento Prático */}
+              <div className="lg:col-span-8">
+                <div className={`reveal-init stagger-delay-1 ${autoridadeInView ? "reveal-visible" : ""}`}>
+                  <SectionBadge>Origem e Conhecimento do Setor</SectionBadge>
+                </div>
+
+                <h2
+                  className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-white tracking-tight reveal-init stagger-delay-2 ${
+                    autoridadeInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  Criado por quem conhece a rotina de{" "}
+                  <span className="text-primary">uma loja de veículos.</span>
+                </h2>
+
+                <div
+                  className={`mt-6 space-y-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                    autoridadeInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  <p>
+                    O <strong>{CRM_CONFIG.productName}</strong> foi desenvolvido pela equipe da <strong>NC Agência</strong>, liderada por Victoria Maia, a partir de mais de 10 anos de experiência prática e convivência contínua com a operação comercial de mais de 100 lojas de veículos e concessionárias.
+                  </p>
+                  <p>
+                    Diferente de softwares genéricos de mercado, a plataforma nasceu para resolver as dores reais do salão de vendas: o cliente que desiste quando a resposta demora, a troca que precisa ser avaliada e a necessidade de colocar o comprador diante do vendedor físico com agilidade.
+                  </p>
+                </div>
+
+                {/* 3 Blocos de Competência */}
+                <div
+                  className={`mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 border-y border-white/10 py-5 text-left reveal-init stagger-delay-4 ${
+                    autoridadeInView ? "reveal-visible" : ""
+                  }`}
+                >
+                  <div>
+                    <span className="font-display font-bold text-2xl text-white block">
+                      {CRM_CONFIG.storesServed}
+                    </span>
+                    <span className="font-sans text-xs text-muted-foreground mt-0.5 block">
+                      Lojas atendidas no mercado automotivo brasileiro.
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="font-display font-bold text-2xl text-primary block">
+                      {CRM_CONFIG.experienceYears}
+                    </span>
+                    <span className="font-sans text-xs text-muted-foreground mt-0.5 block">
+                      De vivência nas particularidades de pátios e revendas.
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="font-display font-bold text-2xl text-white block">
+                      Foco Auto
+                    </span>
+                    <span className="font-sans text-xs text-muted-foreground mt-0.5 block">
+                      Terminologias e rotinas pensadas para quem vende automóveis.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* ============================================================== */}
+        {/* SEÇÃO 8 — OFERTA E TESTE GRATUITO (REFORÇADA)                */}
+        {/* ============================================================== */}
+        <section
+          ref={ofertaRef}
+          className="relative overflow-hidden border-t border-white/10 bg-[#080808] py-24 sm:py-32 text-center"
+          id="teste"
+        >
           <div className="absolute inset-0 bg-radial-vignette" />
           <Container className="relative z-10 max-w-3xl">
-            <SectionBadge>Decisão Comercial</SectionBadge>
-            <h2 className="mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white">
-              Pronto para colocar sua loja na frente da concorrência?
+            <div className={`reveal-init stagger-delay-1 ${ofertaInView ? "reveal-visible" : ""}`}>
+              <SectionBadge>Oportunidade de Avaliação</SectionBadge>
+            </div>
+
+            <h2
+              className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
+                ofertaInView ? "reveal-visible" : ""
+              }`}
+            >
+              Experimente uma nova forma de{" "}
+              <span className="text-primary">atender e vender.</span>
             </h2>
-            <p className="mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground">
-              Pare de depender da sorte e de leads desqualificados. Dê o primeiro passo para
-              estruturar seu processo comercial automotivo com quem realmente entende do setor.
+
+            {/* Destaque 7 DIAS GRÁTIS */}
+            <div
+              className={`mt-6 inline-block rounded-2xl border border-primary/40 bg-primary/10 px-8 py-3.5 font-display font-bold text-3xl sm:text-4xl md:text-5xl text-primary tracking-tight shadow-glow reveal-init stagger-delay-3 ${
+                ofertaInView ? "reveal-visible" : ""
+              }`}
+            >
+              7 DIAS GRÁTIS
+            </div>
+
+            <p
+              className={`mt-6 font-sans text-base sm:text-lg leading-relaxed text-neutral-300 reveal-init stagger-delay-4 ${
+                ofertaInView ? "reveal-visible" : ""
+              }`}
+            >
+              Conheça o NC Performance Suite e descubra como a inteligência artificial pode ajudar sua loja a organizar oportunidades e acelerar o primeiro atendimento.
             </p>
-            <div className="mt-8 flex justify-center">
-              <DiagnosticButton
+
+            <div
+              className={`mt-8 flex flex-col items-center justify-center gap-3 reveal-init stagger-delay-4 ${
+                ofertaInView ? "reveal-visible" : ""
+              }`}
+            >
+              <TrialCtaButton
                 position="final"
-                label="Quero acelerar minha loja agora"
-                className="w-full sm:w-auto text-base"
+                label="COMEÇAR MEU TESTE GRATUITO"
+                className="h-14 px-8 text-sm font-semibold tracking-wider"
               />
+              <span className="text-xs text-muted-foreground font-sans">
+                A ativação do período gratuito é realizada pela nossa central de vendas.
+              </span>
+            </div>
+          </Container>
+        </section>
+
+        {/* ============================================================== */}
+        {/* SEÇÃO FAQ — DÚVIDAS FREQUENTES                               */}
+        {/* ============================================================== */}
+        <section
+          ref={faqRef}
+          className="border-t border-white/8 bg-[#0a0a0c] py-24 sm:py-28"
+          id="duvidas"
+        >
+          <Container className="max-w-4xl">
+            <div className="text-center">
+              <div className={`reveal-init stagger-delay-1 ${faqInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Perguntas Frequentes</SectionBadge>
+              </div>
+
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl tracking-tight text-white reveal-init stagger-delay-2 ${
+                  faqInView ? "reveal-visible" : ""
+                }`}
+              >
+                Dúvidas comuns sobre o{" "}
+                <span className="text-primary">{CRM_CONFIG.productName}</span>
+              </h2>
+
+              <p
+                className={`mt-3 font-sans text-sm sm:text-base text-muted-foreground reveal-init stagger-delay-3 ${
+                  faqInView ? "reveal-visible" : ""
+                }`}
+              >
+                Respostas diretas sobre o funcionamento da ferramenta e o período de testes.
+              </p>
+            </div>
+
+            <div
+              className={`mt-12 rounded-2xl border border-white/10 bg-[#121216] p-6 sm:p-8 reveal-init stagger-delay-3 ${
+                faqInView ? "reveal-visible" : ""
+              }`}
+            >
+              <Accordion type="single" collapsible className="w-full space-y-3">
+                {faqItems.map((item, idx) => (
+                  <AccordionItem
+                    key={idx}
+                    value={`faq-${idx}`}
+                    className="border border-white/8 rounded-xl bg-[#16161a] px-4 data-[state=open]:border-primary/40 transition-colors"
+                  >
+                    <AccordionTrigger className="text-left font-display font-semibold text-sm sm:text-base text-white hover:text-primary transition-colors py-4">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="font-sans text-xs sm:text-sm text-neutral-300 leading-relaxed pb-4 pt-1">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
           </Container>
         </section>
       </main>
 
-      {/* RODAPÉ EXECUTIVO */}
-      <footer className="border-t border-white/8 bg-[#050505] py-12 text-sm text-[#A3A3A3]">
+      {/* ============================================================== */}
+      {/* FOOTER EXECUTIVO                                              */}
+      {/* ============================================================== */}
+      <footer className="border-t border-white/8 bg-[#050505] py-14 text-sm text-[#A3A3A3]">
         <Container className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
-          <Logo className="h-9" />
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <Logo className="h-8" />
+            <span className="text-xs font-mono text-white/50">
+              {CRM_CONFIG.productName} • {CRM_CONFIG.signature}
+            </span>
+          </div>
 
           <nav className="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-wider text-muted-foreground">
             <button
@@ -1649,23 +1311,29 @@ function Index() {
             </button>
           </nav>
 
-          <PhoneDiagnosticButton
-            position="footer"
-            showCountryCode={true}
-            className="text-white font-semibold hover:text-primary transition-colors text-sm"
-          />
+          <a
+            href={getOfficialWhatsAppTrialUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white font-semibold hover:text-primary transition-colors text-xs"
+          >
+            <Phone className="h-4 w-4 text-primary" />
+            <span>Central WhatsApp: {CRM_CONFIG.formattedWhatsAppNumber}</span>
+          </a>
         </Container>
 
         <Container className="mt-8 border-t border-white/5 pt-6 text-center text-xs text-muted-foreground/80">
-          <p>© {new Date().getFullYear()} NC - Inteligência Comercial Automotiva. Todos os direitos reservados.</p>
+          <p>
+            © {new Date().getFullYear()} {CRM_CONFIG.productName} by NC Agência. Todos os direitos reservados.
+          </p>
           <p className="mt-1 text-[11px] text-muted-foreground/60">
-            Atendimento estratégico direcionado exclusivamente a revendas de veículos e concessionárias no Brasil.
+            {CRM_CONFIG.tagline}
           </p>
         </Container>
       </footer>
 
-      {/* MODAIS LEGAIS EXECUTIVOS (Termos de Uso, Política de Privacidade e LGPD) */}
+      {/* Modais Legais (Termos, Privacidade e LGPD) */}
       <LegalModals activeModal={legalModal} onClose={() => setLegalModal(null)} />
-    </DiagnosticProvider>
+    </TrialProvider>
   );
 }
