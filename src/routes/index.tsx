@@ -1018,7 +1018,9 @@ function Index() {
                       loading="lazy"
                       width={500}
                       height={650}
-                      className="w-full rounded-xl object-cover grayscale contrast-105 transition-all duration-500 hover:grayscale-0"
+                      className={`w-full rounded-xl object-cover transition-all duration-700 ease-out ${
+                        autoridadeInView ? "grayscale-0 contrast-100" : "grayscale contrast-105"
+                      } hover:grayscale-0 hover:scale-[1.02] active:scale-[0.99] cursor-pointer`}
                     />
                     <div className="mt-3 rounded-xl border border-white/10 bg-[#0e0e10] p-3 text-center">
                       <div className="font-display font-semibold text-sm text-white">

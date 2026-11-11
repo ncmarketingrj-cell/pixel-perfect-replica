@@ -159,8 +159,8 @@ export function InteractivePlatformTabs() {
                   alt="Interface do Dashboard Gerencial do NC CRM (dados ilustrativos)"
                   className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
                   loading="lazy"
-                  width={1024}
-                  height={448}
+                  width={1920}
+                  height={840}
                 />
               </div>
             </div>
@@ -208,8 +208,8 @@ export function InteractivePlatformTabs() {
                   alt="Interface de Conversas e Atendimento IA do NC CRM (dados ilustrativos)"
                   className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
                   loading="lazy"
-                  width={1024}
-                  height={449}
+                  width={1920}
+                  height={842}
                 />
               </div>
             </div>
