@@ -309,64 +309,62 @@ function Index() {
       {/* 1. NAVBAR FIXA EXECUTIVA */}
       <header className="sticky top-0 z-50 w-full border-b border-white/8 bg-[#080808]/92 backdrop-blur-lg">
         <Container className="flex h-20 items-center justify-between">
-          {/* Logo e Assinatura de Produto */}
-          <div className="flex items-center gap-4 sm:gap-6">
-            <a href="#" aria-label={`${CRM_CONFIG.productName} ${CRM_CONFIG.signature}`}>
-              <Logo className="h-8 sm:h-9" />
-            </a>
-            <div className="hidden 2xl:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/70">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              <span>{CRM_CONFIG.category}</span>
-            </div>
-          </div>
+          {/* Logo do Produto */}
+          <a
+            href="#"
+            aria-label={`${CRM_CONFIG.productName} ${CRM_CONFIG.signature}`}
+            className="shrink-0"
+          >
+            <Logo className="h-8 sm:h-9" />
+          </a>
 
           {/* Links de Navegação Desktop por Âncora */}
-          <nav className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-7 text-[13px] tracking-[-0.01em] font-medium text-neutral-300">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-[13px] tracking-[-0.01em] font-medium text-neutral-300">
             <a
               href="#plataforma"
-              className="hover:text-white transition-colors duration-150 py-1"
+              className="hover:text-white transition-colors duration-150 py-1 whitespace-nowrap"
             >
               Plataforma
             </a>
             <a
               href="#inteligencia-artificial"
-              className="hover:text-white transition-colors duration-150 py-1"
+              className="hover:text-white transition-colors duration-150 py-1 whitespace-nowrap"
             >
               Inteligência Artificial
             </a>
             <a
               href="#funcionalidades"
-              className="hover:text-white transition-colors duration-150 py-1"
+              className="hover:text-white transition-colors duration-150 py-1 whitespace-nowrap"
             >
               Funcionalidades
             </a>
             <a
               href="#como-funciona"
-              className="hover:text-white transition-colors duration-150 py-1"
+              className="hover:text-white transition-colors duration-150 py-1 whitespace-nowrap"
             >
               Como funciona
             </a>
             <a
               href="#duvidas"
-              className="hover:text-white transition-colors duration-150 py-1"
+              className="hover:text-white transition-colors duration-150 py-1 whitespace-nowrap"
             >
               Dúvidas
             </a>
           </nav>
 
           {/* CTA Desktop & Toggle Mobile */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             <TrialCtaButton
               position="header"
               label="Testar grátis por 7 dias"
-              className="hidden sm:inline-flex !h-10 !px-5 text-xs font-semibold normal-case tracking-normal whitespace-nowrap shrink-0"
+              className="hidden sm:inline-flex !h-10 !px-5 text-xs font-semibold normal-case tracking-normal whitespace-nowrap"
             />
 
             {/* Botão Menu Mobile */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex md:hidden items-center justify-center rounded-lg border border-white/10 bg-white/5 p-2 text-white hover:bg-white/10 focus:outline-none"
+              className="inline-flex lg:hidden items-center justify-center rounded-lg border border-white/10 bg-white/5 p-2 text-white hover:bg-white/10 focus:outline-none"
               aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -376,7 +374,7 @@ function Index() {
 
         {/* Menu Mobile Retrátil */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-b border-white/10 bg-[#0e0e10] px-5 py-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="lg:hidden border-b border-white/10 bg-[#0e0e10] px-5 py-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
             <nav className="flex flex-col space-y-3 text-sm font-medium text-white/80">
               <a
                 href="#plataforma"
