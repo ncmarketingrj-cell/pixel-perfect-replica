@@ -20,8 +20,46 @@ export function HeroVideoPlayer({ className = "" }: HeroVideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const wasPlayingBeforeLeaveRef = useRef(true);
 
-  // Monitora prefers-reduced-motion e evento de pausa mútua
+  // Monitora visibilidade na viewport (IntersectionObserver) para economizar recursos
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = videoRef.current;
+          if (!video) return;
+
+          if (!entry.isIntersecting) {
+            // Ao sair da tela: memoriza o estado anterior e pausa
+            wasPlayingBeforeLeaveRef.current = !video.paused;
+            if (!video.paused) {
+              video.pause();
+            }
+          } else {
+            // Ao retornar à tela: se estava reproduzindo antes de sair, retoma do ponto exato
+            if (wasPlayingBeforeLeaveRef.current && video.paused) {
+              video
+                .play()
+                .then(() => setIsPlaying(true))
+                .catch(() => {});
+            }
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(container);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Monitora prefers-reduced-motion e evento de pausa externa (quando o segundo vídeo é iniciado)
   useEffect(() => {
     const prefersReducedMotion =
       typeof window !== "undefined" &&
@@ -30,12 +68,14 @@ export function HeroVideoPlayer({ className = "" }: HeroVideoPlayerProps) {
     if (prefersReducedMotion && videoRef.current) {
       videoRef.current.pause();
       setIsPlaying(false);
+      wasPlayingBeforeLeaveRef.current = false;
     }
 
     const handleExternalPause = () => {
       if (videoRef.current && !videoRef.current.paused) {
         videoRef.current.pause();
         setIsPlaying(false);
+        wasPlayingBeforeLeaveRef.current = false;
       }
     };
 
@@ -45,6 +85,23 @@ export function HeroVideoPlayer({ className = "" }: HeroVideoPlayerProps) {
     };
   }, []);
 
+  // Tentativa de autoplay inicial com tratamento de restrição do navegador
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch((err) => {
+        if (err.name !== "AbortError") {
+          setIsPlaying(false);
+        }
+      });
+  }, []);
+
   const togglePlayPause = () => {
     const video = videoRef.current;
     if (!video) return;
@@ -52,11 +109,15 @@ export function HeroVideoPlayer({ className = "" }: HeroVideoPlayerProps) {
     if (video.paused) {
       video
         .play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true);
+          wasPlayingBeforeLeaveRef.current = true;
+        })
         .catch(() => {});
     } else {
       video.pause();
       setIsPlaying(false);
+      wasPlayingBeforeLeaveRef.current = false;
     }
   };
 
@@ -121,10 +182,10 @@ export function HeroVideoPlayer({ className = "" }: HeroVideoPlayerProps) {
           onPause={() => setIsPlaying(false)}
         />
 
-        {/* Indicador central sutil apenas quando pausado */}
+        {/* Indicador sutil exibido apenas se pausado (não exibe controles durante reprodução) */}
         {!isPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/35 backdrop-blur-[1px] transition-opacity duration-200">
-            <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-white/25 bg-primary text-white shadow-2xl transition-transform hover:scale-110">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/25 transition-opacity duration-200 pointer-events-none">
+            <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-white/25 bg-primary/95 text-white shadow-2xl transition-transform hover:scale-110">
               <Play className="h-7 w-7 sm:h-9 sm:w-9 translate-x-0.5 fill-white text-white" />
             </div>
           </div>

@@ -100,18 +100,18 @@ export function InteractivePlatformTabs() {
                 </div>
                 <div className="flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono text-primary font-medium">
                   <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  <span>Captura Real do Sistema</span>
+                  <span>Interface do NC CRM · Dados ilustrativos</span>
                 </div>
               </div>
 
               <div className="p-2 sm:p-3 bg-[#0a0a0c]">
                 <img
                   src={kanbanRealImg}
-                  alt="Tela Real do Funil Kanban do NC CRM"
+                  alt="Interface do Funil Kanban do NC CRM (dados ilustrativos)"
                   className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
                   loading="lazy"
-                  width={1024}
-                  height={451}
+                  width={1920}
+                  height={846}
                 />
               </div>
             </div>
@@ -149,14 +149,14 @@ export function InteractivePlatformTabs() {
                 </div>
                 <div className="flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono text-primary font-medium">
                   <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  <span>Captura Real do Sistema</span>
+                  <span>Interface do NC CRM · Dados ilustrativos</span>
                 </div>
               </div>
 
               <div className="p-2 sm:p-3 bg-[#0a0a0c]">
                 <img
                   src={dashboardRealImg}
-                  alt="Tela Real do Dashboard Gerencial do NC CRM"
+                  alt="Interface do Dashboard Gerencial do NC CRM (dados ilustrativos)"
                   className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
                   loading="lazy"
                   width={1024}
@@ -198,14 +198,14 @@ export function InteractivePlatformTabs() {
                 </div>
                 <div className="flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono text-primary font-medium">
                   <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  <span>Captura Real do Sistema</span>
+                  <span>Interface do NC CRM · Dados ilustrativos</span>
                 </div>
               </div>
 
               <div className="p-2 sm:p-3 bg-[#0a0a0c]">
                 <img
                   src={conversasRealImg}
-                  alt="Tela Real de Conversas e Atendimento IA do NC CRM"
+                  alt="Interface de Conversas e Atendimento IA do NC CRM (dados ilustrativos)"
                   className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
                   loading="lazy"
                   width={1024}

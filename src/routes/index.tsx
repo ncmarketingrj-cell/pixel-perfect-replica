@@ -453,8 +453,8 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-[#080808]/40" />
 
           <Container className="relative z-10 grid items-center gap-10 lg:grid-cols-12 lg:gap-10">
-            {/* Bloco de Mensagem Principal (Esquerda - 6 Colunas) */}
-            <div className="lg:col-span-6 xl:col-span-6">
+            {/* Bloco de Mensagem Principal (Esquerda - 5 Colunas no Desktop para dar mais área ao Vídeo) */}
+            <div className="lg:col-span-6 xl:col-span-5">
               {/* Eyebrow de Posicionamento */}
               <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -530,8 +530,8 @@ function Index() {
               </div>
             </div>
 
-            {/* Apresentação do Vídeo Real no Hero (Direita - 6 Colunas) */}
-            <div className="hero-seq-photo flex justify-center lg:col-span-6 lg:justify-end w-full">
+            {/* Apresentação do Vídeo Real no Hero (Direita - 7 Colunas no Desktop: +10% a 12% de área útil) */}
+            <div className="hero-seq-photo flex justify-center lg:col-span-6 xl:col-span-7 lg:justify-end w-full">
               <HeroVideoPlayer />
             </div>
           </Container>
@@ -681,7 +681,7 @@ function Index() {
                   plataformaInView ? "reveal-visible" : ""
                 }`}
               >
-                Navegue pelas capturas reais do NC CRM e descubra como o software organiza o funil de vendas, a gestão da loja e o atendimento inicial com inteligência artificial.
+                Navegue pela interface do NC CRM e descubra como o software organiza o funil de vendas, a gestão da loja e o atendimento inicial com inteligência artificial (telas demonstrativas com dados ilustrativos).
               </p>
             </div>
 
@@ -729,6 +729,16 @@ function Index() {
               >
                 Enquanto seu vendedor se concentra nas negociações, o NC CRM inicia a conversa pelo WhatsApp, identifica o veículo de interesse e reúne as informações necessárias para a continuidade do atendimento.
               </p>
+
+              {/* Destaque do Benefício Principal */}
+              <div
+                className={`mt-5 inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs sm:text-sm font-semibold text-white reveal-init stagger-delay-3 ${
+                  iaInView ? "reveal-visible" : ""
+                }`}
+              >
+                <Sparkles className="h-4 w-4 text-primary shrink-0" />
+                <span>A IA faz o primeiro atendimento. Seu vendedor entra na conversa preparado para negociar.</span>
+              </div>
             </div>
 
             {/* Grid Amplo: Player com 8 Colunas de Destaque + 5 Etapas em 4 Colunas */}
@@ -1211,7 +1221,7 @@ function Index() {
           <div className="flex flex-col items-center md:items-start gap-2">
             <Logo className="h-8" />
             <span className="text-xs font-mono text-white/50">
-              {CRM_CONFIG.productName} • {CRM_CONFIG.signature}
+              {CRM_CONFIG.productName} • Ecossistema NC Performance Suite
             </span>
           </div>
 
@@ -1252,7 +1262,7 @@ function Index() {
 
         <Container className="mt-8 border-t border-white/5 pt-6 text-center text-xs text-muted-foreground/80">
           <p>
-            © {new Date().getFullYear()} {CRM_CONFIG.productName} by NC Agência. Todos os direitos reservados.
+            © {new Date().getFullYear()} {CRM_CONFIG.productName} • Integrado ao ecossistema NC Performance Suite by NC Agência. Todos os direitos reservados.
           </p>
           <p className="mt-1 text-[11px] text-muted-foreground/60">
             {CRM_CONFIG.tagline}
