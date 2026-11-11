@@ -452,84 +452,87 @@ function Index() {
           <div className="absolute inset-0 bg-radial-vignette" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-[#080808]/40" />
 
-          <Container size="hero" className="relative z-10 text-center">
-            {/* Eyebrow de Posicionamento */}
-            <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-mono tracking-wide text-primary">
-              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
+          <Container className="relative z-10 grid items-center gap-10 lg:grid-cols-12 lg:gap-10">
+            {/* Bloco de Mensagem Principal (Esquerda - 6 Colunas) */}
+            <div className="lg:col-span-6 xl:col-span-6">
+              {/* Eyebrow de Posicionamento */}
+              <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
+              </div>
+
+              {/* Headline */}
+              <div className="mt-6">
+                <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.3rem,4.6vw,4rem)] leading-[1.08] tracking-[-0.03em] text-white">
+                  Seu próximo cliente não pode ficar esperando.{" "}
+                  <span className="text-primary block sm:inline mt-1 sm:mt-0">
+                    Sua IA já pode começar o atendimento.
+                  </span>
+                </h1>
+              </div>
+
+              {/* Subheadline */}
+              <p className="hero-seq-sub mt-6 max-w-xl font-sans text-base sm:text-lg leading-[1.6] text-muted-foreground">
+                Conheça o CRM automotivo com inteligência artificial que atende seus primeiros contatos, identifica oportunidades e organiza as negociações para sua equipe vender com mais agilidade.
+              </p>
+
+              {/* CTAs do Hero */}
+              <div className="hero-seq-cta mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
+                <TrialCtaButton
+                  position="hero"
+                  label="TESTAR GRÁTIS POR 7 DIAS"
+                  className="h-13 sm:h-14 px-8 text-xs sm:text-sm font-semibold tracking-wider"
+                />
+
+                <a
+                  href="#plataforma"
+                  className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-6 font-sans text-xs sm:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25"
+                >
+                  <span>CONHECER A PLATAFORMA</span>
+                  <ChevronRight className="h-4 w-4 text-primary" />
+                </a>
+              </div>
+
+              {/* Microcopy e Garantia */}
+              <p className="mt-3.5 font-sans text-xs text-white/50 flex items-center gap-2">
+                <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
+                <span>Solicite seus 7 dias gratuitos diretamente à nossa central de vendas.</span>
+              </p>
+
+              {/* Indicadores Institucionais Verificados */}
+              <div className="hero-seq-metrics mt-8 grid grid-cols-3 gap-3 max-w-lg border-t border-white/8 pt-6">
+                <div>
+                  <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
+                    {CRM_CONFIG.storesServed}
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
+                    Lojas Atendidas
+                  </div>
+                </div>
+
+                <div>
+                  <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
+                    {CRM_CONFIG.experienceYears}
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
+                    No Setor Auto
+                  </div>
+                </div>
+
+                <div>
+                  <div className="font-display font-semibold text-xl sm:text-2xl text-primary tracking-tight">
+                    7 Dias
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
+                    Acesso Gratuito
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Headline Centralizada de Máximo Impacto */}
-            <div className="mt-6 max-w-5xl mx-auto">
-              <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[1.08] tracking-[-0.03em] text-white">
-                Seu próximo cliente não pode ficar esperando.{" "}
-                <span className="text-primary block sm:inline mt-1 sm:mt-0">
-                  Sua IA já pode começar o atendimento.
-                </span>
-              </h1>
-            </div>
-
-            {/* Subheadline Otimizada */}
-            <p className="hero-seq-sub mt-5 max-w-3xl mx-auto font-sans text-base sm:text-lg md:text-xl leading-[1.6] text-muted-foreground">
-              Conheça o CRM automotivo com inteligência artificial que atende seus primeiros contatos, identifica oportunidades e organiza as negociações para sua equipe vender com mais agilidade.
-            </p>
-
-            {/* CTAs do Hero */}
-            <div className="hero-seq-cta mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <TrialCtaButton
-                position="hero"
-                label="TESTAR GRÁTIS POR 7 DIAS"
-                className="h-14 px-9 text-xs sm:text-sm font-semibold tracking-wider shadow-[0_10px_35px_rgba(239,64,69,0.35)]"
-              />
-
-              <a
-                href="#plataforma"
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-7 font-sans text-xs sm:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25"
-              >
-                <span>CONHECER A PLATAFORMA</span>
-                <ChevronRight className="h-4 w-4 text-primary" />
-              </a>
-            </div>
-
-            {/* Microcopy e Garantia */}
-            <p className="mt-3.5 font-sans text-xs text-white/50 flex items-center justify-center gap-2">
-              <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
-              <span>Solicite seus 7 dias gratuitos diretamente à nossa central de vendas.</span>
-            </p>
-
-            {/* VÍDEO DO HERO COM DESTAQUE TOTAL (AMPLO E ADAPTÁVEL) */}
-            <div className="hero-seq-photo mt-12 sm:mt-16 w-full max-w-[1400px] mx-auto">
+            {/* Apresentação do Vídeo Real no Hero (Direita - 6 Colunas) */}
+            <div className="hero-seq-photo flex justify-center lg:col-span-6 lg:justify-end w-full">
               <HeroVideoPlayer />
-            </div>
-
-            {/* Indicadores Institucionais Abaixo do Vídeo */}
-            <div className="hero-seq-metrics mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto border-t border-white/8 pt-8">
-              <div className="rounded-xl border border-white/5 bg-[#121214]/60 p-4 backdrop-blur-sm">
-                <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">
-                  {CRM_CONFIG.storesServed}
-                </div>
-                <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-1">
-                  Lojas Atendidas
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-white/5 bg-[#121214]/60 p-4 backdrop-blur-sm">
-                <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">
-                  {CRM_CONFIG.experienceYears}
-                </div>
-                <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-1">
-                  No Setor Auto
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-white/5 bg-[#121214]/60 p-4 backdrop-blur-sm">
-                <div className="font-display font-semibold text-2xl sm:text-3xl text-primary tracking-tight">
-                  7 Dias
-                </div>
-                <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-1">
-                  Acesso Gratuito
-                </div>
-              </div>
             </div>
           </Container>
         </section>
