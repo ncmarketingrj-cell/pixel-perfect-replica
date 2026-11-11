@@ -53,30 +53,30 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "NC Performance Suite — CRM Automotivo com Inteligência Artificial | by NC Agência",
+        title: "NC CRM — CRM Automotivo com Inteligência Artificial | by NC Agência",
       },
       {
         name: "description",
         content:
-          "Pare de perder oportunidades por demora no atendimento. Conheça o CRM automotivo com inteligência artificial que ajuda sua loja a responder mais rápido, qualificar compradores e organizar cada negociação.",
+          "Pare de perder oportunidades por demora no atendimento. Conheça o NC CRM: software automotivo com inteligência artificial que ajuda sua loja a responder mais rápido, qualificar compradores e organizar cada negociação.",
       },
       {
         name: "keywords",
         content:
-          "CRM automotivo, inteligência artificial para lojas de carros, software para revenda de veículos, CRM para concessionárias, gestão de leads automotivos, Kanban automotivo, primeiro atendimento rápido, NC Performance Suite, NC Agência",
+          "CRM automotivo, inteligência artificial para lojas de carros, software para revenda de veículos, CRM para concessionárias, gestão de leads automotivos, Kanban automotivo, primeiro atendimento rápido, NC CRM, NC Agência",
       },
       {
         property: "og:title",
-        content: "NC Performance Suite — CRM Automotivo com Inteligência Artificial",
+        content: "NC CRM — CRM Automotivo com Inteligência Artificial",
       },
       {
         property: "og:description",
         content:
-          "Pare de perder oportunidades por demora no atendimento. Conheça o CRM automotivo com inteligência artificial feito especialmente para lojas de veículos.",
+          "Pare de perder oportunidades por demora no atendimento. Conheça o NC CRM: inteligência artificial feita especialmente para lojas de veículos.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:site_name", content: "NC Performance Suite by NC Agência" },
+      { property: "og:site_name", content: "NC CRM by NC Agência" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index, follow" },
     ],
@@ -88,7 +88,7 @@ function Logo({ className = "h-9" }: { className?: string }) {
   return (
     <img
       src={ncLogo}
-      alt="NC Performance Suite by NC Agência"
+      alt="NC CRM by NC Agência"
       className={`${className} object-contain transition-transform duration-200 hover:scale-105`}
       width={140}
       height={54}
@@ -100,12 +100,23 @@ function Logo({ className = "h-9" }: { className?: string }) {
 function Container({
   children,
   className = "",
+  size = "wide",
 }: {
   children: React.ReactNode;
   className?: string;
+  size?: "narrow" | "default" | "wide" | "hero";
 }) {
+  const sizeClasses = {
+    narrow: "max-w-4xl",
+    default: "max-w-6xl",
+    wide: "max-w-[1536px]",
+    hero: "max-w-[1600px]",
+  };
+
   return (
-    <div className={`mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8 ${className}`}>
+    <div
+      className={`mx-auto w-full ${sizeClasses[size]} px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 ${className}`}
+    >
       {children}
     </div>
   );
@@ -258,7 +269,7 @@ const commercialJourneySteps = [
 
 const faqItems = [
   {
-    question: "O NC Performance Suite é exclusivo para o setor automotivo?",
+    question: "O NC CRM é exclusivo para o setor automotivo?",
     answer:
       "Sim. O software foi concebido e configurado especificamente para a realidade de lojas de veículos, revendas de seminovos, multimarcas e concessionárias. Seus fluxos de triagem, etapas de funil e termos da IA consideram veículos na troca, intenção de entrada e rotina de salão de vendas.",
   },
@@ -275,7 +286,7 @@ const faqItems = [
   {
     question: "Posso organizar minhas oportunidades em Kanban?",
     answer:
-      "Sim. O NC Performance Suite oferece um painel visual em formato Kanban, permitindo visualizar com clareza em qual etapa cada comprador se encontra: triagem inicial, qualificação, visita agendada na loja ou proposta em andamento.",
+      "Sim. O NC CRM oferece um painel visual em formato Kanban, permitindo visualizar com clareza em qual etapa cada comprador se encontra: triagem inicial, qualificação, visita agendada na loja ou proposta em andamento.",
   },
   {
     question: "O que posso testar durante os 7 dias?",
@@ -441,87 +452,84 @@ function Index() {
           <div className="absolute inset-0 bg-radial-vignette" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-[#080808]/40" />
 
-          <Container className="relative z-10 grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
-            {/* Bloco de Mensagem Principal (Esquerda - 6 Colunas) */}
-            <div className="lg:col-span-6 xl:col-span-6">
-              {/* Eyebrow de Posicionamento */}
-              <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
-              </div>
-
-              {/* Headline Otimizada da Fase 3 */}
-              <div className="mt-6">
-                <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.3rem,4.6vw,4rem)] leading-[1.08] tracking-[-0.03em] text-white">
-                  Seu próximo cliente não pode ficar esperando.{" "}
-                  <span className="text-primary block sm:inline mt-1 sm:mt-0">
-                    Sua IA já pode começar o atendimento.
-                  </span>
-                </h1>
-              </div>
-
-              {/* Subheadline Otimizada da Fase 3 */}
-              <p className="hero-seq-sub mt-6 max-w-xl font-sans text-base sm:text-lg leading-[1.6] text-muted-foreground">
-                Conheça o CRM automotivo com inteligência artificial que atende seus primeiros contatos, identifica oportunidades e organiza as negociações para sua equipe vender com mais agilidade.
-              </p>
-
-              {/* CTAs do Hero */}
-              <div className="hero-seq-cta mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
-                <TrialCtaButton
-                  position="hero"
-                  label="TESTAR GRÁTIS POR 7 DIAS"
-                  className="h-13 sm:h-14 px-8 text-xs sm:text-sm font-semibold tracking-wider"
-                />
-
-                <a
-                  href="#plataforma"
-                  className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-6 font-sans text-xs sm:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25"
-                >
-                  <span>CONHECER A PLATAFORMA</span>
-                  <ChevronRight className="h-4 w-4 text-primary" />
-                </a>
-              </div>
-
-              {/* Microcopy e Garantia */}
-              <p className="mt-3.5 font-sans text-xs text-white/50 flex items-center gap-2">
-                <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
-                <span>Solicite seus 7 dias gratuitos diretamente à nossa central de vendas.</span>
-              </p>
-
-              {/* Indicadores Institucionais Verificados */}
-              <div className="hero-seq-metrics mt-8 grid grid-cols-3 gap-3 max-w-lg border-t border-white/8 pt-6">
-                <div>
-                  <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
-                    {CRM_CONFIG.storesServed}
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
-                    Lojas Atendidas
-                  </div>
-                </div>
-
-                <div>
-                  <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
-                    {CRM_CONFIG.experienceYears}
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
-                    No Setor Auto
-                  </div>
-                </div>
-
-                <div>
-                  <div className="font-display font-semibold text-xl sm:text-2xl text-primary tracking-tight">
-                    7 Dias
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
-                    Acesso Gratuito
-                  </div>
-                </div>
-              </div>
+          <Container size="hero" className="relative z-10 text-center">
+            {/* Eyebrow de Posicionamento */}
+            <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-mono tracking-wide text-primary">
+              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
             </div>
 
-            {/* Apresentação do Vídeo Real no Hero (Direita - 6 Colunas) */}
-            <div className="hero-seq-photo flex justify-center lg:col-span-6 lg:justify-end">
+            {/* Headline Centralizada de Máximo Impacto */}
+            <div className="mt-6 max-w-5xl mx-auto">
+              <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[1.08] tracking-[-0.03em] text-white">
+                Seu próximo cliente não pode ficar esperando.{" "}
+                <span className="text-primary block sm:inline mt-1 sm:mt-0">
+                  Sua IA já pode começar o atendimento.
+                </span>
+              </h1>
+            </div>
+
+            {/* Subheadline Otimizada */}
+            <p className="hero-seq-sub mt-5 max-w-3xl mx-auto font-sans text-base sm:text-lg md:text-xl leading-[1.6] text-muted-foreground">
+              Conheça o CRM automotivo com inteligência artificial que atende seus primeiros contatos, identifica oportunidades e organiza as negociações para sua equipe vender com mais agilidade.
+            </p>
+
+            {/* CTAs do Hero */}
+            <div className="hero-seq-cta mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <TrialCtaButton
+                position="hero"
+                label="TESTAR GRÁTIS POR 7 DIAS"
+                className="h-14 px-9 text-xs sm:text-sm font-semibold tracking-wider shadow-[0_10px_35px_rgba(239,64,69,0.35)]"
+              />
+
+              <a
+                href="#plataforma"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-7 font-sans text-xs sm:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25"
+              >
+                <span>CONHECER A PLATAFORMA</span>
+                <ChevronRight className="h-4 w-4 text-primary" />
+              </a>
+            </div>
+
+            {/* Microcopy e Garantia */}
+            <p className="mt-3.5 font-sans text-xs text-white/50 flex items-center justify-center gap-2">
+              <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
+              <span>Solicite seus 7 dias gratuitos diretamente à nossa central de vendas.</span>
+            </p>
+
+            {/* VÍDEO DO HERO COM DESTAQUE TOTAL (AMPLO E ADAPTÁVEL) */}
+            <div className="hero-seq-photo mt-12 sm:mt-16 w-full max-w-[1400px] mx-auto">
               <HeroVideoPlayer />
+            </div>
+
+            {/* Indicadores Institucionais Abaixo do Vídeo */}
+            <div className="hero-seq-metrics mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto border-t border-white/8 pt-8">
+              <div className="rounded-xl border border-white/5 bg-[#121214]/60 p-4 backdrop-blur-sm">
+                <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">
+                  {CRM_CONFIG.storesServed}
+                </div>
+                <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-1">
+                  Lojas Atendidas
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-white/5 bg-[#121214]/60 p-4 backdrop-blur-sm">
+                <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight">
+                  {CRM_CONFIG.experienceYears}
+                </div>
+                <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-1">
+                  No Setor Auto
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-white/5 bg-[#121214]/60 p-4 backdrop-blur-sm">
+                <div className="font-display font-semibold text-2xl sm:text-3xl text-primary tracking-tight">
+                  7 Dias
+                </div>
+                <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mt-1">
+                  Acesso Gratuito
+                </div>
+              </div>
             </div>
           </Container>
         </section>
@@ -530,7 +538,7 @@ function Index() {
         {/* TICKER DE CAPACIDADES DA PLATAFORMA (LOOP CONTÍNUO)          */}
         {/* ============================================================== */}
         <div
-          aria-label="Capacidades do NC Performance Suite"
+          aria-label="Capacidades do NC CRM"
           className="relative overflow-hidden border-y border-white/8 bg-[#090909] py-3.5 select-none"
         >
           <div className="animate-marquee flex items-center">
@@ -670,7 +678,7 @@ function Index() {
                   plataformaInView ? "reveal-visible" : ""
                 }`}
               >
-                Navegue pelas capturas reais do NC Performance Suite e descubra como o software organiza o funil de vendas, a gestão da loja e o atendimento inicial com inteligência artificial.
+                Navegue pelas capturas reais do NC CRM e descubra como o software organiza o funil de vendas, a gestão da loja e o atendimento inicial com inteligência artificial.
               </p>
             </div>
 
@@ -686,46 +694,63 @@ function Index() {
         </section>
 
         {/* ============================================================== */}
-        {/* SEÇÃO 4 — INTELIGÊNCIA ARTIFICIAL (COM TELA REAL CONVERSAS)   */}
+        {/* SEÇÃO 4 — INTELIGÊNCIA ARTIFICIAL (SHOWCASE COM VÍDEO AMPLO)   */}
         {/* ============================================================== */}
         <section
           ref={iaRef}
           className="border-t border-white/8 bg-[#080808] py-24 sm:py-32"
           id="inteligencia-artificial"
         >
-          <Container>
-            <div className="grid items-center gap-12 lg:grid-cols-12">
-              {/* Coluna da Esquerda: Textos e Benefícios */}
-              <div className="lg:col-span-6">
-                <div className={`reveal-init stagger-delay-1 ${iaInView ? "reveal-visible" : ""}`}>
-                  <SectionBadge>Inteligência Artificial de Atendimento</SectionBadge>
-                </div>
+          <Container size="wide">
+            {/* Cabeçalho da Seção */}
+            <div className="mx-auto max-w-4xl text-center">
+              <div className={`reveal-init stagger-delay-1 ${iaInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Inteligência Artificial de Atendimento</SectionBadge>
+              </div>
 
-                <h2
-                  className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-white tracking-tight reveal-init stagger-delay-2 ${
-                    iaInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  Veja como a IA conduz o{" "}
-                  <span className="text-primary block mt-1">
-                    primeiro atendimento da sua loja.
-                  </span>
-                </h2>
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-white tracking-tight reveal-init stagger-delay-2 ${
+                  iaInView ? "reveal-visible" : ""
+                }`}
+              >
+                Veja como a IA conduz o{" "}
+                <span className="text-primary block mt-1 sm:inline">
+                  primeiro atendimento no WhatsApp.
+                </span>
+              </h2>
 
-                <p
-                  className={`mt-4 font-sans text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                    iaInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  Enquanto seu vendedor se concentra nas negociações, a inteligência artificial pode iniciar a conversa, identificar o veículo de interesse e reunir informações importantes para a continuidade do atendimento.
-                </p>
+              <p
+                className={`mt-4 font-sans text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
+                  iaInView ? "reveal-visible" : ""
+                }`}
+              >
+                Enquanto seu vendedor se concentra nas negociações, o NC CRM inicia a conversa pelo WhatsApp, identifica o veículo de interesse e reúne as informações necessárias para a continuidade do atendimento.
+              </p>
+            </div>
 
-                {/* 5 Etapas do Primeiro Atendimento com IA */}
+            {/* Grid Amplo: Player com 8 Colunas de Destaque + 5 Etapas em 4 Colunas */}
+            <div className="mt-14 grid items-start gap-8 lg:grid-cols-12 xl:gap-10">
+              {/* Coluna do Vídeo com Máximo Destaque Visual */}
+              <div
+                className={`lg:col-span-7 xl:col-span-8 flex justify-center reveal-init stagger-delay-2 ${
+                  iaInView ? "reveal-visible" : ""
+                }`}
+              >
+                <AiDemoVideoPlayer className="w-full" />
+              </div>
+
+              {/* Coluna das 5 Etapas Estruturadas */}
+              <div className="lg:col-span-5 xl:col-span-4 flex flex-col justify-between space-y-4">
                 <div
-                  className={`mt-8 space-y-2.5 reveal-init stagger-delay-4 ${
+                  className={`space-y-2.5 reveal-init stagger-delay-3 ${
                     iaInView ? "reveal-visible" : ""
                   }`}
                 >
+                  <div className="text-xs font-mono uppercase tracking-wider text-primary font-semibold pb-1 flex items-center gap-2">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    <span>Jornada do Atendimento com IA</span>
+                  </div>
+
                   {[
                     {
                       num: "01",
@@ -734,7 +759,7 @@ function Index() {
                     },
                     {
                       num: "02",
-                      title: "Identificação da forma de pagamento e entrada pretendida",
+                      title: "Identificação da forma de pagamento e entrada",
                       desc: "Consulta antecipada sobre pretensão de financiamento, parcelas ou valor à vista.",
                     },
                     {
@@ -744,12 +769,12 @@ function Index() {
                     },
                     {
                       num: "04",
-                      title: "Registro de todas as informações no histórico do CRM",
+                      title: "Registro de todas as informações no CRM",
                       desc: "Cada resposta e detalhe coletado é estruturado automaticamente na ficha do contato.",
                     },
                     {
                       num: "05",
-                      title: "Transição suave para o vendedor assumir com contexto completo",
+                      title: "Transição suave com contexto completo",
                       desc: "Sua equipe assume a negociação sem precisar repetir perguntas já respondidas.",
                     },
                   ].map((step) => (
@@ -772,25 +797,16 @@ function Index() {
                   ))}
                 </div>
 
-                <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="pt-2">
                   <TrialCtaButton
                     position="features"
                     label="TESTAR GRÁTIS POR 7 DIAS"
-                    className="h-12 px-7 text-xs sm:text-sm font-semibold"
+                    className="w-full !h-12 text-xs sm:text-sm font-semibold"
                   />
-                  <span className="text-xs text-muted-foreground">
+                  <p className="text-[11px] text-muted-foreground text-center mt-2">
                     Sem formulários complexos. Direto pelo WhatsApp.
-                  </span>
+                  </p>
                 </div>
-              </div>
-
-              {/* Coluna da Direita: Player de Demonstração Real da IA */}
-              <div
-                className={`lg:col-span-6 flex justify-center reveal-init stagger-delay-2 ${
-                  iaInView ? "reveal-visible" : ""
-                }`}
-              >
-                <AiDemoVideoPlayer />
               </div>
             </div>
           </Container>
@@ -985,7 +1001,7 @@ function Index() {
                   <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#141418] p-2 shadow-2xl">
                     <img
                       src={victoriaAbout}
-                      alt="Victoria Maia — Fundadora da NC Agência e criadora do NC Performance Suite"
+                      alt="Victoria Maia — Fundadora da NC Agência e criadora do NC CRM"
                       loading="lazy"
                       width={500}
                       height={650}
@@ -1106,7 +1122,7 @@ function Index() {
                 ofertaInView ? "reveal-visible" : ""
               }`}
             >
-              Conheça o NC Performance Suite e descubra como a inteligência artificial pode ajudar sua loja a organizar oportunidades e acelerar o primeiro atendimento.
+              Conheça o NC CRM e descubra como a inteligência artificial pode ajudar sua loja a organizar oportunidades e acelerar o primeiro atendimento.
             </p>
 
             <div

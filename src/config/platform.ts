@@ -1,10 +1,10 @@
 /**
- * Configuração central da plataforma NC Performance Suite
+ * Configuração central da plataforma NC CRM
  * Desenvolvido por NC Agência
  */
 
 export const CRM_CONFIG = {
-  productName: "NC Performance Suite",
+  productName: "NC CRM",
   signature: "by NC Agência",
   category: "CRM Automotivo com Inteligência Artificial",
   tagline: "Inteligência comercial desenvolvida para a realidade de quem vende veículos.",
@@ -20,7 +20,7 @@ export const CRM_CONFIG = {
    * Mensagem automática oficial para ativação do teste gratuito de 7 dias
    */
   officialTrialMessage:
-    "Olá! Tenho uma loja de veículos e conheci o NC Performance Suite pelo site. Quero solicitar meu acesso gratuito de 7 dias para testar o CRM com inteligência artificial. Como faço para começar?",
+    "Olá! Tenho uma loja de veículos e conheci o NC CRM pelo site. Quero solicitar meu acesso gratuito de 7 dias para testar o CRM com inteligência artificial. Como faço para começar?",
 
   /**
    * URL de cadastro / autenticação da plataforma (opcional para integrações futuras)

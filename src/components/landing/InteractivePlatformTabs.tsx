@@ -107,7 +107,7 @@ export function InteractivePlatformTabs() {
               <div className="p-2 sm:p-3 bg-[#0a0a0c]">
                 <img
                   src={kanbanRealImg}
-                  alt="Tela Real do Funil Kanban do NC Performance Suite"
+                  alt="Tela Real do Funil Kanban do NC CRM"
                   className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
                   loading="lazy"
                   width={1024}
@@ -156,7 +156,7 @@ export function InteractivePlatformTabs() {
               <div className="p-2 sm:p-3 bg-[#0a0a0c]">
                 <img
                   src={dashboardRealImg}
-                  alt="Tela Real do Dashboard Gerencial do NC Performance Suite"
+                  alt="Tela Real do Dashboard Gerencial do NC CRM"
                   className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
                   loading="lazy"
                   width={1024}
@@ -205,7 +205,7 @@ export function InteractivePlatformTabs() {
               <div className="p-2 sm:p-3 bg-[#0a0a0c]">
                 <img
                   src={conversasRealImg}
-                  alt="Tela Real de Conversas e Atendimento IA do NC Performance Suite"
+                  alt="Tela Real de Conversas e Atendimento IA do NC CRM"
                   className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
                   loading="lazy"
                   width={1024}

@@ -360,7 +360,7 @@ export function CrmMockup({ compact = false }: { compact?: boolean }) {
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               <span>Sincronização de leads e esteira comercial ativas</span>
             </div>
-            <span className="text-white/60 font-mono">NC Performance Suite v1.0</span>
+            <span className="text-white/60 font-mono">NC CRM v1.0</span>
           </div>
         </div>
       </div>
