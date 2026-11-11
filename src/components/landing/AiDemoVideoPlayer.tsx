@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Play, Pause, Volume2, VolumeX, Maximize2, Minimize2, Sparkles } from "lucide-react";
+import { Sparkles, Play } from "lucide-react";
 import { pauseHeroVideo } from "./HeroVideoPlayer";
 
 interface AiDemoVideoPlayerProps {
@@ -10,9 +10,6 @@ export function AiDemoVideoPlayer({ className = "" }: AiDemoVideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   // Pausa o vídeo automaticamente quando sair do campo de visão (IntersectionObserver)
   useEffect(() => {
@@ -37,24 +34,12 @@ export function AiDemoVideoPlayer({ className = "" }: AiDemoVideoPlayerProps) {
     };
   }, []);
 
-  // Monitora tela cheia
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-    };
-  }, []);
-
   const togglePlayPause = () => {
     const video = videoRef.current;
     if (!video) return;
 
     if (video.paused) {
-      // Pausa o vídeo do Hero para evitar conflito
+      // Pausa o vídeo do Hero para evitar reprodução simultânea
       pauseHeroVideo();
       video
         .play()
@@ -66,62 +51,18 @@ export function AiDemoVideoPlayer({ className = "" }: AiDemoVideoPlayerProps) {
     }
   };
 
-  const toggleSound = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    const video = videoRef.current;
-    if (!video) return;
-
-    const nextMuted = !isMuted;
-    video.muted = nextMuted;
-    setIsMuted(nextMuted);
-  };
-
-  const toggleFullscreen = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    const container = containerRef.current;
-    if (!container) return;
-
-    if (!document.fullscreenElement) {
-      container.requestFullscreen().catch(() => {});
-    } else {
-      document.exitFullscreen().catch(() => {});
-    }
-  };
-
   const handleEnded = () => {
     const video = videoRef.current;
     if (video) {
       video.currentTime = 0;
       setIsPlaying(false);
-      setProgress(0);
     }
-  };
-
-  const handleTimeUpdate = () => {
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-    setProgress((video.currentTime / video.duration) * 100);
-  };
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const pos = (e.clientX - rect.left) / rect.width;
-    video.currentTime = pos * video.duration;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === " " || e.key === "Enter") {
       e.preventDefault();
       togglePlayPause();
-    } else if (e.key === "m" || e.key === "M") {
-      e.preventDefault();
-      toggleSound();
-    } else if (e.key === "f" || e.key === "F") {
-      e.preventDefault();
-      toggleFullscreen();
     }
   };
 
@@ -148,52 +89,14 @@ export function AiDemoVideoPlayer({ className = "" }: AiDemoVideoPlayerProps) {
           </span>
         </div>
 
-        {/* Controles de Topo: Som, Tela Cheia e Status */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Botão de Som Destacado */}
-          <button
-            type="button"
-            onClick={toggleSound}
-            aria-label={isMuted ? "Ativar som" : "Desativar som"}
-            className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-medium transition-all ${
-              isMuted
-                ? "border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
-                : "border-primary/40 bg-primary/20 text-primary font-semibold shadow-glow"
+        {/* Status Discreto */}
+        <div className="flex items-center gap-1.5 rounded-md border border-primary/25 bg-primary/10 px-2.5 py-1 text-[10px] font-mono text-primary font-medium">
+          <span
+            className={`h-1.5 w-1.5 rounded-full bg-primary ${
+              isPlaying ? "animate-pulse" : "opacity-40"
             }`}
-            title={isMuted ? "Clique para ativar o som (tecla M)" : "Clique para silenciar (tecla M)"}
-          >
-            {isMuted ? (
-              <>
-                <VolumeX className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">Sem som</span>
-              </>
-            ) : (
-              <>
-                <Volume2 className="h-3.5 w-3.5 animate-pulse text-primary" />
-                <span className="hidden sm:inline">Com som</span>
-              </>
-            )}
-          </button>
-
-          {/* Botão Tela Cheia */}
-          <button
-            type="button"
-            onClick={toggleFullscreen}
-            aria-label={isFullscreen ? "Sair da tela cheia" : "Ver em tela cheia"}
-            className="flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/70 hover:bg-white/10 hover:text-white transition-all"
-            title={isFullscreen ? "Sair da tela cheia (tecla F)" : "Expandir para tela cheia (tecla F)"}
-          >
-            {isFullscreen ? <Minimize2 className="h-3.5 w-3.5" /> : <Maximize2 className="h-3.5 w-3.5" />}
-          </button>
-
-          <div className="hidden sm:flex items-center gap-1.5 rounded-md border border-primary/25 bg-primary/10 px-2.5 py-1 text-[10px] font-mono text-primary font-medium">
-            <span
-              className={`h-1.5 w-1.5 rounded-full bg-primary ${
-                isPlaying ? "animate-pulse" : "opacity-40"
-              }`}
-            />
-            <span>{isPlaying ? "Em reprodução" : "Demonstração Prática"}</span>
-          </div>
+          />
+          <span>{isPlaying ? "Em reprodução" : "Demonstração Prática"}</span>
         </div>
       </div>
 
@@ -207,19 +110,17 @@ export function AiDemoVideoPlayer({ className = "" }: AiDemoVideoPlayerProps) {
           ref={videoRef}
           src="/videos/ia-conversas-demo.mp4"
           poster="/videos/ia-conversas-demo-poster.png"
-          muted={isMuted}
           playsInline
           preload="metadata"
           className="h-full w-full object-contain pointer-events-none"
           onEnded={handleEnded}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
-          onTimeUpdate={handleTimeUpdate}
         />
 
         {/* Botão de Play Central Elegante (exibido apenas quando pausado) */}
         {!isPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[1px] transition-opacity duration-200">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/35 backdrop-blur-[1px] transition-opacity duration-200">
             <button
               type="button"
               onClick={togglePlayPause}
@@ -230,46 +131,6 @@ export function AiDemoVideoPlayer({ className = "" }: AiDemoVideoPlayerProps) {
             </button>
           </div>
         )}
-
-        {/* Linha de Progresso Interativa */}
-        <div
-          onClick={handleSeek}
-          className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/10 hover:h-2.5 transition-all cursor-pointer z-10"
-        >
-          <div
-            className="h-full bg-primary transition-all duration-100"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Barra de Rodapé com Controles e Contexto */}
-      <div className="border-t border-white/8 bg-[#101012] px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs text-white/80">
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={togglePlayPause}
-            className="flex items-center gap-1.5 rounded-md bg-white/5 px-2.5 py-1 text-xs text-white/90 hover:bg-white/10 hover:text-white transition-colors"
-          >
-            {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 fill-white" />}
-            <span className="font-medium">{isPlaying ? "Pausar" : "Assistir"}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleSound}
-            className="flex items-center gap-1.5 rounded-md bg-white/5 px-2.5 py-1 text-xs text-white/90 hover:bg-white/10 hover:text-white transition-colors"
-          >
-            {isMuted ? <VolumeX className="h-3.5 w-3.5 text-white/60" /> : <Volume2 className="h-3.5 w-3.5 text-primary" />}
-            <span>{isMuted ? "Ativar som" : "Desativar som"}</span>
-          </button>
-        </div>
-
-        <div className="flex items-center gap-3 text-white/60 text-[11px] font-mono">
-          <span className="hidden md:inline">Atendimento com IA, troca e fotos de veículos • Tecla F para tela cheia</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-white/80">Simulação Real</span>
-        </div>
       </div>
     </div>
   );
