@@ -30,9 +30,6 @@ import {
 import ncLogo from "@/assets/nc-logo.png";
 import heroDealership from "@/assets/hero-dealership.jpg";
 import victoriaAbout from "@/assets/victoria-founder.png";
-import kanbanRealImg from "@/assets/real-crm-kanban.png";
-import dashboardRealImg from "@/assets/real-crm-dashboard.png";
-import conversasRealImg from "@/assets/real-crm-conversas.png";
 
 import { CRM_CONFIG, getOfficialWhatsAppTrialUrl } from "@/config/platform";
 import {
@@ -41,6 +38,8 @@ import {
   useTrial,
 } from "@/components/landing/TrialModal";
 import { InteractivePlatformTabs } from "@/components/landing/InteractivePlatformTabs";
+import { HeroVideoPlayer } from "@/components/landing/HeroVideoPlayer";
+import { AiDemoVideoPlayer } from "@/components/landing/AiDemoVideoPlayer";
 import { LegalModals, type LegalModalType } from "@/components/landing/LegalModals";
 import {
   Accordion,
@@ -315,14 +314,14 @@ function Index() {
             <a href="#" aria-label={`${CRM_CONFIG.productName} ${CRM_CONFIG.signature}`}>
               <Logo className="h-8 sm:h-9" />
             </a>
-            <div className="hidden lg:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/70">
+            <div className="hidden xl:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/70">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               <span>{CRM_CONFIG.category}</span>
             </div>
           </div>
 
           {/* Links de Navegação Desktop por Âncora */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-medium text-neutral-300">
+          <nav className="hidden md:flex items-center gap-5 lg:gap-6 xl:gap-8 text-[13px] tracking-[-0.01em] font-medium text-neutral-300">
             <a
               href="#plataforma"
               className="hover:text-white transition-colors duration-150 py-1"
@@ -360,7 +359,7 @@ function Index() {
             <TrialCtaButton
               position="header"
               label="Testar grátis por 7 dias"
-              className="hidden sm:inline-flex !h-10 !px-5 text-xs font-semibold normal-case tracking-normal"
+              className="hidden sm:inline-flex !h-10 !px-5 text-xs font-semibold normal-case tracking-normal whitespace-nowrap shrink-0"
             />
 
             {/* Botão Menu Mobile */}
@@ -453,19 +452,19 @@ function Index() {
                 <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
               </div>
 
-              {/* Headline Otimizada da Fase 2 */}
+              {/* Headline Otimizada da Fase 3 */}
               <div className="mt-6">
                 <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.3rem,4.6vw,4rem)] leading-[1.08] tracking-[-0.03em] text-white">
-                  Pare de perder oportunidades por{" "}
+                  Seu próximo cliente não pode ficar esperando.{" "}
                   <span className="text-primary block sm:inline mt-1 sm:mt-0">
-                    demora no atendimento.
+                    Sua IA já pode começar o atendimento.
                   </span>
                 </h1>
               </div>
 
-              {/* Subheadline Otimizada da Fase 2 */}
+              {/* Subheadline Otimizada da Fase 3 */}
               <p className="hero-seq-sub mt-6 max-w-xl font-sans text-base sm:text-lg leading-[1.6] text-muted-foreground">
-                Conheça o CRM automotivo com inteligência artificial que ajuda sua loja a responder mais rápido, qualificar compradores e organizar cada negociação.
+                Conheça o CRM automotivo com inteligência artificial que atende seus primeiros contatos, identifica oportunidades e organiza as negociações para sua equipe vender com mais agilidade.
               </p>
 
               {/* CTAs do Hero */}
@@ -488,7 +487,7 @@ function Index() {
               {/* Microcopy e Garantia */}
               <p className="mt-3.5 font-sans text-xs text-white/50 flex items-center gap-2">
                 <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
-                <span>Ativação assistida pela nossa central oficial no WhatsApp.</span>
+                <span>Solicite seus 7 dias gratuitos diretamente à nossa central de vendas.</span>
               </p>
 
               {/* Indicadores Institucionais Verificados */}
@@ -522,63 +521,9 @@ function Index() {
               </div>
             </div>
 
-            {/* Apresentação Visual da Captura Real do Kanban (Direita - 6 Colunas) */}
+            {/* Apresentação do Vídeo Real no Hero (Direita - 6 Colunas) */}
             <div className="hero-seq-photo flex justify-center lg:col-span-6 lg:justify-end">
-              <div className="relative w-full max-w-2xl rounded-2xl border border-white/12 bg-[#0c0c0e] shadow-2xl overflow-hidden font-sans group">
-                {/* Barra Superior da Aplicação Real */}
-                <div className="flex items-center justify-between border-b border-white/8 bg-[#141416] px-4 py-2.5 text-[11px] text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                    </div>
-                    <span className="font-mono text-[10px] text-white/50 ml-2 hidden sm:inline">
-                      NC Agência › Funil
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono text-primary font-medium">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                    <span>Interface Real • Funil & Kanban</span>
-                  </div>
-                </div>
-
-                {/* Captura Real do Kanban Sanitizada */}
-                <div className="p-2 sm:p-3 bg-[#0a0a0c]">
-                  <img
-                    src={kanbanRealImg}
-                    alt="Interface Real do Funil Kanban no NC Performance Suite"
-                    className="w-full rounded-xl object-cover border border-white/5 shadow-inner transition-transform duration-500 group-hover:scale-[1.01]"
-                    loading="eager"
-                    width={1024}
-                    height={451}
-                  />
-                </div>
-
-                {/* Destaque das 5 Etapas do Funil */}
-                <div className="border-t border-white/8 bg-[#101012] px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-white/70">
-                  <span className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-amber-400" />
-                    <span>Novo Lead</span>
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-primary" />
-                    <span>Chatbot / IA</span>
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-amber-500" />
-                    <span>Aguardando Atendimento</span>
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-blue-400" />
-                    <span>Atendimento Humano</span>
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                    <span>Follow-up 6h</span>
-                  </span>
-                </div>
-              </div>
+              <HeroVideoPlayer />
             </div>
           </Container>
         </section>
@@ -755,7 +700,7 @@ function Index() {
               {/* Coluna da Esquerda: Textos e Benefícios */}
               <div className="lg:col-span-6">
                 <div className={`reveal-init stagger-delay-1 ${iaInView ? "reveal-visible" : ""}`}>
-                  <SectionBadge>Qualificação Preliminar com IA</SectionBadge>
+                  <SectionBadge>Inteligência Artificial de Atendimento</SectionBadge>
                 </div>
 
                 <h2
@@ -763,9 +708,9 @@ function Index() {
                     iaInView ? "reveal-visible" : ""
                   }`}
                 >
-                  A IA faz o primeiro atendimento.{" "}
+                  Veja como a IA conduz o{" "}
                   <span className="text-primary block mt-1">
-                    Seu vendedor entra com mais contexto.
+                    primeiro atendimento da sua loja.
                   </span>
                 </h2>
 
@@ -774,54 +719,59 @@ function Index() {
                     iaInView ? "reveal-visible" : ""
                   }`}
                 >
-                  A IA de atendimento é um dos principais diferenciais do NC Performance Suite, agilizando o primeiro contato e coletando as respostas mais importantes para fechar o negócio.
+                  Enquanto seu vendedor se concentra nas negociações, a inteligência artificial pode iniciar a conversa, identificar o veículo de interesse e reunir informações importantes para a continuidade do atendimento.
                 </p>
 
-                {/* Situações Atendidas pela IA Destacadas */}
+                {/* 5 Etapas do Primeiro Atendimento com IA */}
                 <div
-                  className={`mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 reveal-init stagger-delay-4 ${
+                  className={`mt-8 space-y-2.5 reveal-init stagger-delay-4 ${
                     iaInView ? "reveal-visible" : ""
                   }`}
                 >
-                  <div className="rounded-xl border border-white/8 bg-[#121214] p-3.5">
-                    <Car className="h-4 w-4 text-primary mb-1.5" />
-                    <h3 className="font-display font-semibold text-sm text-white">
-                      Interesse em um veículo
-                    </h3>
-                    <p className="font-sans text-xs text-muted-foreground mt-0.5">
-                      Identificação do modelo desejado do estoque no primeiro contato.
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-white/8 bg-[#121214] p-3.5">
-                    <Database className="h-4 w-4 text-primary mb-1.5" />
-                    <h3 className="font-display font-semibold text-sm text-white">
-                      Financiamento & Entrada
-                    </h3>
-                    <p className="font-sans text-xs text-muted-foreground mt-0.5">
-                      Consulta da intenção de valor de entrada e forma de pagamento.
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-white/8 bg-[#121214] p-3.5">
-                    <Workflow className="h-4 w-4 text-primary mb-1.5" />
-                    <h3 className="font-display font-semibold text-sm text-white">
-                      Veículo na troca
-                    </h3>
-                    <p className="font-sans text-xs text-muted-foreground mt-0.5">
-                      Coleta antecipada de modelo e ano do carro usado do comprador.
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-white/8 bg-[#121214] p-3.5">
-                    <Users className="h-4 w-4 text-primary mb-1.5" />
-                    <h3 className="font-display font-semibold text-sm text-white">
-                      Transição para o consultor
-                    </h3>
-                    <p className="font-sans text-xs text-muted-foreground mt-0.5">
-                      Encaminhamento com histórico salvo para o vendedor agendar a visita.
-                    </p>
-                  </div>
+                  {[
+                    {
+                      num: "01",
+                      title: "Resposta instantânea à consulta do veículo",
+                      desc: "Acolhimento imediato com confirmação do modelo e disponibilidade de estoque.",
+                    },
+                    {
+                      num: "02",
+                      title: "Identificação da forma de pagamento e entrada pretendida",
+                      desc: "Consulta antecipada sobre pretensão de financiamento, parcelas ou valor à vista.",
+                    },
+                    {
+                      num: "03",
+                      title: "Coleta de dados sobre carro usado na troca",
+                      desc: "Mapeamento prévio de modelo, ano e informações do automóvel para avaliação comercial.",
+                    },
+                    {
+                      num: "04",
+                      title: "Registro de todas as informações no histórico do CRM",
+                      desc: "Cada resposta e detalhe coletado é estruturado automaticamente na ficha do contato.",
+                    },
+                    {
+                      num: "05",
+                      title: "Transição suave para o vendedor assumir com contexto completo",
+                      desc: "Sua equipe assume a negociação sem precisar repetir perguntas já respondidas.",
+                    },
+                  ].map((step) => (
+                    <div
+                      key={step.num}
+                      className="flex items-start gap-3 rounded-xl border border-white/8 bg-[#121214] p-3 transition-colors hover:border-white/15"
+                    >
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 border border-primary/25 font-mono text-xs font-bold text-primary">
+                        {step.num}
+                      </span>
+                      <div>
+                        <h3 className="font-display font-semibold text-sm text-white">
+                          {step.title}
+                        </h3>
+                        <p className="font-sans text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -836,52 +786,13 @@ function Index() {
                 </div>
               </div>
 
-              {/* Coluna da Direita: Captura Real de Conversas com IA */}
-              <div className="lg:col-span-6 flex justify-center">
-                <div
-                  className={`w-full max-w-2xl rounded-2xl border border-white/12 bg-[#0c0c0e] shadow-2xl overflow-hidden reveal-init stagger-delay-2 ${
-                    iaInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  <div className="flex items-center justify-between border-b border-white/8 bg-[#141416] px-4 py-2.5 text-[11px] text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <div className="flex gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                      </div>
-                      <span className="font-mono text-[10px] text-white/50 ml-2">
-                        NC Agência › Conversas › WhatsApp
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono text-primary font-medium">
-                      <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                      <span>Interface Real • IA Ativa</span>
-                    </div>
-                  </div>
-
-                  <div className="p-2 sm:p-3 bg-[#0a0a0c]">
-                    <img
-                      src={conversasRealImg}
-                      alt="Tela Real do Módulo de Conversas com IA do NC Performance Suite"
-                      className="w-full rounded-xl object-cover border border-white/5 shadow-inner"
-                      loading="lazy"
-                      width={1024}
-                      height={449}
-                    />
-                  </div>
-
-                  {/* Detalhes de Funcionamento da IA */}
-                  <div className="border-t border-white/8 bg-[#101012] p-4 text-xs space-y-2">
-                    <div className="flex items-center gap-2 text-white font-medium">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
-                      <span>Atendimento automático sem interrupção de horário comercial</span>
-                    </div>
-                    <p className="text-[11px] text-muted-foreground leading-relaxed pl-6">
-                      A IA realiza o primeiro acolhimento e coleta de informações. Ao enviar uma mensagem, o vendedor assume a conversa com todo o histórico pronto.
-                    </p>
-                  </div>
-                </div>
+              {/* Coluna da Direita: Player de Demonstração Real da IA */}
+              <div
+                className={`lg:col-span-6 flex justify-center reveal-init stagger-delay-2 ${
+                  iaInView ? "reveal-visible" : ""
+                }`}
+              >
+                <AiDemoVideoPlayer />
               </div>
             </div>
           </Container>
