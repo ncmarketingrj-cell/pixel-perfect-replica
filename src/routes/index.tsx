@@ -314,14 +314,14 @@ function Index() {
             <a href="#" aria-label={`${CRM_CONFIG.productName} ${CRM_CONFIG.signature}`}>
               <Logo className="h-8 sm:h-9" />
             </a>
-            <div className="hidden xl:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/70">
+            <div className="hidden 2xl:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/70">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               <span>{CRM_CONFIG.category}</span>
             </div>
           </div>
 
           {/* Links de Navegação Desktop por Âncora */}
-          <nav className="hidden md:flex items-center gap-5 lg:gap-6 xl:gap-8 text-[13px] tracking-[-0.01em] font-medium text-neutral-300">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-7 text-[13px] tracking-[-0.01em] font-medium text-neutral-300">
             <a
               href="#plataforma"
               className="hover:text-white transition-colors duration-150 py-1"

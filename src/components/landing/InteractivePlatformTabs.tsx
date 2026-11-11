@@ -12,7 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-import kanbanRealImg from "@/assets/real-crm-kanban.png";
+import kanbanRealImg from "@/assets/real-crm-kanban.jpg";
 import dashboardRealImg from "@/assets/real-crm-dashboard.png";
 import conversasRealImg from "@/assets/real-crm-conversas.png";
 import { TrialCtaButton } from "./TrialModal";

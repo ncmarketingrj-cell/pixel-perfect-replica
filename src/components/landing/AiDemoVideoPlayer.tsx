@@ -169,3 +169,4 @@ export function AiDemoVideoPlayer({ className = "" }: AiDemoVideoPlayerProps) {
     </div>
   );
 }
+
