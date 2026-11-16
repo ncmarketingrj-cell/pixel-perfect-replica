@@ -141,37 +141,6 @@ const tickerItems = [
   "Teste Gratuito por 7 Dias",
 ];
 
-const painPoints = [
-  {
-    icon: Clock,
-    title: "Demora no primeiro atendimento",
-    description:
-      "Enquanto o comprador pesquisa em diversas lojas simultaneamente, a demora para responder no WhatsApp faz o interesse esfriar e a oportunidade migrar para a concorrência.",
-    tag: "Gargalo de Tempo",
-  },
-  {
-    icon: Users,
-    title: "Leads que se perdem entre vendedores e conversas",
-    description:
-      "Contatos espalhados nos celulares pessoais da equipe comercial, sem centralização, sem registro de mensagens e sem histórico claro do veículo de interesse.",
-    tag: "Falta de Centralização",
-  },
-  {
-    icon: Workflow,
-    title: "Falta de acompanhamento e follow-up",
-    description:
-      "Negociações pausadas que nunca mais são retomadas. Sem rotina e sem lembretes de contato, clientes com real intenção de compra são simplesmente esquecidos.",
-    tag: "Perda de Oportunidades",
-  },
-  {
-    icon: BarChart3,
-    title: "Gestão sem visão clara do funil de vendas",
-    description:
-      "Proprietários e gestores sem visibilidade sobre quantos compradores estão em triagem, quantos agendaram visita física ao pátio e em qual etapa o processo está travando.",
-    tag: "Falta de Indicadores",
-  },
-];
-
 const faqItems = [
   {
     question: "O NC CRM é exclusivo para o setor automotivo?",
@@ -206,7 +175,6 @@ const faqItems = [
 ];
 
 function Index() {
-  const { ref: dorRef, isInView: dorInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: plataformaRef, isInView: plataformaInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: iaRef, isInView: iaInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: ofertaRef, isInView: ofertaInView } = useInView<HTMLElement>({ threshold: 0.1 });
@@ -458,76 +426,6 @@ function Index() {
             </div>
           </div>
         </div>
-
-        {/* ============================================================== */}
-        {/* SEÇÃO 2 — A DOR DO LOJISTA                                   */}
-        {/* ============================================================== */}
-        <section ref={dorRef} className="py-24 sm:py-28 bg-[#080808]" id="problema">
-          <Container>
-            <div className="mx-auto max-w-3xl text-center">
-              <div className={`reveal-init stagger-delay-1 ${dorInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Diagnóstico de Operação Comercial</SectionBadge>
-              </div>
-
-              <h2
-                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  dorInView ? "reveal-visible" : ""
-                }`}
-              >
-                Sua loja não precisa apenas de mais leads.{" "}
-                <span className="text-primary block sm:inline mt-1 sm:mt-0">
-                  Precisa aproveitar melhor cada oportunidade.
-                </span>
-              </h2>
-
-              <p
-                className={`mt-4 font-sans text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  dorInView ? "reveal-visible" : ""
-                }`}
-              >
-                Gerar contatos no WhatsApp sem um sistema estruturado para atender rápido e acompanhar as negociações resulta em esforço desperdiçado e vendas perdidas para a concorrência.
-              </p>
-            </div>
-
-            {/* Grid dos 4 Problemas */}
-            <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {painPoints.map(({ icon: Icon, title, description, tag }, index) => {
-                const delayClass = `stagger-delay-${index + 1}`;
-                return (
-                  <div
-                    key={title}
-                    className={`card-editorial relative flex flex-col justify-between rounded-xl border border-white/8 bg-[#121212] p-6 reveal-init ${delayClass} ${
-                      dorInView ? "reveal-visible" : ""
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-mono tracking-wide text-primary font-medium">
-                          {tag}
-                        </span>
-                      </div>
-
-                      <h3 className="mt-5 font-display font-semibold text-lg text-white tracking-tight">
-                        {title}
-                      </h3>
-                      <p className="mt-2.5 font-sans text-xs sm:text-sm leading-relaxed text-muted-foreground">
-                        {description}
-                      </p>
-                    </div>
-
-                    <div className="mt-6 border-t border-white/8 pt-3 flex items-center gap-1.5 text-[11px] font-sans text-white/50">
-                      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                      <span>Resolvido no {CRM_CONFIG.productName}</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </Container>
-        </section>
 
         {/* ============================================================== */}
         {/* SEÇÃO 3 — SEÇÃO INTERATIVA: VEJA A PLATAFORMA EM AÇÃO        */}
