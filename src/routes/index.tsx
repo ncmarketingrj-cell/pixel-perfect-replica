@@ -29,7 +29,6 @@ import {
 
 import ncLogo from "@/assets/nc-logo.png";
 import heroDealership from "@/assets/hero-dealership.jpg";
-import victoriaAbout from "@/assets/victoria-founder.png";
 
 import { CRM_CONFIG, getOfficialWhatsAppTrialUrl } from "@/config/platform";
 import {
@@ -173,100 +172,6 @@ const painPoints = [
   },
 ];
 
-const crmFeatures = [
-  {
-    number: "01",
-    title: "Kanban de oportunidades",
-    description:
-      "Visualize cada negociação em cartões organizados por etapas claras: Novo Lead, Chatbot/IA, Aguardando Atendimento, Atendimento Humano e Follow-up.",
-    icon: Workflow,
-    badge: "Fluxo Visual",
-  },
-  {
-    number: "02",
-    title: "Funil comercial",
-    description:
-      "Estrutura de avanço de negociações desenhada para o ciclo de decisão de compra de veículos novos e seminovos.",
-    icon: Target,
-    badge: "Processo Claro",
-  },
-  {
-    number: "03",
-    title: "Inteligência artificial de atendimento",
-    description:
-      "Acolhimento imediato com respostas coerentes às dúvidas comuns de quem está interessado em um veículo do seu estoque.",
-    icon: Bot,
-    badge: "Atendimento Rápido",
-  },
-  {
-    number: "04",
-    title: "Gestão de contatos",
-    description:
-      "Base de clientes centralizada na loja, evitando que o histórico das negociações fique restrito aos celulares pessoais dos vendedores.",
-    icon: Users,
-    badge: "Patrimônio da Loja",
-  },
-  {
-    number: "05",
-    title: "Histórico de interações",
-    description:
-      "Registro de todas as conversas, anotações de contrapropostas, veículos avaliados na troca e preferências de financiamento.",
-    icon: Database,
-    badge: "Memória Comercial",
-  },
-  {
-    number: "06",
-    title: "Acompanhamento e follow-up",
-    description:
-      "Organização das tarefas diárias da equipe para garantir que nenhum comprador fique sem retorno ou proposta atualizada.",
-    icon: Clock,
-    badge: "Régua Ativa",
-  },
-  {
-    number: "07",
-    title: "Visibilidade da operação comercial",
-    description:
-      "Painel unificado para o gestor acompanhar a velocidade de resposta, distribuição dos contatos e volume de oportunidades em andamento.",
-    icon: BarChart3,
-    badge: "Controle Gerencial",
-  },
-];
-
-const commercialJourneySteps = [
-  {
-    step: "01",
-    title: "O interessado entra em contato",
-    description:
-      "O comprador envia uma mensagem demonstrando interesse por um veículo específico do estoque a partir do WhatsApp, anúncios ou site da loja.",
-    icon: MessageSquare,
-    tag: "Entrada do Lead",
-  },
-  {
-    step: "02",
-    title: "A IA realiza a qualificação inicial",
-    description:
-      "A inteligência artificial responde em segundos, acolhe o cliente e coleta detalhes essenciais como pretensão de entrada e veículo usado na troca.",
-    icon: Bot,
-    tag: "Triagem Imediata",
-  },
-  {
-    step: "03",
-    title: "A oportunidade é organizada no CRM",
-    description:
-      "O contato é automaticamente inserido no funil Kanban com o resumo da conversa e dados do veículo desejado devidamente cadastrados.",
-    icon: Workflow,
-    tag: "Estruturação no Funil",
-  },
-  {
-    step: "04",
-    title: "O vendedor assume a negociação com mais contexto",
-    description:
-      "A equipe comercial entra em contato já sabendo o modelo de interesse, condição de pagamento e carro na troca, acelerando o agendamento da visita.",
-    icon: CheckCircle2,
-    tag: "Negociação & Venda",
-  },
-];
-
 const faqItems = [
   {
     question: "O NC CRM é exclusivo para o setor automotivo?",
@@ -304,9 +209,6 @@ function Index() {
   const { ref: dorRef, isInView: dorInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: plataformaRef, isInView: plataformaInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: iaRef, isInView: iaInView } = useInView<HTMLElement>({ threshold: 0.1 });
-  const { ref: funcionalidadesRef, isInView: funcionalidadesInView } = useInView<HTMLElement>({ threshold: 0.1 });
-  const { ref: jornadaRef, isInView: jornadaInView } = useInView<HTMLElement>({ threshold: 0.1 });
-  const { ref: autoridadeRef, isInView: autoridadeInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: ofertaRef, isInView: ofertaInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: faqRef, isInView: faqInView } = useInView<HTMLElement>({ threshold: 0.1 });
 
@@ -342,18 +244,6 @@ function Index() {
               className="hover:text-white transition-colors duration-150 py-1 whitespace-nowrap"
             >
               Inteligência Artificial
-            </a>
-            <a
-              href="#funcionalidades"
-              className="hover:text-white transition-colors duration-150 py-1 whitespace-nowrap"
-            >
-              Funcionalidades
-            </a>
-            <a
-              href="#como-funciona"
-              className="hover:text-white transition-colors duration-150 py-1 whitespace-nowrap"
-            >
-              Como funciona
             </a>
             <a
               href="#duvidas"
@@ -402,20 +292,6 @@ function Index() {
                 Inteligência Artificial
               </a>
               <a
-                href="#funcionalidades"
-                onClick={closeMobileMenu}
-                className="py-1.5 hover:text-white border-b border-white/5"
-              >
-                Funcionalidades
-              </a>
-              <a
-                href="#como-funciona"
-                onClick={closeMobileMenu}
-                className="py-1.5 hover:text-white border-b border-white/5"
-              >
-                Como funciona
-              </a>
-              <a
                 href="#duvidas"
                 onClick={closeMobileMenu}
                 className="py-1.5 hover:text-white border-b border-white/5"
@@ -453,8 +329,8 @@ function Index() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-[#080808]/40" />
 
           <Container className="relative z-10 grid items-center gap-10 lg:grid-cols-12 lg:gap-10">
-            {/* Bloco de Mensagem Principal (Esquerda - 5 Colunas no Desktop para dar mais área ao Vídeo) */}
-            <div className="lg:col-span-6 xl:col-span-5">
+            {/* Bloco de Mensagem Principal (Esquerda - 7 colunas no lg e 6 no xl para equilíbrio perfeito dos botões e títulos) */}
+            <div className="lg:col-span-7 xl:col-span-6">
               {/* Eyebrow de Posicionamento */}
               <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -477,19 +353,19 @@ function Index() {
               </p>
 
               {/* CTAs do Hero */}
-              <div className="hero-seq-cta mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
+              <div className="hero-seq-cta mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5">
                 <TrialCtaButton
                   position="hero"
                   label="TESTAR GRÁTIS POR 7 DIAS"
-                  className="h-13 sm:h-14 px-8 text-xs sm:text-sm font-semibold tracking-wider"
+                  className="h-13 sm:h-14 px-5 sm:px-6 xl:px-7 text-xs sm:text-xs xl:text-sm font-semibold tracking-wider whitespace-nowrap"
                 />
 
                 <a
                   href="#plataforma"
-                  className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-6 font-sans text-xs sm:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25"
+                  className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-5 sm:px-6 font-sans text-xs sm:text-xs xl:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25 whitespace-nowrap"
                 >
                   <span>CONHECER A PLATAFORMA</span>
-                  <ChevronRight className="h-4 w-4 text-primary" />
+                  <ChevronRight className="h-4 w-4 text-primary shrink-0" />
                 </a>
               </div>
 
@@ -530,8 +406,8 @@ function Index() {
               </div>
             </div>
 
-            {/* Apresentação do Vídeo Real no Hero (Direita - 7 Colunas no Desktop: +10% a 12% de área útil) */}
-            <div className="hero-seq-photo flex justify-center lg:col-span-6 xl:col-span-7 lg:justify-end w-full">
+            {/* Apresentação do Vídeo Real no Hero (Direita - 5 colunas no lg, 6 colunas no xl: presença visual marcante sem overflow) */}
+            <div className="hero-seq-photo flex justify-center lg:col-span-5 xl:col-span-6 lg:justify-end w-full">
               <HeroVideoPlayer />
             </div>
           </Container>
@@ -819,281 +695,6 @@ function Index() {
                   <p className="text-[11px] text-muted-foreground text-center mt-2">
                     Sem formulários complexos. Direto pelo WhatsApp.
                   </p>
-                </div>
-              </div>
-            </div>
-          </Container>
-        </section>
-
-        {/* ============================================================== */}
-        {/* SEÇÃO 5 — FUNCIONALIDADES (BENTO GRID)                        */}
-        {/* ============================================================== */}
-        <section
-          ref={funcionalidadesRef}
-          className="border-t border-white/8 bg-[#0c0c0e] py-24 sm:py-32"
-          id="funcionalidades"
-        >
-          <Container>
-            <div className="mx-auto max-w-3xl text-center">
-              <div className={`reveal-init stagger-delay-1 ${funcionalidadesInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Arquitetura Funcional</SectionBadge>
-              </div>
-
-              <h2
-                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  funcionalidadesInView ? "reveal-visible" : ""
-                }`}
-              >
-                Um CRM profissional.{" "}
-                <span className="text-primary">Feito para quem vende carros.</span>
-              </h2>
-
-              <p
-                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  funcionalidadesInView ? "reveal-visible" : ""
-                }`}
-              >
-                Desenvolvido sem complexidades desnecessárias para atender exatamente as demandas de atendimento e controle de estoque de revendas de veículos.
-              </p>
-            </div>
-
-            {/* Bento Grid dos 7 Módulos */}
-            <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {crmFeatures.map(({ number, title, description, icon: FeatureIcon, badge }, idx) => {
-                const isHighlight = idx === 0 || idx === 6;
-                const delayClass = `stagger-delay-${(idx % 4) + 1}`;
-                return (
-                  <div
-                    key={title}
-                    className={`card-editorial group relative flex flex-col justify-between rounded-2xl border p-7 transition-all duration-300 ${
-                      isHighlight
-                        ? "lg:col-span-2 border-primary/30 bg-[#141418]"
-                        : "border-white/10 bg-[#121214]"
-                    } reveal-init ${delayClass} ${
-                      funcionalidadesInView ? "reveal-visible" : ""
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-primary">
-                          <FeatureIcon className="h-5 w-5" />
-                        </div>
-                        <span className="rounded-full bg-white/5 border border-white/8 px-2.5 py-0.5 text-[10px] font-mono text-primary font-bold">
-                          {badge}
-                        </span>
-                      </div>
-
-                      <div className="mt-5">
-                        <span className="text-[10px] font-mono text-white/40 uppercase block">
-                          Recurso {number}
-                        </span>
-                        <h3 className="font-display font-semibold text-xl text-white tracking-tight mt-0.5">
-                          {title}
-                        </h3>
-                        <p className="mt-2.5 font-sans text-xs sm:text-sm leading-relaxed text-muted-foreground">
-                          {description}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 border-t border-white/8 pt-3.5 flex items-center justify-between text-xs font-semibold text-primary">
-                      <span>Integrado ao ecossistema</span>
-                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="mt-12 flex justify-center">
-              <TrialCtaButton
-                position="features"
-                label="TESTAR GRÁTIS POR 7 DIAS"
-                className="h-13 px-8 text-xs sm:text-sm font-semibold"
-              />
-            </div>
-          </Container>
-        </section>
-
-        {/* ============================================================== */}
-        {/* SEÇÃO 6 — JORNADA COMERCIAL ("COMO FUNCIONA")                */}
-        {/* ============================================================== */}
-        <section
-          ref={jornadaRef}
-          className="border-t border-white/8 bg-[#080808] py-24 sm:py-32"
-          id="como-funciona"
-        >
-          <Container>
-            <div className="mx-auto max-w-3xl text-center">
-              <div className={`reveal-init stagger-delay-1 ${jornadaInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Etapas da Jornada</SectionBadge>
-              </div>
-
-              <h2
-                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  jornadaInView ? "reveal-visible" : ""
-                }`}
-              >
-                Do primeiro contato à{" "}
-                <span className="text-primary">próxima oportunidade de venda.</span>
-              </h2>
-
-              <p
-                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  jornadaInView ? "reveal-visible" : ""
-                }`}
-              >
-                Um fluxo contínuo e sincronizado para garantir velocidade na chegada do comprador e eficiência no salão de vendas.
-              </p>
-            </div>
-
-            {/* Trilha Progressiva de 4 Etapas */}
-            <div className="relative mt-16 sm:mt-20">
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 relative">
-                {commercialJourneySteps.map(
-                  ({ step, title, description, icon: StepIcon, tag }, idx) => {
-                    const delayClass = `stagger-delay-${idx + 1}`;
-                    return (
-                      <div
-                        key={title}
-                        className={`card-editorial group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#121214] p-7 transition-all duration-300 hover:border-primary/40 reveal-init ${delayClass} ${
-                          jornadaInView ? "reveal-visible" : ""
-                        }`}
-                      >
-                        <div>
-                          <div className="flex items-center justify-between">
-                            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-sm">
-                              {step}
-                            </span>
-                            <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-mono text-muted-foreground">
-                              {tag}
-                            </span>
-                          </div>
-
-                          <div className="mt-5 flex items-center gap-2.5">
-                            <StepIcon className="h-4 w-4 text-primary shrink-0" />
-                            <h3 className="font-display font-semibold text-base sm:text-lg text-white tracking-tight">
-                              {title}
-                            </h3>
-                          </div>
-
-                          <p className="mt-3 font-sans text-xs sm:text-sm leading-relaxed text-muted-foreground">
-                            {description}
-                          </p>
-                        </div>
-
-                        <div className="mt-6 border-t border-white/8 pt-3 text-[11px] font-mono text-white/50">
-                          Etapa {step} de 04
-                        </div>
-                      </div>
-                    );
-                  }
-                )}
-              </div>
-            </div>
-          </Container>
-        </section>
-
-        {/* ============================================================== */}
-        {/* SEÇÃO 7 — AUTORIDADE NC AGÊNCIA                              */}
-        {/* ============================================================== */}
-        <section
-          ref={autoridadeRef}
-          className="border-t border-white/8 bg-[#0b0b0d] py-24 sm:py-32"
-          id="autoridade"
-        >
-          <Container>
-            <div className="grid items-center gap-12 lg:grid-cols-12">
-              {/* Fotografia Compacta de Victoria Maia */}
-              <div className="flex justify-center lg:col-span-4">
-                <div
-                  className={`relative w-full max-w-xs reveal-init stagger-delay-1 ${
-                    autoridadeInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#141418] p-2 shadow-2xl">
-                    <img
-                      src={victoriaAbout}
-                      alt="Victoria Maia — Fundadora da NC Agência e criadora do NC CRM"
-                      loading="lazy"
-                      width={500}
-                      height={650}
-                      className={`w-full rounded-xl object-cover transition-all duration-700 ease-out ${
-                        autoridadeInView ? "grayscale-0 contrast-100" : "grayscale contrast-105"
-                      } hover:grayscale-0 hover:scale-[1.02] active:scale-[0.99] cursor-pointer`}
-                    />
-                    <div className="mt-3 rounded-xl border border-white/10 bg-[#0e0e10] p-3 text-center">
-                      <div className="font-display font-semibold text-sm text-white">
-                        {CRM_CONFIG.founderName}
-                      </div>
-                      <div className="text-[11px] text-primary font-mono mt-0.5">
-                        {CRM_CONFIG.founderRole}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Narrativa Editorial de Conhecimento Prático */}
-              <div className="lg:col-span-8">
-                <div className={`reveal-init stagger-delay-1 ${autoridadeInView ? "reveal-visible" : ""}`}>
-                  <SectionBadge>Origem e Conhecimento do Setor</SectionBadge>
-                </div>
-
-                <h2
-                  className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-white tracking-tight reveal-init stagger-delay-2 ${
-                    autoridadeInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  Criado por quem conhece a rotina de{" "}
-                  <span className="text-primary">uma loja de veículos.</span>
-                </h2>
-
-                <div
-                  className={`mt-6 space-y-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                    autoridadeInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  <p>
-                    O <strong>{CRM_CONFIG.productName}</strong> foi desenvolvido pela equipe da <strong>NC Agência</strong>, liderada por Victoria Maia, a partir de mais de 10 anos de experiência prática e convivência contínua com a operação comercial de mais de 100 lojas de veículos e concessionárias.
-                  </p>
-                  <p>
-                    Diferente de softwares genéricos de mercado, a plataforma nasceu para resolver as dores reais do salão de vendas: o cliente que desiste quando a resposta demora, a troca que precisa ser avaliada e a necessidade de colocar o comprador diante do vendedor físico com agilidade.
-                  </p>
-                </div>
-
-                {/* 3 Blocos de Competência */}
-                <div
-                  className={`mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 border-y border-white/10 py-5 text-left reveal-init stagger-delay-4 ${
-                    autoridadeInView ? "reveal-visible" : ""
-                  }`}
-                >
-                  <div>
-                    <span className="font-display font-bold text-2xl text-white block">
-                      {CRM_CONFIG.storesServed}
-                    </span>
-                    <span className="font-sans text-xs text-muted-foreground mt-0.5 block">
-                      Lojas atendidas no mercado automotivo brasileiro.
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="font-display font-bold text-2xl text-primary block">
-                      {CRM_CONFIG.experienceYears}
-                    </span>
-                    <span className="font-sans text-xs text-muted-foreground mt-0.5 block">
-                      De vivência nas particularidades de pátios e revendas.
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="font-display font-bold text-2xl text-white block">
-                      Foco Auto
-                    </span>
-                    <span className="font-sans text-xs text-muted-foreground mt-0.5 block">
-                      Terminologias e rotinas pensadas para quem vende automóveis.
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>

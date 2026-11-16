@@ -90,7 +90,7 @@ export function TrialCtaButton({
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
-        className={`inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 font-sans text-xs sm:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/30 cursor-pointer ${className}`}
+        className={`inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 font-sans text-xs sm:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/30 cursor-pointer whitespace-nowrap ${className}`}
       >
         <span>{label}</span>
       </a>
@@ -104,10 +104,10 @@ export function TrialCtaButton({
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
-        className={`inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#161616] px-6 font-sans text-xs sm:text-sm font-semibold text-white btn-interaction hover:bg-white/10 hover:border-white/20 cursor-pointer ${className}`}
+        className={`inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#161616] px-6 font-sans text-xs sm:text-sm font-semibold text-white btn-interaction hover:bg-white/10 hover:border-white/20 cursor-pointer whitespace-nowrap ${className}`}
       >
         <span>{label}</span>
-        <ChevronRight className="h-4 w-4 text-primary" />
+        <ChevronRight className="h-4 w-4 text-primary shrink-0" />
       </a>
     );
   }
@@ -118,10 +118,10 @@ export function TrialCtaButton({
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      className={`inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-white shadow-glow btn-interaction hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] cursor-pointer ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-7 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-white shadow-glow btn-interaction hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] cursor-pointer whitespace-nowrap ${className}`}
     >
       <span>{label}</span>
-      <ChevronRight className="h-4 w-4" />
+      <ChevronRight className="h-4 w-4 shrink-0" />
     </a>
   );
 }

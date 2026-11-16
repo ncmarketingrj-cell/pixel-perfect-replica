@@ -133,7 +133,7 @@ export function AiDemoVideoPlayer({ className = "" }: AiDemoVideoPlayerProps) {
         <video
           ref={videoRef}
           src="/videos/ia-conversas-demo.mp4"
-          poster="/videos/ia-conversas-demo-poster.png"
+          poster="/videos/ia-conversas-demo-poster.webp"
           playsInline
           preload="metadata"
           className="h-full w-full object-contain pointer-events-none"

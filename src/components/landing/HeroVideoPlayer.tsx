@@ -171,7 +171,7 @@ export function HeroVideoPlayer({ className = "" }: HeroVideoPlayerProps) {
         <video
           ref={videoRef}
           src="/videos/hero-crm-ia.mp4"
-          poster="/videos/hero-crm-ia-poster.png"
+          poster="/videos/hero-crm-ia-poster.webp"
           autoPlay
           muted
           loop
