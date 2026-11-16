@@ -283,28 +283,49 @@ function Index() {
         {/* ============================================================== */}
         {/* 2. HERO: PRIMEIRA DOBRA PERSUASIVA + PRESENÇA DE VICTORIA MAIA */}
         {/* ============================================================== */}
-        <section className="relative overflow-hidden border-b border-white/8 bg-[#080808] pt-14 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24">
-          {/* Palco Superior com Fundo da Concessionária e Victoria Maia em Destaque */}
+        <section className="relative overflow-hidden border-b border-white/8 bg-[#080808] pt-0 pb-16 sm:pb-20 lg:pt-24 lg:pb-24">
+          {/* Palco Mobile Exclusivo: mostra Victoria Maia inteira e nítida sem texto por cima */}
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden lg:hidden">
+            <img
+              src={heroVictoriaShowroom}
+              alt="Victoria Maia em showroom automotivo — Fundadora da NC Agência e criadora do NC CRM"
+              width={1536}
+              height={1024}
+              fetchPriority="high"
+              className="h-full w-full object-cover object-[80%_15%]"
+            />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080808] to-transparent" />
+            <div className="absolute bottom-3 left-4 z-10 inline-flex items-center gap-2 rounded-lg border border-white/15 bg-[#0a0a0c]/85 px-3 py-1.5 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+              <span className="font-display text-[11px] font-semibold text-white">
+                {CRM_CONFIG.founderName}
+              </span>
+              <span className="text-[10px] font-mono text-primary">
+                • NC Agência
+              </span>
+            </div>
+          </div>
+
+          {/* Palco Superior Desktop com Fundo da Concessionária e Victoria Maia em Destaque */}
           <div className="relative">
-            {/* Imagem de Fundo (Victoria Maia no Showroom) com Scrim Direcional para Contraste */}
-            <div className="pointer-events-none absolute inset-x-0 -top-14 sm:-top-20 lg:-top-24 bottom-0 overflow-hidden">
+            {/* Imagem de Fundo Desktop (oculta no mobile pois o mobile tem seu próprio palco acima) */}
+            <div className="hidden lg:block pointer-events-none absolute inset-x-0 -top-24 bottom-0 overflow-hidden">
               <img
                 src={heroVictoriaShowroom}
                 alt="Victoria Maia em showroom automotivo — Fundadora da NC Agência e criadora do NC CRM"
                 width={1536}
                 height={1024}
                 fetchPriority="high"
-                className="h-full w-full object-cover object-[76%_18%] sm:object-[72%_20%] lg:object-[75%_22%] opacity-45 sm:opacity-60 lg:opacity-90"
+                className="h-full w-full object-cover object-[75%_22%] opacity-90"
               />
-              {/* Gradiente horizontal: protege legibilidade da copy à esquerda e revela Victoria à direita */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/92 lg:via-[#080808]/75 to-[#080808]/35 lg:to-transparent" />
-              {/* Gradiente vertical: transição suave para o vídeo logo abaixo */}
+              {/* Gradientes desktop: protege legibilidade da copy à esquerda e revela Victoria à direita */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/75 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/60" />
             </div>
 
             <Container className="relative z-10 grid items-end gap-8 lg:grid-cols-12 lg:gap-10 pb-8 lg:pb-12">
               {/* Bloco de Mensagem Principal (Esquerda - 7 colunas) */}
-              <div className="lg:col-span-7">
+              <div className="pt-2 lg:pt-0 lg:col-span-7">
                 {/* Eyebrow de Posicionamento */}
                 <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary backdrop-blur-sm">
                   <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
