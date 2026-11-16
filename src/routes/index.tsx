@@ -29,6 +29,7 @@ import {
 
 import ncLogo from "@/assets/nc-logo.png";
 import heroVictoriaShowroom from "@/assets/hero-victoria-showroom.jpg";
+import heroVictoriaMobile from "@/assets/hero-victoria-mobile.jpg";
 
 import { CRM_CONFIG, getOfficialWhatsAppTrialUrl } from "@/config/platform";
 import {
@@ -284,15 +285,15 @@ function Index() {
         {/* 2. HERO: PRIMEIRA DOBRA PERSUASIVA + PRESENÇA DE VICTORIA MAIA */}
         {/* ============================================================== */}
         <section className="relative overflow-hidden border-b border-white/8 bg-[#080808] pt-0 pb-16 sm:pb-20 lg:pt-24 lg:pb-24">
-          {/* Palco Mobile Exclusivo: mostra Victoria Maia inteira e nítida sem texto por cima */}
+          {/* Palco Mobile Exclusivo: mostra Victoria Maia centralizada e nítida apenas no mobile */}
           <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden lg:hidden">
             <img
-              src={heroVictoriaShowroom}
+              src={heroVictoriaMobile}
               alt="Victoria Maia em showroom automotivo — Fundadora da NC Agência e criadora do NC CRM"
-              width={1536}
+              width={1024}
               height={1024}
               fetchPriority="high"
-              className="h-full w-full object-cover object-[80%_15%]"
+              className="h-full w-full object-cover object-[center_15%]"
             />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080808] to-transparent" />
             <div className="absolute bottom-3 left-4 z-10 inline-flex items-center gap-2 rounded-lg border border-white/15 bg-[#0a0a0c]/85 px-3 py-1.5 backdrop-blur-md">
