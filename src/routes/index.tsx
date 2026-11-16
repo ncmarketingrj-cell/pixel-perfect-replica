@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 
 import ncLogo from "@/assets/nc-logo.png";
-import heroDealership from "@/assets/hero-dealership.jpg";
+import heroVictoriaShowroom from "@/assets/hero-victoria-showroom.jpg";
 
 import { CRM_CONFIG, getOfficialWhatsAppTrialUrl } from "@/config/platform";
 import {
@@ -281,101 +281,125 @@ function Index() {
 
       <main>
         {/* ============================================================== */}
-        {/* 2. HERO: PRIMEIRA DOBRA PERSUASIVA COM CAPTURA REAL DO KANBAN */}
+        {/* 2. HERO: PRIMEIRA DOBRA PERSUASIVA + PRESENÇA DE VICTORIA MAIA */}
         {/* ============================================================== */}
-        <section className="relative overflow-hidden border-b border-white/8 bg-[#080808] bg-tech-grid py-14 sm:py-20 lg:py-24">
-          {/* Fundo de Concessionária com Vinheta e Máscara */}
-          <img
-            src={heroDealership}
-            alt="Concessionária de alto padrão"
-            width={1920}
-            height={1088}
-            fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover opacity-15 filter grayscale contrast-125"
-          />
-          <div className="absolute inset-0 bg-radial-vignette" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-[#080808]/40" />
-
-          <Container className="relative z-10 grid items-center gap-10 lg:grid-cols-12 lg:gap-10">
-            {/* Bloco de Mensagem Principal (Esquerda - 7 colunas no lg e 6 no xl para equilíbrio perfeito dos botões e títulos) */}
-            <div className="lg:col-span-7 xl:col-span-6">
-              {/* Eyebrow de Posicionamento */}
-              <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
-              </div>
-
-              {/* Headline */}
-              <div className="mt-6">
-                <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.3rem,4.6vw,4rem)] leading-[1.08] tracking-[-0.03em] text-white">
-                  Seu próximo cliente não pode ficar esperando.{" "}
-                  <span className="text-primary block sm:inline mt-1 sm:mt-0">
-                    Sua IA já pode começar o atendimento.
-                  </span>
-                </h1>
-              </div>
-
-              {/* Subheadline */}
-              <p className="hero-seq-sub mt-6 max-w-xl font-sans text-base sm:text-lg leading-[1.6] text-muted-foreground">
-                Conheça o CRM automotivo com inteligência artificial que atende seus primeiros contatos, identifica oportunidades e organiza as negociações para sua equipe vender com mais agilidade.
-              </p>
-
-              {/* CTAs do Hero */}
-              <div className="hero-seq-cta mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5">
-                <TrialCtaButton
-                  position="hero"
-                  label="TESTAR GRÁTIS POR 7 DIAS"
-                  className="h-13 sm:h-14 px-5 sm:px-6 xl:px-7 text-xs sm:text-xs xl:text-sm font-semibold tracking-wider whitespace-nowrap"
-                />
-
-                <a
-                  href="#plataforma"
-                  className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/12 bg-white/5 px-5 sm:px-6 font-sans text-xs sm:text-xs xl:text-sm font-semibold text-white/90 btn-interaction hover:bg-white/10 hover:border-white/25 whitespace-nowrap"
-                >
-                  <span>CONHECER A PLATAFORMA</span>
-                  <ChevronRight className="h-4 w-4 text-primary shrink-0" />
-                </a>
-              </div>
-
-              {/* Microcopy e Garantia */}
-              <p className="mt-3.5 font-sans text-xs text-white/50 flex items-center gap-2">
-                <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
-                <span>Solicite seus 7 dias gratuitos diretamente à nossa central de vendas.</span>
-              </p>
-
-              {/* Indicadores Institucionais Verificados */}
-              <div className="hero-seq-metrics mt-8 grid grid-cols-3 gap-3 max-w-lg border-t border-white/8 pt-6">
-                <div>
-                  <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
-                    {CRM_CONFIG.storesServed}
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
-                    Lojas Atendidas
-                  </div>
-                </div>
-
-                <div>
-                  <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
-                    {CRM_CONFIG.experienceYears}
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
-                    No Setor Auto
-                  </div>
-                </div>
-
-                <div>
-                  <div className="font-display font-semibold text-xl sm:text-2xl text-primary tracking-tight">
-                    7 Dias
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
-                    Acesso Gratuito
-                  </div>
-                </div>
-              </div>
+        <section className="relative overflow-hidden border-b border-white/8 bg-[#080808] pt-14 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24">
+          {/* Palco Superior com Fundo da Concessionária e Victoria Maia em Destaque */}
+          <div className="relative">
+            {/* Imagem de Fundo (Victoria Maia no Showroom) com Scrim Direcional para Contraste */}
+            <div className="pointer-events-none absolute inset-x-0 -top-14 sm:-top-20 lg:-top-24 bottom-0 overflow-hidden">
+              <img
+                src={heroVictoriaShowroom}
+                alt="Victoria Maia em showroom automotivo — Fundadora da NC Agência e criadora do NC CRM"
+                width={1536}
+                height={1024}
+                fetchPriority="high"
+                className="h-full w-full object-cover object-[76%_18%] sm:object-[72%_20%] lg:object-[75%_22%] opacity-45 sm:opacity-60 lg:opacity-90"
+              />
+              {/* Gradiente horizontal: protege legibilidade da copy à esquerda e revela Victoria à direita */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/92 lg:via-[#080808]/75 to-[#080808]/35 lg:to-transparent" />
+              {/* Gradiente vertical: transição suave para o vídeo logo abaixo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/60" />
             </div>
 
-            {/* Apresentação do Vídeo Real no Hero (Direita - 5 colunas no lg, 6 colunas no xl: presença visual marcante sem overflow) */}
-            <div className="hero-seq-photo flex justify-center lg:col-span-5 xl:col-span-6 lg:justify-end w-full">
+            <Container className="relative z-10 grid items-end gap-8 lg:grid-cols-12 lg:gap-10 pb-8 lg:pb-12">
+              {/* Bloco de Mensagem Principal (Esquerda - 7 colunas) */}
+              <div className="lg:col-span-7">
+                {/* Eyebrow de Posicionamento */}
+                <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                  <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
+                </div>
+
+                {/* Headline */}
+                <div className="mt-6">
+                  <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.25rem,4.4vw,3.85rem)] leading-[1.08] tracking-[-0.03em] text-white">
+                    Seu próximo cliente não pode ficar esperando.{" "}
+                    <span className="text-primary block sm:inline mt-1 sm:mt-0">
+                      Sua IA já pode começar o atendimento.
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Subheadline */}
+                <p className="hero-seq-sub mt-6 max-w-xl font-sans text-base sm:text-lg leading-[1.6] text-neutral-300">
+                  Conheça o CRM automotivo com inteligência artificial que atende seus primeiros contatos, identifica oportunidades e organiza as negociações para sua equipe vender com mais agilidade.
+                </p>
+
+                {/* CTAs do Hero */}
+                <div className="hero-seq-cta mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5">
+                  <TrialCtaButton
+                    position="hero"
+                    label="TESTAR GRÁTIS POR 7 DIAS"
+                    className="h-13 sm:h-14 px-5 sm:px-6 xl:px-7 text-xs sm:text-xs xl:text-sm font-semibold tracking-wider whitespace-nowrap"
+                  />
+
+                  <a
+                    href="#plataforma"
+                    className="inline-flex h-13 sm:h-14 items-center justify-center gap-2 rounded-xl border border-white/15 bg-[#0e0e10]/80 backdrop-blur-md px-5 sm:px-6 font-sans text-xs sm:text-xs xl:text-sm font-semibold text-white/95 btn-interaction hover:bg-white/10 hover:border-white/30 whitespace-nowrap"
+                  >
+                    <span>CONHECER A PLATAFORMA</span>
+                    <ChevronRight className="h-4 w-4 text-primary shrink-0" />
+                  </a>
+                </div>
+
+                {/* Microcopy e Garantia */}
+                <p className="mt-3.5 font-sans text-xs text-white/60 flex items-center gap-2">
+                  <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
+                  <span>Solicite seus 7 dias gratuitos diretamente à nossa central de vendas.</span>
+                </p>
+
+                {/* Indicadores Institucionais Verificados */}
+                <div className="hero-seq-metrics mt-8 grid grid-cols-3 gap-3 max-w-lg border-t border-white/10 pt-6">
+                  <div>
+                    <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
+                      {CRM_CONFIG.storesServed}
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-400 mt-0.5">
+                      Lojas Atendidas
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="font-display font-semibold text-xl sm:text-2xl text-white tracking-tight">
+                      {CRM_CONFIG.experienceYears}
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-400 mt-0.5">
+                      No Setor Auto
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="font-display font-semibold text-xl sm:text-2xl text-primary tracking-tight">
+                      7 Dias
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-400 mt-0.5">
+                      Acesso Gratuito
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Palco Aberto à Direita (5 colunas): preserva o rosto de Victoria Maia e vincula a marca */}
+              <div className="hidden lg:flex lg:col-span-5 flex-col items-end justify-end min-h-[420px]">
+                <div className="hero-seq-photo inline-flex items-center gap-3 rounded-xl border border-white/15 bg-[#0a0a0c]/80 px-4 py-2.5 backdrop-blur-md shadow-2xl">
+                  <span className="h-2 w-2 rounded-full bg-primary shrink-0" />
+                  <div className="text-left">
+                    <div className="font-display font-semibold text-xs sm:text-sm text-white leading-tight">
+                      {CRM_CONFIG.founderName}
+                    </div>
+                    <div className="font-mono text-[10px] text-primary/90 tracking-wide uppercase mt-0.5">
+                      {CRM_CONFIG.founderRole}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </div>
+
+          {/* Apresentação do Vídeo Real do CRM logo abaixo do palco (em destaque e sem cobrir Victoria) */}
+          <Container className="relative z-10 mt-4 sm:mt-6">
+            <div className="hero-seq-photo mx-auto max-w-5xl">
               <HeroVideoPlayer />
             </div>
           </Container>
