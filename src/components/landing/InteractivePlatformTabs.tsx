@@ -29,11 +29,10 @@ export function InteractivePlatformTabs() {
         <button
           type="button"
           onClick={() => setActiveTab("kanban")}
-          className={`flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border px-5 py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-            activeTab === "kanban"
+          className={`flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border px-5 py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${activeTab === "kanban"
               ? "border-primary bg-primary/15 text-white shadow-glow"
               : "border-white/10 bg-[#121214] text-white/70 hover:bg-white/5 hover:text-white"
-          }`}
+            }`}
         >
           <Workflow className={`h-4 w-4 ${activeTab === "kanban" ? "text-primary" : "text-white/50"}`} />
           <span>Funil de vendas</span>
@@ -42,11 +41,10 @@ export function InteractivePlatformTabs() {
         <button
           type="button"
           onClick={() => setActiveTab("dashboard")}
-          className={`flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border px-5 py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-            activeTab === "dashboard"
+          className={`flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border px-5 py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${activeTab === "dashboard"
               ? "border-primary bg-primary/15 text-white shadow-glow"
               : "border-white/10 bg-[#121214] text-white/70 hover:bg-white/5 hover:text-white"
-          }`}
+            }`}
         >
           <BarChart3 className={`h-4 w-4 ${activeTab === "dashboard" ? "text-primary" : "text-white/50"}`} />
           <span>Gestão comercial</span>
@@ -55,11 +53,10 @@ export function InteractivePlatformTabs() {
         <button
           type="button"
           onClick={() => setActiveTab("ia")}
-          className={`flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border px-5 py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-            activeTab === "ia"
+          className={`flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border px-5 py-3 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${activeTab === "ia"
               ? "border-primary bg-primary/15 text-white shadow-glow"
               : "border-white/10 bg-[#121214] text-white/70 hover:bg-white/5 hover:text-white"
-          }`}
+            }`}
         >
           <Bot className={`h-4 w-4 ${activeTab === "ia" ? "text-primary" : "text-white/50"}`} />
           <span>Inteligência artificial</span>
@@ -73,7 +70,7 @@ export function InteractivePlatformTabs() {
           <div className="animate-in fade-in duration-300 space-y-6">
             <div className="mx-auto max-w-2xl text-center">
               <p className="font-sans text-base sm:text-lg text-white font-medium">
-                Visualize suas oportunidades em cada etapa da negociação e mantenha o processo comercial organizado.
+                Visualize cada negociação por etapa e não deixe nenhum comprador sem retorno.
               </p>
               <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5">
@@ -122,7 +119,7 @@ export function InteractivePlatformTabs() {
           <div className="animate-in fade-in duration-300 space-y-6">
             <div className="mx-auto max-w-2xl text-center">
               <p className="font-sans text-base sm:text-lg text-white font-medium">
-                Acompanhe as oportunidades e tenha uma visão mais clara da operação comercial da sua loja.
+                Acompanhe leads ativos, retornos pendentes e o ritmo comercial da sua loja em um só painel.
               </p>
               <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5">
@@ -171,7 +168,7 @@ export function InteractivePlatformTabs() {
           <div className="animate-in fade-in duration-300 space-y-6">
             <div className="mx-auto max-w-2xl text-center">
               <p className="font-sans text-base sm:text-lg text-white font-medium">
-                Agilize o primeiro atendimento com uma IA preparada para as perguntas mais comuns do mercado automotivo.
+                Responda compradores na hora com uma IA preparada para dúvidas comuns de quem busca um carro.
               </p>
               <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5">
@@ -225,7 +222,7 @@ export function InteractivePlatformTabs() {
           className="h-12 px-7 text-xs sm:text-sm font-semibold"
         />
         <span className="text-xs text-muted-foreground">
-          Ativação direta pela central oficial de atendimento no WhatsApp.
+          Liberação rápida dos seus 7 dias grátis pelo WhatsApp.
         </span>
       </div>
     </div>

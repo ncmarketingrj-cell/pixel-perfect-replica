@@ -133,45 +133,45 @@ function SectionBadge({ children }: { children: React.ReactNode }) {
 
 const tickerItems = [
   "CRM Automotivo com Inteligência Artificial",
-  "Primeiro Atendimento Instantâneo via WhatsApp",
-  "Kanban de Oportunidades em 5 Estágios",
-  "Histórico Completo de Interações e Veículos",
-  "Qualificação de Troca & Entrada com IA",
-  "Acompanhamento e Follow-up da Equipe",
-  "Visibilidade Total da Operação Comercial",
-  "Teste Gratuito por 7 Dias",
+  "Primeiro Atendimento Imediato no WhatsApp",
+  "Funil Kanban de Oportunidades",
+  "Histórico de Conversas e Veículos",
+  "Qualificação de Troca e Entrada com IA",
+  "Controle de Follow-up da Equipe",
+  "Visão Clara das Negociações",
+  "Teste Grátis por 7 Dias",
 ];
 
 const faqItems = [
   {
     question: "O NC CRM é exclusivo para o setor automotivo?",
     answer:
-      "Sim. O software foi concebido e configurado especificamente para a realidade de lojas de veículos, revendas de seminovos, multimarcas e concessionárias. Seus fluxos de triagem, etapas de funil e termos da IA consideram veículos na troca, intenção de entrada e rotina de salão de vendas.",
+      "Sim. O software foi desenvolvido especificamente para lojas de veículos, revendas de seminovos, multimarcas e concessionárias. Os fluxos de triagem, etapas do funil e respostas da IA já contemplam carro na troca, valor de entrada e rotina de pátio.",
   },
   {
     question: "Como funciona a IA de atendimento?",
     answer:
-      "A IA atua como um primeiro assistente ágil conectado ao canal de atendimento. Assim que o cliente manda mensagem demonstrando interesse em um carro, a IA responde cordialmente, tira dúvidas preliminares frequentes e coleta dados cruciais (como valor de entrada pretendido ou modelo de carro na troca), organizando o contexto para o vendedor.",
+      "A IA atua no primeiro atendimento conectado ao WhatsApp. Assim que o comprador demonstra interesse em um veículo, ela responde na hora, tira dúvidas iniciais e coleta dados essenciais — como forma de pagamento, entrada e carro na troca — entregando tudo organizado para o vendedor.",
   },
   {
     question: "A IA substitui o vendedor?",
     answer:
-      "Não. A IA não substitui o vendedor, ela o apoia. Seu papel é eliminar a demora inicial no primeiro contato e poupar a equipe de tarefas repetitivas de triagem. O fechamento, a negociação de valores, a avaliação do veículo usado e a assinatura do contrato continuam sendo conduzidos pelos seus consultores comerciais.",
+      "Não. A IA elimina a demora no primeiro contato e faz a triagem inicial. A negociação de valores, avaliação do usado, agendamento de visita e fechamento da venda continuam sob comando da sua equipe comercial.",
   },
   {
     question: "Posso organizar minhas oportunidades em Kanban?",
     answer:
-      "Sim. O NC CRM oferece um painel visual em formato Kanban, permitindo visualizar com clareza em qual etapa cada comprador se encontra: triagem inicial, qualificação, visita agendada na loja ou proposta em andamento.",
+      "Sim. O NC CRM oferece um painel visual em Kanban para acompanhar cada negociação por etapa: novo lead, atendimento por IA, atendimento humano, visita e follow-up.",
   },
   {
     question: "O que posso testar durante os 7 dias?",
     answer:
-      "Durante o período de teste de 7 dias você tem acesso completo para vivenciar a experiência do software na rotina da sua loja: organização do funil comercial, gestão de contatos, histórico de conversas e demonstração prática do atendimento inicial assistido por inteligência artificial.",
+      "Durante os 7 dias grátis você acessa a plataforma na prática na rotina da sua loja: organização do funil comercial, gestão de contatos, histórico de conversas e atendimento inicial com inteligência artificial.",
   },
   {
     question: "Como começo a usar a plataforma?",
     answer:
-      "Basta clicar em qualquer botão de 'Testar grátis por 7 dias' nesta página para abrir o WhatsApp oficial da nossa central de vendas com a mensagem de ativação já preenchida. Nossa equipe libera seu acesso e auxilia na configuração inicial da sua loja.",
+      "Basta clicar em qualquer botão de teste gratuito nesta página para abrir o WhatsApp oficial da nossa equipe com a solicitação preenchida. Liberamos seu acesso e auxiliamos na configuração inicial da loja.",
   },
 ];
 
@@ -330,22 +330,22 @@ function Index() {
                 {/* Eyebrow de Posicionamento */}
                 <div className="hero-seq-badge inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-[11px] font-mono tracking-wide text-primary backdrop-blur-sm">
                   <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                  <span>INTELIGÊNCIA ARTIFICIAL PARA LOJAS DE VEÍCULOS</span>
+                  <span>CRM AUTOMOTIVO COM INTELIGÊNCIA ARTIFICIAL</span>
                 </div>
 
                 {/* Headline */}
                 <div className="mt-6">
                   <h1 className="hero-seq-h1-1 font-display font-semibold text-[clamp(2.25rem,4.4vw,3.85rem)] leading-[1.08] tracking-[-0.03em] text-white">
-                    Seu próximo cliente não pode ficar esperando.{" "}
+                    Sua IA atende.{" "}
                     <span className="text-primary block sm:inline mt-1 sm:mt-0">
-                      Sua IA já pode começar o atendimento.
+                      Seu vendedor negocia. Sua loja vende.
                     </span>
                   </h1>
                 </div>
 
                 {/* Subheadline */}
                 <p className="hero-seq-sub mt-6 max-w-xl font-sans text-base sm:text-lg leading-[1.6] text-neutral-300">
-                  Conheça o CRM automotivo com inteligência artificial que atende seus primeiros contatos, identifica oportunidades e organiza as negociações para sua equipe vender com mais agilidade.
+                  O CRM automotivo com inteligência artificial que atende seus clientes, qualifica oportunidades e prepara negociações para seus vendedores.
                 </p>
 
                 {/* CTAs do Hero */}
@@ -368,7 +368,7 @@ function Index() {
                 {/* Microcopy e Garantia */}
                 <p className="mt-3.5 font-sans text-xs text-white/60 flex items-center gap-2">
                   <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
-                  <span>Solicite seus 7 dias gratuitos diretamente à nossa central de vendas.</span>
+                  <span>Liberação rápida do seu teste de 7 dias pelo WhatsApp.</span>
                 </p>
 
                 {/* Indicadores Institucionais Verificados */}
@@ -484,32 +484,29 @@ function Index() {
           <Container>
             <div className="mx-auto max-w-3xl text-center">
               <div className={`reveal-init stagger-delay-1 ${plataformaInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Experiência Real</SectionBadge>
+                <SectionBadge>Plataforma na Prática</SectionBadge>
               </div>
 
               <h2
-                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  plataformaInView ? "reveal-visible" : ""
-                }`}
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${plataformaInView ? "reveal-visible" : ""
+                  }`}
               >
-                Veja a plataforma{" "}
-                <span className="text-primary">em ação.</span>
+                Menos oportunidades perdidas.{" "}
+                <span className="text-primary">Mais controle sobre suas vendas.</span>
               </h2>
 
               <p
-                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  plataformaInView ? "reveal-visible" : ""
-                }`}
+                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${plataformaInView ? "reveal-visible" : ""
+                  }`}
               >
-                Navegue pela interface do NC CRM e descubra como o software organiza o funil de vendas, a gestão da loja e o atendimento inicial com inteligência artificial (telas demonstrativas com dados ilustrativos).
+                Navegue pelas telas do NC CRM e veja como sua loja centraliza leads, acompanha cada negociação e acelera o primeiro atendimento (telas demonstrativas com dados ilustrativos).
               </p>
             </div>
 
             {/* Seletor das 3 Abas com Telas Reais */}
             <div
-              className={`mt-14 reveal-init stagger-delay-3 ${
-                plataformaInView ? "reveal-visible" : ""
-              }`}
+              className={`mt-14 reveal-init stagger-delay-3 ${plataformaInView ? "reveal-visible" : ""
+                }`}
             >
               <InteractivePlatformTabs />
             </div>
@@ -528,36 +525,33 @@ function Index() {
             {/* Cabeçalho da Seção */}
             <div className="mx-auto max-w-4xl text-center">
               <div className={`reveal-init stagger-delay-1 ${iaInView ? "reveal-visible" : ""}`}>
-                <SectionBadge>Inteligência Artificial de Atendimento</SectionBadge>
+                <SectionBadge>Atendimento Automático no WhatsApp</SectionBadge>
               </div>
 
               <h2
-                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-white tracking-tight reveal-init stagger-delay-2 ${
-                  iaInView ? "reveal-visible" : ""
-                }`}
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight text-white tracking-tight reveal-init stagger-delay-2 ${iaInView ? "reveal-visible" : ""
+                  }`}
               >
-                Veja como a IA conduz o{" "}
+                Enquanto seu vendedor negocia,{" "}
                 <span className="text-primary block mt-1 sm:inline">
-                  primeiro atendimento no WhatsApp.
+                  sua IA atende o próximo cliente.
                 </span>
               </h2>
 
               <p
-                className={`mt-4 font-sans text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${
-                  iaInView ? "reveal-visible" : ""
-                }`}
+                className={`mt-4 font-sans text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${iaInView ? "reveal-visible" : ""
+                  }`}
               >
-                Enquanto seu vendedor se concentra nas negociações, o NC CRM inicia a conversa pelo WhatsApp, identifica o veículo de interesse e reúne as informações necessárias para a continuidade do atendimento.
+                O NC CRM inicia a conversa pelo WhatsApp em segundos, identifica o veículo de interesse e coleta os dados essenciais para sua equipe fechar negócio.
               </p>
 
               {/* Destaque do Benefício Principal */}
               <div
-                className={`mt-5 inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs sm:text-sm font-semibold text-white reveal-init stagger-delay-3 ${
-                  iaInView ? "reveal-visible" : ""
-                }`}
+                className={`mt-5 inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs sm:text-sm font-semibold text-white reveal-init stagger-delay-3 ${iaInView ? "reveal-visible" : ""
+                  }`}
               >
                 <Sparkles className="h-4 w-4 text-primary shrink-0" />
-                <span>A IA faz o primeiro atendimento. Seu vendedor entra na conversa preparado para negociar.</span>
+                <span>A IA qualifica o lead na entrada. Seu vendedor assume a negociação já com tudo na tela.</span>
               </div>
             </div>
 
@@ -565,9 +559,8 @@ function Index() {
             <div className="mt-14 grid items-start gap-8 lg:grid-cols-12 xl:gap-10">
               {/* Coluna do Vídeo com Máximo Destaque Visual */}
               <div
-                className={`lg:col-span-7 xl:col-span-8 flex justify-center reveal-init stagger-delay-2 ${
-                  iaInView ? "reveal-visible" : ""
-                }`}
+                className={`lg:col-span-7 xl:col-span-8 flex justify-center reveal-init stagger-delay-2 ${iaInView ? "reveal-visible" : ""
+                  }`}
               >
                 <AiDemoVideoPlayer className="w-full" />
               </div>
@@ -575,9 +568,8 @@ function Index() {
               {/* Coluna das 5 Etapas Estruturadas */}
               <div className="lg:col-span-5 xl:col-span-4 flex flex-col justify-between space-y-4">
                 <div
-                  className={`space-y-2.5 reveal-init stagger-delay-3 ${
-                    iaInView ? "reveal-visible" : ""
-                  }`}
+                  className={`space-y-2.5 reveal-init stagger-delay-3 ${iaInView ? "reveal-visible" : ""
+                    }`}
                 >
                   <div className="text-xs font-mono uppercase tracking-wider text-primary font-semibold pb-1 flex items-center gap-2">
                     <Sparkles className="h-3.5 w-3.5" />
@@ -587,28 +579,28 @@ function Index() {
                   {[
                     {
                       num: "01",
-                      title: "Resposta instantânea à consulta do veículo",
-                      desc: "Acolhimento imediato com confirmação do modelo e disponibilidade de estoque.",
+                      title: "Resposta imediata sobre o veículo",
+                      desc: "Acolhimento na hora com confirmação do modelo e disponibilidade de estoque.",
                     },
                     {
                       num: "02",
-                      title: "Identificação da forma de pagamento e entrada",
-                      desc: "Consulta antecipada sobre pretensão de financiamento, parcelas ou valor à vista.",
+                      title: "Levantamento de entrada e pagamento",
+                      desc: "Identificação prévia se o cliente busca financiamento ou pagamento à vista.",
                     },
                     {
                       num: "03",
-                      title: "Coleta de dados sobre carro usado na troca",
-                      desc: "Mapeamento prévio de modelo, ano e informações do automóvel para avaliação comercial.",
+                      title: "Dados do veículo usado na troca",
+                      desc: "Coleta de modelo, ano e detalhes do carro para agilizar a avaliação.",
                     },
                     {
                       num: "04",
-                      title: "Registro de todas as informações no CRM",
-                      desc: "Cada resposta e detalhe coletado é estruturado automaticamente na ficha do contato.",
+                      title: "Registro automático no CRM",
+                      desc: "Todas as respostas ficam organizadas na ficha da oportunidade.",
                     },
                     {
                       num: "05",
-                      title: "Transição suave com contexto completo",
-                      desc: "Sua equipe assume a negociação sem precisar repetir perguntas já respondidas.",
+                      title: "Passagem de bastão com contexto",
+                      desc: "O vendedor assume a conversa pronto para negociar, sem repetir perguntas.",
                     },
                   ].map((step) => (
                     <div
@@ -656,47 +648,43 @@ function Index() {
           <div className="absolute inset-0 bg-radial-vignette" />
           <Container className="relative z-10 max-w-3xl">
             <div className={`reveal-init stagger-delay-1 ${ofertaInView ? "reveal-visible" : ""}`}>
-              <SectionBadge>Oportunidade de Avaliação</SectionBadge>
+              <SectionBadge>Teste na Sua Loja</SectionBadge>
             </div>
 
             <h2
-              className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                ofertaInView ? "reveal-visible" : ""
-              }`}
+              className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${ofertaInView ? "reveal-visible" : ""
+                }`}
             >
-              Experimente uma nova forma de{" "}
-              <span className="text-primary">atender e vender.</span>
+              Experimente o poder da inteligência artificial{" "}
+              <span className="text-primary">na rotina comercial da sua loja.</span>
             </h2>
 
             {/* Destaque 7 DIAS GRÁTIS */}
             <div
-              className={`mt-6 inline-block rounded-2xl border border-primary/40 bg-primary/10 px-8 py-3.5 font-display font-bold text-3xl sm:text-4xl md:text-5xl text-primary tracking-tight shadow-glow reveal-init stagger-delay-3 ${
-                ofertaInView ? "reveal-visible" : ""
-              }`}
+              className={`mt-6 inline-block rounded-2xl border border-primary/40 bg-primary/10 px-8 py-3.5 font-display font-bold text-3xl sm:text-4xl md:text-5xl text-primary tracking-tight shadow-glow reveal-init stagger-delay-3 ${ofertaInView ? "reveal-visible" : ""
+                }`}
             >
               7 DIAS GRÁTIS
             </div>
 
             <p
-              className={`mt-6 font-sans text-base sm:text-lg leading-relaxed text-neutral-300 reveal-init stagger-delay-4 ${
-                ofertaInView ? "reveal-visible" : ""
-              }`}
+              className={`mt-6 font-sans text-base sm:text-lg leading-relaxed text-neutral-300 reveal-init stagger-delay-4 ${ofertaInView ? "reveal-visible" : ""
+                }`}
             >
-              Conheça o NC CRM e descubra como a inteligência artificial pode ajudar sua loja a organizar oportunidades e acelerar o primeiro atendimento.
+              Ative o NC CRM na sua operação e veja na prática como responder mais rápido, qualificar compradores e organizar suas negociações.
             </p>
 
             <div
-              className={`mt-8 flex flex-col items-center justify-center gap-3 reveal-init stagger-delay-4 ${
-                ofertaInView ? "reveal-visible" : ""
-              }`}
+              className={`mt-8 flex flex-col items-center justify-center gap-3 reveal-init stagger-delay-4 ${ofertaInView ? "reveal-visible" : ""
+                }`}
             >
               <TrialCtaButton
                 position="final"
-                label="COMEÇAR MEU TESTE GRATUITO"
+                label="QUERO MEUS 7 DIAS GRATUITOS"
                 className="h-14 px-8 text-sm font-semibold tracking-wider"
               />
               <span className="text-xs text-muted-foreground font-sans">
-                A ativação do período gratuito é realizada pela nossa central de vendas.
+                Ativação assistida pelo WhatsApp oficial para colocar sua loja para rodar rápido.
               </span>
             </div>
           </Container>
@@ -717,27 +705,24 @@ function Index() {
               </div>
 
               <h2
-                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl tracking-tight text-white reveal-init stagger-delay-2 ${
-                  faqInView ? "reveal-visible" : ""
-                }`}
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl tracking-tight text-white reveal-init stagger-delay-2 ${faqInView ? "reveal-visible" : ""
+                  }`}
               >
-                Dúvidas comuns sobre o{" "}
+                Dúvidas frequentes sobre o{" "}
                 <span className="text-primary">{CRM_CONFIG.productName}</span>
               </h2>
 
               <p
-                className={`mt-3 font-sans text-sm sm:text-base text-muted-foreground reveal-init stagger-delay-3 ${
-                  faqInView ? "reveal-visible" : ""
-                }`}
+                className={`mt-3 font-sans text-sm sm:text-base text-muted-foreground reveal-init stagger-delay-3 ${faqInView ? "reveal-visible" : ""
+                  }`}
               >
-                Respostas diretas sobre o funcionamento da ferramenta e o período de testes.
+                Tudo o que você precisa saber antes de iniciar seus 7 dias grátis.
               </p>
             </div>
 
             <div
-              className={`mt-12 rounded-2xl border border-white/10 bg-[#121216] p-6 sm:p-8 reveal-init stagger-delay-3 ${
-                faqInView ? "reveal-visible" : ""
-              }`}
+              className={`mt-12 rounded-2xl border border-white/10 bg-[#121216] p-6 sm:p-8 reveal-init stagger-delay-3 ${faqInView ? "reveal-visible" : ""
+                }`}
             >
               <Accordion type="single" collapsible className="w-full space-y-3">
                 {faqItems.map((item, idx) => (
