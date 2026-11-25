@@ -40,6 +40,7 @@ import {
 import { InteractivePlatformTabs } from "@/components/landing/InteractivePlatformTabs";
 import { HeroVideoPlayer } from "@/components/landing/HeroVideoPlayer";
 import { AiDemoVideoPlayer } from "@/components/landing/AiDemoVideoPlayer";
+import { VslVideoPlayer } from "@/components/landing/VslVideoPlayer";
 import { LegalModals, type LegalModalType } from "@/components/landing/LegalModals";
 import {
   Accordion,
@@ -176,6 +177,7 @@ const faqItems = [
 ];
 
 function Index() {
+  const { ref: vslRef, isInView: vslInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: plataformaRef, isInView: plataformaInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: iaRef, isInView: iaInView } = useInView<HTMLElement>({ threshold: 0.1 });
   const { ref: ofertaRef, isInView: ofertaInView } = useInView<HTMLElement>({ threshold: 0.1 });
@@ -418,10 +420,61 @@ function Index() {
               </div>
             </Container>
           </div>
+        </section>
 
-          {/* Apresentação do Vídeo Real do CRM logo abaixo do palco (em destaque e sem cobrir Victoria) */}
-          <Container className="relative z-10 mt-4 sm:mt-6">
-            <div className="hero-seq-photo mx-auto max-w-5xl">
+        {/* ============================================================== */}
+        {/* SEÇÃO VSL — VÍDEO DE APRESENTAÇÃO LOGO ABAIXO DO HERO          */}
+        {/* ============================================================== */}
+        <section
+          ref={vslRef}
+          id="vsl"
+          className="relative border-t border-white/8 bg-[#0a0a0c] py-20 sm:py-28"
+        >
+          <Container>
+            <div className="mx-auto max-w-3xl text-center">
+              <div className={`reveal-init stagger-delay-1 ${vslInView ? "reveal-visible" : ""}`}>
+                <SectionBadge>Apresentação Exclusiva</SectionBadge>
+              </div>
+
+              <h2
+                className={`mt-4 font-display font-semibold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white reveal-init stagger-delay-2 ${vslInView ? "reveal-visible" : ""
+                  }`}
+              >
+                Veja como o NC CRM transforma{" "}
+                <span className="text-primary">o atendimento da sua loja.</span>
+              </h2>
+
+              <p
+                className={`mt-4 font-sans text-sm sm:text-base leading-relaxed text-muted-foreground reveal-init stagger-delay-3 ${vslInView ? "reveal-visible" : ""
+                  }`}
+              >
+                Assista ao vídeo abaixo e entenda na prática como acelerar suas respostas e organizar cada negociação.
+              </p>
+            </div>
+
+            <div
+              className={`mx-auto mt-10 sm:mt-12 max-w-5xl reveal-init stagger-delay-3 ${vslInView ? "reveal-visible" : ""
+                }`}
+            >
+              <VslVideoPlayer
+                videoId="ybfEnAArulE"
+                title="NC CRM — Apresentação Completa"
+              />
+            </div>
+
+            <div
+              className={`mt-8 flex flex-col items-center justify-center gap-3 reveal-init stagger-delay-4 ${vslInView ? "reveal-visible" : ""
+                }`}
+            >
+              <TrialCtaButton
+                position="hero"
+                label="TESTAR GRÁTIS POR 7 DIAS"
+                className="h-13 sm:h-14 px-7 text-xs sm:text-sm font-semibold tracking-wider"
+              />
+            </div>
+
+            {/* Vídeo Real do CRM (IA em Ação) mantido abaixo da VSL */}
+            <div className="mx-auto mt-16 sm:mt-20 max-w-5xl">
               <HeroVideoPlayer />
             </div>
           </Container>
